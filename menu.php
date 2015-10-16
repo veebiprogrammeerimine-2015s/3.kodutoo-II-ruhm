@@ -1,5 +1,4 @@
 <h3>Menu</h3>
-<?php echo $file_name; ?>
 <ul>
 	<?php if($file_name == "home.php"){
 		echo "<li>Avaleht</li>";

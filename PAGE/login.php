@@ -105,8 +105,6 @@ $file_name = "login.php";
 
 <?php require_once("../header.php");?>
 
-
-	<h3>Mõtlesin siis teha lehe kuhu inimesed saavad teha postitusi erinevate teemade alla ja teised saavad siis kommenteerida, põhimõtteliselt väga lihtsustatud reddit</h3>
 	<h2>Login</h2>
 	<p>* required field.</p>
 	<form action="<?=htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
