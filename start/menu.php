@@ -1,5 +1,5 @@
 
-<h3>menuu </h3>
+<h3>menu</h3>
 <ul>
 	
 	<?php if($file_name == "home.php"){ ?>
@@ -24,6 +24,20 @@
 		}
 		
 	?>
+	
+	<?php 
+		
+		if($file_name == "../register.php"){ 
+		
+			echo "<li>Registreerimine</li>";
+		
+		}else{
+	
+			echo '<li><a href="register.php">Registreerimine</a></li>';
+		}
+		
+	?>
+	
 	
 	
 </ul> 
