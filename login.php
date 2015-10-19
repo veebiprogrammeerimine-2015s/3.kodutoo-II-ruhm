@@ -2,7 +2,7 @@
 <?php
 	
 	//laeme funktsioni failis
-	require_once("start/functions.php");
+	require_once("functions.php");
 	
 	//kontrollin, kas kasutaja on sisseligunud
 	if(isset($_SESSION["id_from_db"])){
@@ -141,4 +141,3 @@
 			
 		</form>
 <?php require_once("start/footer.php"); ?>
-<?php require_once("start/home.php"); ?>
