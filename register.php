@@ -3,9 +3,18 @@
 <?php
 	$create_password_error = "";
 	$create_email_error = "";
+	$create_name_error = "";
+	$create_secondname_error = "";
+	$create_age_error = "";
+	$create_eriala_error = "";
+	
 
 	$create_email = "";
 	$create_password = "";
+	$create_name = "";
+	$create_secondname = "";
+	$create_age = "";
+	$create_eriala = "";
 
 
 	if(isset($_POST["create"])){
@@ -15,6 +24,7 @@
 			}else{
 				$create_email = cleanInput($_POST["create_email"]);
 			}
+			
 			if ( empty($_POST["create_password"]) ) {
 				$create_password_error = "See väli on kohustuslik";
 			} else {
@@ -33,6 +43,30 @@
 				
 				createUser($create_email, $password_hash);
 				
+			}
+			
+			if ( empty($_POST["create_name"]) ) {
+				$create_name_error = "See väli on kohustuslik";
+			}else{
+				$create_name = cleanInput($_POST["create_name"]);
+			}
+			
+			if ( empty($_POST["create_secondname"]) ) {
+				$create_secondname_error = "See väli on kohustuslik";
+			}else{
+				$create_secondname = cleanInput($_POST["create_secondname"]);
+			}
+			
+			if ( empty($_POST["create_age"]) ) {
+				$create_age_error = "See väli on kohustuslik";
+			}else{
+				$create_age = cleanInput($_POST["create_age"]);
+			}
+			
+			if ( empty($_POST["create_eriala"]) ) {
+				$create_eriala_error = "See väli on kohustuslik";
+			}else{
+				$create_eriala = cleanInput($_POST["create_age"]);
 			}
    
 	 	
@@ -57,10 +91,14 @@
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 			<input name="create_email" type="email" placeholder="E-post" value="<?php echo $create_email; ?>"> <?php echo $create_email_error; ?><br><br>
 			<input name="create_password" type="password" placeholder="Parool"> <?php echo $create_password_error; ?> <br><br>
-			COMMENT THIS SITE TRY IT <br><br>
-			<textarea name="comment" rows="5" cols="40"></textarea><br><br>
-			kas teil meeldib?<input type="radio" name="gender" value="female">Jah
-			<input type="radio" name="gender" value="male">Ei <br><br>
+			ENTER HERE YOUR ANDMED <br><br>
+			<input name="create_name" type="text" placeholder="nimi" value="<?php echo $create_name; ?>"> <?php echo $create_name_error; ?><br><br>
+			<input name="create_secondname" type="text" placeholder="perekonnanimi" value="<?php echo $create_secondname; ?>"> <?php echo $create_secondname_error; ?><br><br>
+			<input name="create_age" type="text" placeholder="age" value="<?php echo $create_age; ?>"> <?php echo $create_age_error; ?><br><br>
+			<input name="create_eriala" type="text" placeholder="eriala" value="<?php echo $create_eriala; ?>"> <?php echo $create_eriala_error; ?><br><br>
+			<br>GENRE</br>
+			<input type="radio" name="gender" value="female">female
+			<input type="radio" name="gender" value="male">male <br><br>
 			<input name="create" type="submit" value="create user" > <br><br>
 			
 		</form>
