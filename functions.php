@@ -9,12 +9,12 @@
 	session_start();
 	
 	// lisame kasutaja ab'i
-	function createUser($create_email, $password_hash){
+	function createUser($create_email, $password_hash, $create_name, $create_secondname, $create_age, $create_eriala){
 		// globals on muutuja kõigist php failidest mis on ühendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO user_sample (email, password) VALUES (?, ?)");
-		$stmt->bind_param("ss", $create_email, $password_hash);
+		$stmt = $mysqli->prepare("INSERT INTO user_register1 (email, password, name, secondname, age, eriala) VALUES (?, ?, ?, ?, ?, ?)");
+		$stmt->bind_param("ss", $create_email, $password_hash, $create_name, $create_secondname, $create_age, $create_eriala);
 		
 		
 	}
@@ -26,7 +26,7 @@
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT id, email FROM user_sample WHERE email=? AND password=?");
+		$stmt = $mysqli->prepare("SELECT id, email FROM user_register1 WHERE email=? AND password=?");
 		$stmt->bind_param("ss", $email, $password_hash);
 		$stmt->bind_result($id_from_db, $email_from_db);
 		$stmt->execute();
@@ -48,6 +48,8 @@
 		$mysqli->close();
 	}
 	
+	
+	//__________________________________________________________________________MUST WORK ON________________________________________________________
 	
 	function createCarPlate($car_plate, $color){
 		// globals on muutuja kõigist php failidest mis on ühendatud
