@@ -8,11 +8,11 @@
 <p>Here you can post your messages for work. Please log in if you re not.</p>
 <body/> 
 
-<?php require_once("start/footer.php");
-?>
+
+
 
 <?php
 	//ukazyvaju header.php "../" ////////////////////////////////////////////////
 	require_once("start/header.php");
-
 ?>
+<?php require_once("start/footer.php");?>

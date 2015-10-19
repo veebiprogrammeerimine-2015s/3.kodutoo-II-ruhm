@@ -1,6 +1,8 @@
 
 	
 <?php
+	
+	
 	$create_password_error = "";
 	$create_email_error = "";
 	$create_name_error = "";
@@ -102,5 +104,5 @@
 			<input name="create" type="submit" value="create user" > <br><br>
 			
 		</form>
-		
+<?php require_once("start/header.php"); ?>
 <?php require_once("start/footer.php"); ?>

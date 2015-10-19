@@ -1,5 +1,5 @@
 
-<h3>menu</h3>
+<h2>Menu</h2>
 <ul>
 	
 	<?php if($file_name == "home.php"){ ?>
