@@ -1,7 +1,7 @@
 
 	
 <?php
-	
+	require_once("functions.php");
 	
 	$create_password_error = "";
 	$create_email_error = "";

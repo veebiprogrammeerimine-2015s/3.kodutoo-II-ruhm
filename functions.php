@@ -15,7 +15,10 @@
 		
 		$stmt = $mysqli->prepare("INSERT INTO user_register1 (email, password, name, secondname, age, eriala) VALUES (?, ?, ?, ?, ?, ?)");
 		$stmt->bind_param("ss", $create_email, $password_hash, $create_name, $create_secondname, $create_age, $create_eriala);
+		$stmt->execute();
+		$stmt->close();
 		
+		$mysqli->close();	
 		
 	}
 	
