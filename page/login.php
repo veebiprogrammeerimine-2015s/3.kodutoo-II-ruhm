@@ -1,8 +1,10 @@
 <?php
-	require_once("../../../config.php");
-	$database = "if15_koidkan";
-	$mysqli = new mysqli($servername, $username, $password, $database);
-
+	require_once("functions.php");
+	
+		if(isset($_SESSION["id_from_db"])){
+		// suunan data lehele
+		header("Location: data.php");
+	}
 
 	// errorite muutujad
 	$email_error = "";
@@ -48,8 +50,9 @@
 				echo "Võib sisse logida! Kasutajanimi on ".$email." ja parool on ".$password;
 				
 				$password_hash = hash("sha512", $password);
+				loginUser($email, $password_hash);
 				
-				$stmt=$mysqli->prepare("SELECT id, email FROM user WHERE email=? AND password=?");
+				/*$stmt=$mysqli->prepare("SELECT id, email FROM user WHERE email=? AND password=?");
 				$stmt->bind_param("ss", $email, $password_hash);
 				
 				// paneme vastuse muutujatesse
@@ -61,7 +64,7 @@
 				} else{
 					echo"Wrong password or email!";
 				}			
-				$stmt->close();			
+				$stmt->close();		*/	
 				
 			}
 		}
@@ -143,7 +146,7 @@
   }
   
   // paneme ühenduse kinni
-  $mysqli->close();	
+  //$mysqli->close();	
 
 ?>
 <?php
