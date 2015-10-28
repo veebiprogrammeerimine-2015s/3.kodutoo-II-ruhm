@@ -1,13 +1,15 @@
 <?php
 
-	//ühenduse loomiseks kasuta
-	require_once("../../config.php");
-	$database = "if15_jarmhab";
-	$mysqli = new mysqli($servername, $username, $password, $database);
-
-	//echo $_POST["email"];
-
-//defineerime muutujad
+	//laeme funktsiooni faili
+	require_once("function.php");
+	
+	//kontrollin, kas kasutaja on sisse loginud
+	if(isset($_SESSION["id_from_db"])){
+		//suunan data lehele
+		header("Location: data.php");
+	}
+	
+// muutujad errorite
 	$email_error = "";
 	$password_error = "";
 	$first_name_error = "";
@@ -52,26 +54,14 @@
 			}
 		// Kui oleme siia jõudnud, võime kasutaja sisse logida	
 			if($password_error == "" && $email_error == ""){
-				echo "Võib sisse logida! Kasutajanimi on ".$email." ja parool on ".$password;
+				echo "Võib sisse logida! Kasutajanimi on ".$email;
 				
 				$password_hash = hash("sha512", $password);
 				
-				$stmt = $mysqli->prepare("SELECT id, email FROM user WHERE email=? AND password=?");
-				$stmt->bind_param("ss", $email, $password_hash);
+				// functions php failis käivitan funktsiooni
+				 loginUser($email, $password_hash);
 				
-				//paneme vastused muutujatesse
-				$stmt->bind_result($id_from_db, $email_from_db);
-				$stmt->execute();
 				
-				if($stmt->fetch()){
-					//leidis
-					echo "kasutaja id=".$id_from_db;
-					
-				}else{
-					//tyhi ei leidnud
-					echo "wrong password or email id";
-					
-				}
 				
 				
 			}
@@ -113,20 +103,15 @@
 				}
 			}
 			if(	$create_email_error == "" && $create_password_error == "" && $first_name_error == "" && $last_name_error == ""){
-				echo "Võib kasutajat luua! Kasutajanimi on ".$create_email." ja parool on ".$create_password;
+				echo "Kasutajakonto edukalt loodud! Kasutajanimi on ".$create_email;
 
 			$password_hash = hash("sha512", $create_password);
-				echo "<br>";
-				echo $password_hash;
-
-			$stmt = $mysqli->prepare("INSERT INTO user (firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
-				echo $mysqli->error;
-				echo $stmt->error;
+				//echo "<br>";
+				//echo $password_hash;
 				
-			//asendame kysimärgid muutujate väärtustega
-				$stmt->bind_param("ssss", $first_name, $last_name, $create_email, $password_hash);
-				$stmt->execute();
-				$stmt->close();
+				// functions.php failis käivina funktsiooni
+				createUser($first_name, $last_name, $create_email, $password_hash);
+
 			}
 		} // create if end
 	}
@@ -137,8 +122,8 @@
   	return $data;
   }
   
-  //paneme ühenduse kinni
-  $mysqli->close();
+  //paneme ühenduse kinni. See ka viia function.php-sse???
+ // $mysqli->close();
 ?>
 
 <?php
@@ -149,6 +134,13 @@
 
 ?>
 <?php require_once("../header.php"); ?>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+</head>
+<body>
 	 
 	<h2>Login</h2>
 	<form action="login.php" method="post">
