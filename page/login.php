@@ -52,19 +52,7 @@
 				$password_hash = hash("sha512", $password);
 				loginUser($email, $password_hash);
 				
-				/*$stmt=$mysqli->prepare("SELECT id, email FROM user WHERE email=? AND password=?");
-				$stmt->bind_param("ss", $email, $password_hash);
 				
-				// paneme vastuse muutujatesse
-				$stmt->bind_result($id_from_db, $email_from_db);
-				$stmt->execute();
-				
-				if($stmt->fetch()){
-					echo "kasutaja id=".$id_from_db;
-				} else{
-					echo"Wrong password or email!";
-				}			
-				$stmt->close();		*/	
 				
 			}
 		}

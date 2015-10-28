@@ -22,7 +22,7 @@
 	
 	
 	if(isset($_POST["create"])){
-		if ( empty($_POST["$day"]) ) {
+		if ( empty($_POST["day"]) ) {
 			$day_error = "See väli on kohustuslik";
 		}else{
 			$day = cleanInput($_POST["day"]);

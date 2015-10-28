@@ -7,7 +7,7 @@
 	function createUser($create_email, $password_hash){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO user_sample (email, password) VALUES (?, ?)");
+		$stmt = $mysqli->prepare("INSERT INTO user (email, password) VALUES (?, ?)");
 		$stmt->bind_param("ss", $create_email, $password_hash);
 		$stmt->execute();
 		$stmt->close();
@@ -41,12 +41,12 @@
 	}
 	
 	
-	function createDayPlanner($day, $time, $task){
+	function createDayPlanner($day, $d_time, $d_task){
 
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO createDayPlanner (user_id, day, time, task) VALUES (?, ?, ?, ?)");
-		$stmt->bind_param("isss", $_SESSION["id_from_db"], $day, $time, $task);
+		$stmt = $mysqli->prepare("INSERT INTO tasks (user_id, day, d_time, d_task) VALUES (?, ?, ?, ?)");
+		$stmt->bind_param("isss", $_SESSION["id_from_db"], $day, $d_time, $d_task);
 		
 		$message = "";
 		
@@ -64,4 +64,61 @@
 		return $message;
 		
 	}
+	
+	function getTaskData(){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("SELECT id, user_id, day, d_time, d_task FROM tasks WHERE deleted IS NULL");
+		$stmt->bind_result($id, $user_id, $day, $d_time, $d_task);
+		$stmt->execute();
+		
+		
+		$array = array();
+		
+		
+		while($stmt->fetch()){
+			
+			
+			$task = new StdClass();
+			$task->id = $id;
+			$task->user_id = $user_id;
+			$task->day = $day;
+			$task->d_time = $d_time;
+			$task->d_task = $d_task;
+			
+			
+			array_push($array, $task);
+		
+			
+		}
+		
+		$stmt->close();
+		$mysqli->close();
+		
+		return $array;
+		
+		
+	}
+	
+	
+	function deleteTask($id_to_be_deleted){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("UPDATE tasks SET deleted=NOW() WHERE id=?");
+		$stmt->bind_param("i", $id_to_be_deleted);
+		
+		if($stmt->execute()){
+			
+			header("Location: table.php");
+			
+		}
+		
+		$stmt->close();
+		$mysqli->close();
+		
+	}
+	
+	
 ?>
