@@ -57,4 +57,43 @@
 	}
 	
 	//discolfi tabeli jaoks
+	function createResult($par, $result){
+		// globals on muutuja kõigist php failidest mis on ühendatud
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("INSERT INTO results (user_id, par, result) VALUES (?, ?, ?)");
+		$stmt->bind_param("iii", $_SESSION["id_from_db"], $par, $result);
+		
+		if($stmt->execute()){
+			//see on tõene, kui sisestus ab'i õnnestus
+			$message = "Edukalt sisestatud andmebaasi";
+			
+		}else {
+			// kui miski läks katki
+			echo $stmt->error;
+		}
+		
+		$stmt->close();
+		
+		$mysqli->close();		
+	
+		return $message;
+	}
+?>
+<?php
+	
+	//Loome uue funktsiooni, et ab'st andmeid
+	function getResultData(){
+		
+	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+	
+	$stmt = $mysqli->prepare("SELECT id, user_id, par, result FROM results"); //WHERE deleted IS NULL
+	$stmt->bind_result($id, $user_id, $par, $result); //algselt oli $color_from_db
+	
+	$stmt->execute();
+	}
+	
+	
+	
+	
 ?>
