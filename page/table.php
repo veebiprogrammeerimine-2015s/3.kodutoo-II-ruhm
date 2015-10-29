@@ -44,8 +44,8 @@
 			
 			echo "<td>".$retsept_list[$i]->id."</td>";
 			echo "<td>".$retsept_list[$i]->title."</td>";
-			echo "<td>".$retsept_list[$i]->ingredients."</td>";
-			echo "<td>".$retsept_list[$i]->preparation."</td>";
+			echo nl2br("<td>".$retsept_list[$i]->ingredients."</td>");
+			echo nl2br("<td>".$retsept_list[$i]->preparation."</td>");
 
 
 			if(isset($_SESSION["id_from_db"])){
