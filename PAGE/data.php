@@ -9,12 +9,7 @@
 		//suuname login lehele kui ei ole sisseloginud
 		header("Location: login.php");
 	}
-	//logni välja
-	if(isset($_GET["logout"])){
-		//kustutab kõik session muutujad
-		session_destroy();
-		header("Location: login.php");
-	}
+
 	
 	if(isset($_POST["create"])){
 		
@@ -60,11 +55,7 @@ $file_name = "data.php";
 
 <?php require_once("../header.php");?>
 
-<p>
-<h2>Data</h2>
-Tere, <?=$_SESSION["user_email"];?><br>
-<a href="?logout=1"> Logout</a>
-</p>
+
 
 <h2>New post</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >

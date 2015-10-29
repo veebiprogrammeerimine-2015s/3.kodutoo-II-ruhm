@@ -10,11 +10,24 @@
 	if(isset($_GET["delete"])){
 		deletePost($_GET["delete"]);
 	}
+	//sisse loginud?
+	if(!isset($_SESSION["id_from_db"])){
+	//suuname login lehele kui ei ole sisseloginud
+	header("Location: login.php");
+	}
 	
 	$post_list = getPostData();
 	
 ?>
-<h2>Your Posts</h2>
+
+<?php
+$page_title = "table";
+$file_name = "table.php";
+?>
+
+<?php require_once("../header.php");?>
+
+<h2>Posts</h2>
 <table border=1>
 	<tr>
 		<th>id</th>
@@ -49,3 +62,5 @@
 		}
 	?>
 </table>
+
+<?php require_once("../footer.php");?>

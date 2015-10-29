@@ -24,6 +24,6 @@
   	<label for="post_title" >Title</label><br>
 	<input id="post_title" name="post_title" type="text" value="<?=$post_object->post_title;?>"><br><br>
   	<label for="post">Text</label><br>
-	<input id="post" name="post" type="text" value="<?=$post_object->post;?>"><br><br>
+	<textarea rows="6" cols="52" id="post" name="post"><?=$post_object->post;?></textarea><br><br>
   	<input type="submit" name="update" value="Save">
   </form>

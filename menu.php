@@ -13,8 +13,30 @@
 	?>
 	
 	<?php if($file_name == "data.php"){
-		echo "<li>Data</li>";
+		echo "<li>New Post</li>";
 	}else{
-		echo '<li><a href="data.php">Data</a></li>';}
+		echo '<li><a href="data.php">New Post</a></li>';}
+	?>
+	
+	<?php if($file_name == "table.php"){
+		echo "<li>Posts</li>";
+	}else{
+		echo '<li><a href="table.php">Posts</a></li>';}
 	?>
 </ul>
+
+<?php
+	//logni välja
+	if(isset($_GET["logout"])){
+		//kustutab kõik session muutujad
+		session_destroy();
+		header("Location: login.php");
+	}
+?>
+
+<p>
+<?php if(!isset($_SESSION["id_from_db"])){
+	}else{
+		echo '<a href="?logout=1"> Logout</a>';}
+	?>
+</p>
