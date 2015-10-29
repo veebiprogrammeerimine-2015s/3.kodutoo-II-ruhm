@@ -40,14 +40,14 @@
 		$stmt->close();
 		$mysqli->close();
 	}
-	function createCarPlate ($car_plate, $color){
+	function createPost ($post_title, $post){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("INSERT INTO car_plates (user_id, number_plate, color) VALUES (?, ?, ?)");
-		$stmt->bind_param("iss", $_SESSION["id_from_db"], $car_plate, $color);
+		$stmt = $mysqli->prepare("INSERT INTO user_posts (user_id, post_title, post) VALUES (?, ?, ?)");
+		$stmt->bind_param("iss", $_SESSION["id_from_db"], $post_title, $post);
 		$message = "";
 		if($stmt->execute()){
 			//täpne kui sisestus AB'i õnnestus
-			$message = "Numbrimärk on sisestatud";
+			$message = "Post has been enteredd";
 		}else{
 			//kui midagi läks sisestuse käigus katki
 			echo $stmt->error;
