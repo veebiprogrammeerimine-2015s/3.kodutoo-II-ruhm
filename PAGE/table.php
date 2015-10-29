@@ -40,17 +40,6 @@ $file_name = "table.php";
 			//iga massiivis oleva elemendi kohta, masiivi pikkus, $i++ = $i=$i+1
 		for($i = 0; $i<count($post_list); $i++){
 			//kui kasutaja tahab muuta kuvan imput välja
-			if(isset($_GET["edit"]) && $post_list[$i]->id == $_GET["edit"]){
-				echo"<tr>";
-				echo"<form action='table.php' method='post'>";
-				echo"<td>".$post_list[$i]->id."</td>";
-				echo"<td>".$post_list[$i]->user_id."</td>";
-				echo"<td><input type='hidden' name='id' value='".$post_list[$i]->id."'><input name='post_title' value='".$post_list[$i]->post_title."'></td>";
-				echo"<td><input type='submit' name='update'></td>";
-				echo "<td><a href='table.php'>cancel</a></td>";
-				echo"</form>";
-				echo"</tr>";
-			}else{
 				echo"<tr>";
 				echo"<td>".$post_list[$i]->id."</td>";
 				echo"<td>".$post_list[$i]->user_id."</td>";
@@ -59,7 +48,6 @@ $file_name = "table.php";
 				echo"<td><a href='edit.php?edit=".$post_list[$i]->id."'>X</a></td>";
 				echo"</tr>";
 			}
-		}
 	?>
 </table>
 
