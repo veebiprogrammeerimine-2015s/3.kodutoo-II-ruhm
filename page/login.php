@@ -8,9 +8,15 @@
 <?php
 
 	// ühenduse loomiseks kasuta
-	require_once("/home/pihlakre/public_html/if13/Veebiprog-2015/konfig.php");
-	$database = "if13_rene_p";
-	$mysqli = new mysqli($servername, $username, $password, $database);
+	require_once("funtions.php");
+	
+	//Kontrollin kas kasutaja on sisse loginud
+	if(isset($_SESSION["id_from_db"])){
+		header("Location: data.php");
+		
+		
+		
+	}
 	
 	//echo $_POST["username"]; 
 	$username_error ="";
@@ -109,16 +115,9 @@
 				echo "<br>";
 				echo $password_hash;
 				
-				$stmt = $mysqli->prepare("INSERT INTO create_user (username, email, firstname, lastname, tel, amet, password) VALUES (?, ?, ?, ?, ?, 'Talupoeg', ?)");
 				
-				//asendame ? muutujate v22rtustega
+				createUser($create_email, $password_hash);
 				
-				//echo $mysqli->error;
-				//echo $stmt->error;
-				
-				$stmt->bind_param("ssssss",$create_username, $create_email, $create_firstname, $create_lastname, $create_tel, $password_hash);
-				$stmt->execute();
-				$stmt->close();
 		}
 		}
 
@@ -149,39 +148,13 @@
 				echo "Võib sisse logida!";
 				
 				$password_hash = hash("sha512", $password);
-				$stmt = $mysqli->prepare("SELECT id, username, email, firstname, lastname, tel, amet FROM create_user WHERE email=? AND password=?");
-				$stmt->bind_param("ss", $email, $password_hash); //asnendab küsimärgid
+				
+				
 				
 				//paneme vastused muutujatesse
 				
-				$stmt->bind_result($id_from_db, $username_from_db, $email_from_db, $firstname_from_db, $lastname_from_db, $tel_from_db, $amet_from_db);
-				$stmt->execute();
-				echo "<br>";
 				
-				if($stmt->fetch()){
-					
-					echo "Kasutaja id = ".$id_from_db;
-					echo "<br>";
-					echo "Kasutaja email = ".$email_from_db;
-					echo "<br>";
-					echo "Kasutaja parool on ".$password;
-					echo "<br>";
-					echo "Kasutaja kasutajanimi = ".$username_from_db;
-					echo "<br>";
-					echo "Kasutaja eesnimi = ".$firstname_from_db;
-					echo "<br>";
-					echo "Kasutaja perekonnanimi = ".$lastname_from_db;
-					echo "<br>";
-					echo "Kasutaja telefoni number = ".$tel_from_db;
-					echo "<br>";
-					echo "Kasutaja amet = ".$amet_from_db;
-					
-				}
-				else{
-					//tühi, ei leidnud
-					echo "Wrong password or email";
-				}
-				$stmt->close();
+				loginUser($email, $password_hash);
 				
 			}
 	
@@ -195,8 +168,6 @@
   	return $data;
   }
 	
-	
-$mysqli->close();
 	
 ?>
 <?php

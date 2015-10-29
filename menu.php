@@ -6,7 +6,7 @@
 ?>
 
 <ul>
-	<?php if($file_name == "home.php"){ ?>
+	<?php if($file_name == "index.php"){ ?>
 		
 	<li>
 		Avaleht
@@ -15,14 +15,14 @@
 	<?php } else { ?>
 		
 	<li>
-		<a href="home.php">Avaleht</a>
+		<a href="index.php">Avaleht</a>
 	</li>
 		
 		
 	<?php } ?>
 	
 	
-	<?php if($file_name == "home.php"){ 
+	<?php if($file_name == "login.php"){ 
 	
 	echo '<li>Logi Sisse</li>';
 	
