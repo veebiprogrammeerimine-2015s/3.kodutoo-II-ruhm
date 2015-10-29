@@ -15,7 +15,6 @@
 	
 
 ?>
-<link rel="stylesheet" type="text/css" href="disain/yldine.css">
 <table border=1 >
 	<tr>
 		<th>Aine nimetus</th>

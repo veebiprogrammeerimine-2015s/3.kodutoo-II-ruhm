@@ -23,7 +23,7 @@
 			$_SESSION["logged_in_user_email"] = $email_from_db;
 			
 			//suunan data.php lehele
-			header("Location: data.php");
+			header("Location: ylesanded.php");
 			
 		}else{
 			// ei leidnud

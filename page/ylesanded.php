@@ -9,8 +9,20 @@
 
 ?>
 <?php
-
 	require_once("functions.php");
+	if(!isset($_SESSION["logged_in_user_id"])){
+		header("Location: login.php");
+	}
+	//kasutaja tahab välja logida
+	if(isset($_GET["logout"])){
+		//aadressireal on olemas muutuja logout
+		
+		//kustutame kõik session muutujad ja peatame sessiooni
+		session_destroy();
+		
+		header("Location: login.php");
+	}
+
 	if(isset($_GET["delete"])){
 		
 		deleteTask($_GET["delete"]);
@@ -31,9 +43,6 @@
 
 ?>
 <html>
-<link rel="stylesheet" type="text/css" href="disain/yldine.css">
-<body>
-<section id="uss">
 <table border=1 >
 	<tr>
 		<th>Aine nimetus</th>
@@ -72,10 +81,11 @@
 	
 	?>
 </table	>
-</section><br>
+<br>
 <input type=button onClick="location.href='task.php'" value='Lisa ülesanne'>
 <input type=button onClick="location.href='ylesanded2.php'" value='Eemaldatud ülesanded'>
 <input type=button onClick="location.href='ylesanded3.php'" value='Lõpetatud ülesanded'>
 </body>
 </html>
+<a href="?logout=1"> Logi välja <a>
 <?php require_once("../footer.php") ?>

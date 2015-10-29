@@ -113,34 +113,7 @@ if(isset($_POST["create"]))
   	$data = htmlspecialchars($data);
   	return $data;
 	}
-	/*function editTask($id_to_be_edited)
-	{
-	header("Location: task.php");
-	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-	$stmt = $mysqli->prepare("SELECT aine, opetaja, ylesanne, kuupaev, raskus, olulisus FROM koolike WHERE id=?");
-	$stmt->bind_param("i", $id_to_be_edited);
-	$stmt->bind_result($eaine, $eopetaja, $eylesanne, $ekuupaev, $eraskus, $eolulisus);
-	$stmt->execute();
-	
-	$aine = $eaine;
-	$opetaja = $eopetaja;
-	$ylesanne = $eylesanne;
-	$kuupaev = $ekuupaev;
-	$eraskus = $raskus;
-	$eolulisus = $olulisus;
-	
-	$stmt->close();
-	$mysqli->close();
-	<?=$opetaja_error; ?>
-	<?=$ylesanne_error; ?>
-	<?=$kuupaev_error; ?>
-	 <?=$raskus_error; ?>
-	  <?=$olulisus_error; ?>
-	  <input name="opetaja" type="text" placeholder="Õpetaja" value="<?=$opetaja; ?>"> 
-	}*/
 ?>
-<link rel="stylesheet" type="text/css" href="disain/yldine.css">
-<!DOCTYPE html>
 <html>
 <head>
   <title>Ülesande lisamine</title>
