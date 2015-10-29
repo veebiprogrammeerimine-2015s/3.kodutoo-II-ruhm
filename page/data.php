@@ -3,11 +3,13 @@
 		require_once("funtions.php");
 		
 		
-		$car_number_error = "";
-		$car_color_error = "";
+		$title_error = "";
+		$ingredients_error = "";
+		$preparation_error = "";
 		
-		$car_number = "";
-		$car_color = "";
+		$title = "";
+		$ingredients = "";
+		$preparation = "";
 		
 		
 		
@@ -15,7 +17,7 @@
 	
 	//Kontrollin kas kasutaja on sisse loginud
 	if(!isset($_SESSION["id_from_db"])){
-		header("Location: login_sample.php");
+		header("Location: login.php");
 		
 		
 		
@@ -28,33 +30,40 @@
 	}
 	
 	
-if(isset($_POST["add_car"])){
+if(isset($_POST["add_retsept"])){
 		
 		//echo $_SESSION["logged_in_user_id"];
 		
 		// valideerite väljad
-		if ( empty($_POST["car_number"]) ) {
-			$car_number_error = "See väli on kohustuslik";
+		if ( empty($_POST["title"]) ) {
+			$title_error = "See väli on kohustuslik";
 		}else{
-			$car_number = cleanInput($_POST["car_number"]);
+			$title = cleanInput($_POST["title"]);
 		}
 		
-		if ( empty($_POST["car_color"]) ) {
-			$car_color_error = "See väli on kohustuslik";
+		if ( empty($_POST["ingredients"]) ) {
+			$ingredients_error = "See väli on kohustuslik";
 		}else{
-			$car_color = cleanInput($_POST["car_color"]);
+			$ingredients = cleanInput($_POST["ingredients"]);
+		}
+
+		if ( empty($_POST["preparation"]) ) {
+			$preparation_error = "See väli on kohustuslik";
+		}else{
+			$preparation = cleanInput($_POST["preparation"]);
 		}
 		
 		// mõlemad on kohustuslikud
-		if($car_color_error == "" && $car_number_error == ""){
-			//salvestate ab'i fn kaudu addCarPlate
-		$msg = addCarPlate($car_number, $car_color);
+		if($ingredients_error == "" && $title_error == "" && $preparation_error == ""){
+			//salvestate ab'i fn kaudu addRetsept
+		$msg = addRetsept($title, $ingredients, $preparation);
 			
 			if($msg != ""){
 				//salvestamine õnnestus
 				
-				$car_number = "";
-				$car_color = "";
+				$title = "";
+				$ingredients = "";
+				$preparation = "";
 				
 				echo $msg;
 				
@@ -90,10 +99,13 @@ if(isset($_POST["add_car"])){
 </p>
 
   <h2>Lisa auto</h2>
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	<input name="car_number" type="text" placeholder="Auto number" value="<?php echo $car_number; ?>"> <?php echo $car_number_error; ?><br><br>
-  	<input name="car_color" type="text" placeholder="Auto värv" value="<?php echo $car_color; ?>"> <?php echo $car_color_error; ?><br><br>
-  	<input type="submit" name="add_car" value="Lisa">
+  <form id="usrform" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+  	<input name="title" type="text" placeholder="Retsepti nimi" value="<?php echo $title; ?>"> <?php echo $title_error; ?><br><br>
+  	<textarea name="ingredients" form="usrform" placeholder="Koostisosad" value="<?php echo $ingredients; ?>"></textarea><?php echo $ingredients_error; ?><br><br>
+  	<textarea name="preparation" form="usrform" placeholder="Valmistamine" value="<?php echo $preparation; ?>"></textarea><?php echo $preparation_error; ?><br><br>
+  	<input type="submit" name="add_retsept" value="Lisa">
   </form>
+
+  
 <body>
 <html>

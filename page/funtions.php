@@ -56,6 +56,30 @@
 		
 		
 	}
+		function addRetsept($title, $ingredients, $preparation) {
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("INSERT INTO create_retsept (user_id, title, ingredients, preparation) VALUES (?,?,?,?)");
+		$stmt->bind_param("isss", $_SESSION["id_from_db"], $title, $ingredients, $preparation);
+		
+		$message = "";
+		if($stmt->execute()){
+			
+		$message = "Eduklat edastatud anbmebaasi";	
+		}else{
+			echo $stmt->error;
+			
+		}
+		
+		$stmt->close();
+		
+		$mysqli->close();
+		
+		return $message;
+	}
+
+
 
 	
  ?>
