@@ -84,6 +84,7 @@
 				$stmt->bind_param("ssiss", $fname, $lname, $age, $email, $password_hash);
 				$stmt->execute();
 				$stmt->close();
+				header("Location: login.php");
 			}
 		 }
 	
