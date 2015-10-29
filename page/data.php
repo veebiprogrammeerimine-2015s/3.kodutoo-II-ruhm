@@ -1,5 +1,11 @@
 <?php
+	$page_title = "Numbrimärgid";
+	$file_name = "data.php";
+?>
+<?php
+	
 	require_once("functions.php");
+	require_once("../header.php");
 	//data.php
 	// siia pääseb ligi sisseloginud kasutaja
 	//kui kasutaja ei ole sisseloginud,

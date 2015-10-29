@@ -86,6 +86,6 @@
 <input type=button onClick="location.href='ylesanded2.php'" value='Eemaldatud ülesanded'>
 <input type=button onClick="location.href='ylesanded3.php'" value='Lõpetatud ülesanded'>
 </body>
-</html>
-<a href="?logout=1"> Logi välja <a>
+</html><br><br><br>
+<input type=button onClick="location.href='?logout=1'" value='Logi välja'>
 <?php require_once("../footer.php") ?>
