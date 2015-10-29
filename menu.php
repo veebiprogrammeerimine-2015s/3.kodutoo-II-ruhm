@@ -38,7 +38,7 @@
 	
 	?>
 	
-	
+	<li><a href="table.php">Vaata Retsepte</a></li>
 	
 
 </ul>

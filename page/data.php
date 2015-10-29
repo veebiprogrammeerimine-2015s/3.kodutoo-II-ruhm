@@ -95,7 +95,8 @@ if(isset($_POST["add_retsept"])){
 
 <p>
 	Tere, <?=$_SESSION["user_email"]; ?>
-	<a href="?logout=1">Logi väljalja</a>
+	<a href="?logout=1">Logi väljalja</a><br><br>
+	<a href="table.php">Vaata retsepte</a>
 </p>
 
   <h2>Lisa auto</h2>
