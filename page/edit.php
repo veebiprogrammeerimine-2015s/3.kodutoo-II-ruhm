@@ -1,11 +1,17 @@
 <?php
 	//edit.php
 	require_once("edit_functions.php");
+
+
 	
 	//kas kasutaja uuendab andmeid
 	if(isset($_POST["update"])){
+
+
+
 		
-		updateRetsept($_POST["id"],$_POST["title"], $_POST["ingredients"], $_POST["preparation"]);
+			updateRetsept($_POST["id"],$_POST["title"], $_POST["ingredients"], $_POST["preparation"]);
+		
 	}
 	
 	
@@ -28,9 +34,8 @@
 		var_dump($retsept_object);
 	}
 	
-	
-	
-	
+
+
 	
 ?>
 <h2>Muuda Retsepti</h2>

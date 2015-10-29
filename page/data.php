@@ -75,7 +75,7 @@ if(isset($_POST["add_retsept"])){
 	
 	
 	
-	  function cleanInput($data) {
+	function cleanInput($data) {
   	$data = trim($data); //tabulaator, tühikud, Enter
   	$data = stripslashes($data); //Kaldkriipsud
   	$data = htmlspecialchars($data); // 

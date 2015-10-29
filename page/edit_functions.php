@@ -39,7 +39,12 @@
 		$mysqli->close();
 		
 	}
+
 	function updateRetsept($id, $title, $ingredients, $preparation){
+
+				$title = cleanInput($_POST["title"]);
+			$ingredients = cleanInput($_POST["ingredients"]);
+			$preparation = cleanInput($_POST["preparation"]);
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
@@ -57,6 +62,16 @@
 		$mysqli->close();
 		
 		
+	}
+
+
+	function cleanInput($data) {
+  	$data = trim($data); //tabulaator, tühikud, Enter
+  	$data = stripslashes($data); //Kaldkriipsud
+  	$data = htmlspecialchars($data); // 
+  	return $data;
+	
+	
 	}
 	
 	
