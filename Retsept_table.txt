@@ -1,0 +1,10 @@
+CREATE TABLE create_retsept (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	user_id INT NOT NULL, 
+	title VARCHAR(128),
+	ingredients  TEXT,
+	preparation TEXT,
+	created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	deleted DATETIME
+	FOREIGN KEY (user_id) REFERENCES create_user(id)
+);
