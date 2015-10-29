@@ -1,16 +1,12 @@
 <?php
-
 	//muutujad
-	$car_plate = $color = $car_plate_error = $color_error = "";
-	
-	//sisestus vorm
-	
-	//laeme functions faili
+	$post_title = $post = $post_title_error = $post_error = "";	
+	//lisame functions faili
 	require_once("functions.php");
 	
-	//kontrollin, kas kasutaja ei ole sisse loginud
+	//kontrollin, kas kasutaja on sisse loginud
 	if(!isset($_SESSION["id_from_db"])){
-		//suuname login lehele kui on sisseloginud
+		//suuname login lehele kui ei ole sisseloginud
 		header("Location: login.php");
 	}
 	//logni välja
@@ -23,26 +19,24 @@
 	if(isset($_POST["create"])){
 		
 		//kas on tühi
-		if(empty($_POST["car_plate"])){
+		if(empty($_POST["post_title"])){
 			//jah oli tühi
-			$car_plate_error = "Numbrimärk on vajalik";
+			$post_title_error = "Title is needed";
 		}else{
-			$car_plate = test_input($_POST["car_plate"]);
+			$post_title = test_input($_POST["post_title"]);
 		}
 			
-		//kas create email on tühi
-		if(empty($_POST["color"])){
+		//kas on tühi
+		if(empty($_POST["post"])){
 			//jah oli tühi
-			$color_error= "Värv on vajalik";
+			$post_error= "Text is needed";
 		}else{
-			$color = test_input($_POST["color"]);
+			$post = test_input($_POST["post"]);
 		}
 		
-		if($car_plate_error == "" && $color_error == ""){
-				
-				echo "Plate nr ".$car_plate." color is ".$color;
-				//msg = message
-				$msg = createCarPlate($car_plate, $color);
+		//kui errorit ei ole
+		if($post_title_error == "" && $post_error == ""){
+				$msg = createPost($post_title, $post);
 				if($msg != ""){
 					//salvestamine õnnestus, teen väljad tühjaks
 					$car_plate = "";
@@ -72,13 +66,13 @@ Tere, <?=$_SESSION["user_email"];?><br>
 <a href="?logout=1"> Logout</a>
 </p>
 
-<h2>Lisa auto</h2>
+<h2>New post</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	<label for="car_plate" >auto nr</label><br>
-	<input id="car_plate" name="car_plate" type="text" value="<?=$car_plate; ?>"> <?=$car_plate_error; ?><br><br>
-  	<label>värv</label><br>
-	<input name="color" type="text" value="<?=$color; ?>"> <?=$color_error; ?><br><br>
-  	<input type="submit" name="create" value="Salvesta">
+  	<label for="post_title" >Title</label><br>
+	<input size="50" id="post_title" name="post_title" type="text" value="<?=$post_title; ?>"> <?=$post_title_error; ?><br><br>
+  	<label>Text</label><br>
+	<textarea rows="6" cols="52" name="post" value="<?=$post; ?>"></textarea><?=$post_error; ?><br><br>
+  	<input type="submit" name="create" value="Submit">
   </form>
   
 <?php require_once("../footer.php");?>

@@ -5,10 +5,10 @@
 	$database = "if15_rimo";
 	
 	//funktsioon et küsida andmebaasist andmeid
-	function getCarData(){
+	function getPostData(){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("SELECT id, user_id, number_plate, color FROM car_plates WHERE deleted IS NULL");
-		$stmt->bind_result($id, $user_id, $number_plate, $color);
+		$stmt = $mysqli->prepare("SELECT id, user_id, post_title, post FROM user_posts WHERE deleted IS NULL");
+		$stmt->bind_result($id, $user_id, $post_title, $post);
 		$stmt->execute();
 		
 		//tühi masiiv kus hoiame objekte(1rida andmeid)
@@ -18,19 +18,19 @@
 			//loon objekti
 			$car = new StdClass();
 			$car->id = $id;
-			$car->number_plate = $number_plate;
-			$car->color = $color;
+			$car->post_title = $post;
+			$car->post = $post;
 			$car->user_id = $user_id;
-			array_push($array, $car);
+			array_push($array, $posts);
 		}
 		$stmt->close();
 		$mysqli->close();
 		return $array;
 	}
 	
-	function deleteCar($id_to_be_deleted){
+	function deletePost($id_to_be_deleted){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("UPDATE car_plates SET deleted=NOW() WHERE id=?");
+		$stmt = $mysqli->prepare("UPDATE user_posts SET deleted=NOW() WHERE id=?");
 		$stmt->bind_param("i", $id_to_be_deleted);
 		if($stmt->execute()){
 			//kui on edukas
