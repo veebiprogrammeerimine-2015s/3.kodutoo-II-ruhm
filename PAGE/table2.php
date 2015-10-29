@@ -27,7 +27,7 @@ $file_name = "table2.php";
 			echo"<td>".$post_list[$i]->id."</td>";
 			echo"<td>".$post_list[$i]->user_id."</td>";
 			echo"<td>".$post_list[$i]->post_title."</td>";
-			echo"<td><a href='view.php?edit=".$post_list[$i]->id."'>X</a></td>";
+			echo"<td style='text-align:center'><a href='view.php?edit=".$post_list[$i]->id."'>X</a></td>";
 			echo"</tr>";
 		}
 	?>
