@@ -86,6 +86,7 @@ if(isset($_POST["add_retsept"])){
 ?>
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -99,11 +100,11 @@ if(isset($_POST["add_retsept"])){
 	<a href="table.php">Vaata retsepte</a>
 </p>
 
-  <h2>Lisa auto</h2>
+  <h2>Lisa Retsept</h2>
   <form id="usrform" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
   	<input name="title" type="text" placeholder="Retsepti nimi" value="<?php echo $title; ?>"> <?php echo $title_error; ?><br><br>
-  	<textarea name="ingredients" form="usrform" placeholder="Koostisosad" value="<?php echo $ingredients; ?>"></textarea><?php echo $ingredients_error; ?><br><br>
-  	<textarea name="preparation" form="usrform" placeholder="Valmistamine" value="<?php echo $preparation; ?>"></textarea><?php echo $preparation_error; ?><br><br>
+  	<textarea name="ingredients" form="usrform" placeholder="Koostisosad"><?php echo $ingredients; ?></textarea><?php echo $ingredients_error; ?><br><br>
+  	<textarea name="preparation" form="usrform" placeholder="Valmistamine"><?php echo $preparation; ?></textarea><?php echo $preparation_error; ?><br><br>
   	<input type="submit" name="add_retsept" value="Lisa">
   </form>
 

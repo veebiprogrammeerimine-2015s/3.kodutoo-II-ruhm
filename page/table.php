@@ -36,20 +36,7 @@
 
 
 
-			if(isset($_GET["edit"]) && $retsept_list[$i]->id == $_GET["edit"]){
-				// kasutajale muutmiseks
-				echo "<tr>";
-					echo "<form action='table.php' method='post'>";
-						echo "<td>".$retsept_list[$i]->id."</td>";
-						echo "<td><input type='hidden' name='id' value='".$retsept_list[$i]->id."'><input name='title' value='".$retsept_list[$i]->title."'></td>";
-						echo "<td><input name='ingredients' value='".$retsept_list[$i]->ingredients."'></td>";
-						echo "<td><input name='preparation' value='".$retsept_list[$i]->preparation."'></td>";
-						echo "<td><input type='submit' name='update'></td>";
-						echo "<td><a href='table.php'>cancel</a></td>";
-					echo "</form>";
-				echo "</tr>";
-				
-			}else{
+
 
 
 
@@ -63,17 +50,19 @@
 
 			if(isset($_SESSION["id_from_db"])){
 
-	
+		
+					
+				
 			
 				echo "<td><a href='?delete=".$retsept_list[$i]->id."'>X</a></td>";
-				echo "<td><a href='?edit=".$retsept_list[$i]->id."'>edit</a></td>";
-				echo "<td><a href='edit.php?edit=".$retsept_list[$i]->id."'>edit.php</a></td>";
-			
+
+				echo "<td><a href='edit.php?edit=".$retsept_list[$i]->id."'>edit</a></td>";
+				
 			}
 
 			echo "</tr>";
 
-			}
+			
 			
 		}
 	

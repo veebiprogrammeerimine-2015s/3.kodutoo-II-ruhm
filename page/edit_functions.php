@@ -8,8 +8,8 @@
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT title, ingredients, preparation FROM retsept_plates WHERE id=? AND deleted IS NULL");
-		//asendan ? märgi
+		$stmt = $mysqli->prepare("SELECT title, ingredients, preparation FROM create_retsept WHERE id=? AND deleted IS NULL");
+		//var_dump();//asendan ? märgi
 		$stmt->bind_param("i", $edit_id);
 		$stmt->bind_result($title, $ingredients, $preparation);
 		$stmt->execute();
