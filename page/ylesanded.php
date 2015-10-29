@@ -51,7 +51,7 @@
 		<th>Tähtaeg</th>
 		<th>Raskus</th>
 		<th>Olulisus</th>
-		<th>Muuda</th>
+		<!--<th>Muuda</th>-->
 		<th>Tehtud</th>
 		<th>Eemalda</th>
 	</tr>
@@ -71,7 +71,7 @@
 			echo "<td align=center>".$ylesanded[$i]->kuupaev."</td>";
 			echo "<td align=center>".$ylesanded[$i]->raskus."</td>";
 			echo "<td align=center>".$ylesanded[$i]->olulisus."</td>";
-			echo "<td align=center><a href='?edit=".$ylesanded[$i]->id."'><input type='submit' name='edit' value='Muuda'></a></td>";
+			//echo "<td align=center><a href='?edit=".$ylesanded[$i]->id."'><input type='submit' name='edit' value='Muuda'></a></td>";
 			echo "<td align=center><a href='?done=".$ylesanded[$i]->id."'><input type='submit' name='done' value='Tehtud'></a></td>";
 			echo "<td align=center><a href='?delete=".$ylesanded[$i]->id."'><input type='submit' name='delete' value='X'></a></td>";
 			//echo "<td align=center><a href='?delete=".$ylesanded[$i]->id."'>X</a></td>";
