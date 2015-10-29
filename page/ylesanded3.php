@@ -1,20 +1,28 @@
 <?php
+	$page_title = "Lõpetatud ülesanded";
+	$file_name = "ylesanded3.php";
+	require_once("../header.php")
+?>
+<?php
 
 	require_once("functions.php");
-	/*if(isset($_GET["delete"])){
-		
-		deleteTask($_GET["delete"]);
-			
+	if(!isset($_SESSION["logged_in_user_id"])){
+		header("Location: login.php");
 	}
-	if(isset($_GET["edit"])){
+	//kasutaja tahab välja logida
+	if(isset($_GET["logout"])){
+		//aadressireal on olemas muutuja logout
 		
-		editTask($_GET["edit"]);
+		//kustutame kõik session muutujad ja peatame sessiooni
+		session_destroy();
 		
-	}	*/	
+		header("Location: login.php");
+	}	
 	$ylesanded = doneTasks();
 	
 
 ?>
+<h3>Lõpetatud ülesanded</h3>
 <table border=1 >
 	<tr>
 		<th>Aine nimetus</th>

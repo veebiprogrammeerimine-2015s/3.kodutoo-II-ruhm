@@ -63,7 +63,6 @@
 ?>
 <p>
 	Tere, <?=$_SESSION["logged_in_user_email"];?><br>
-	<a href="?logout=1"> Logi välja <a> 
 </p>
 
 

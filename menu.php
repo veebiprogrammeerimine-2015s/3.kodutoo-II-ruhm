@@ -1,9 +1,17 @@
-<h3>Menüü</h3>
-
-<ul>
 <?php
 	require_once("functions.php");
 ?>
+<h3>Menüü</h3>
+<?php
+	if(isset($_SESSION["logged_in_user_id"]))
+	{?>
+		<input type=button onClick="location.href='?logout=1'" value='Logi välja'>
+		<?php
+	}
+		
+?>
+
+<ul>
 
 
 
