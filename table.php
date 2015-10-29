@@ -1,3 +1,8 @@
+<?php
+	require_once("functions.php");
+	
+	$book_list = getBookData();
+?>
 <table border= 1>
 	<tr>
 		<th>id</th>
@@ -25,4 +30,7 @@
 		}
 	
 	?>
+	<tr>
+		
+	</tr>
 </table>
