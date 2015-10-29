@@ -37,8 +37,8 @@
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
-		$stmt = $mysqli->prepare("INSERT INTO koolike (aine, opetaja, ylesanne, kuupaev, raskus, olulisus) VALUES (?, ?, ?, ?, ?, ?)");
-		$stmt->bind_param("ssssii", $aine, $opetaja, $ylesanne, $kuupaev, $raskus, $olulisus);
+		$stmt = $mysqli->prepare("INSERT INTO koolike (user_id, aine, opetaja, ylesanne, kuupaev, raskus, olulisus) VALUES (?, ?, ?, ?, ?, ?, ?)");
+		$stmt->bind_param("issssii", $_SESSION["logged_in_user_id"], $aine, $opetaja, $ylesanne, $kuupaev, $raskus, $olulisus);
 		
 		$message ="";
 		
@@ -54,10 +54,11 @@
 		
 		return $message;
 	}
-	function koolike(){
+	function tasks(){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("SELECT id, aine, opetaja, ylesanne, kuupaev, raskus, olulisus FROM koolike WHERE deleted IS NULL AND done IS NULL");
+		$stmt = $mysqli->prepare("SELECT id, aine, opetaja, ylesanne, kuupaev, raskus, olulisus FROM koolike WHERE deleted IS NULL AND done IS NULL AND user_id =?");
+		$stmt->bind_param("i", $_SESSION["logged_in_user_id"]);
 		$stmt->bind_result($id, $aine, $opetaja, $ylesanne, $kuupaev, $raskus, $olulisus);
 		$stmt->execute();
 		//tühi massiiv kus hoiame objekte( 1 rida andmeid)
@@ -68,16 +69,16 @@
 		{
 		
 			//loon objekti
-			$koolike = new stdClass();
-			$koolike->id = $id;
-			$koolike->aine= $aine;
-			$koolike->opetaja = $opetaja;
-			$koolike->ylesanne = $ylesanne;
-			$koolike->kuupaev = $kuupaev;
-			$koolike->raskus = $raskus;
-			$koolike->olulisus = $olulisus;
+			$tasks = new stdClass();
+			$tasks->id = $id;
+			$tasks->aine= $aine;
+			$tasks->opetaja = $opetaja;
+			$tasks->ylesanne = $ylesanne;
+			$tasks->kuupaev = $kuupaev;
+			$tasks->raskus = $raskus;
+			$tasks->olulisus = $olulisus;
 			//lisame selle massiivi
-			array_push($array, $koolike);
+			array_push($array, $tasks);
 			//echo "<pre>";
 			//var_dump($array);
 			//echo "</pre>";
@@ -123,7 +124,8 @@
 	function deletedTasks(){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("SELECT id, aine, opetaja, ylesanne, kuupaev, raskus, olulisus FROM koolike WHERE deleted IS NOT NULL");
+		$stmt = $mysqli->prepare("SELECT id, aine, opetaja, ylesanne, kuupaev, raskus, olulisus FROM koolike WHERE deleted IS NOT NULL AND user_id=?");
+		$stmt->bind_param("i", $_SESSION["logged_in_user_id"]);
 		$stmt->bind_result($id, $aine, $opetaja, $ylesanne, $kuupaev, $raskus, $olulisus);
 		$stmt->execute();
 		//tühi massiiv kus hoiame objekte( 1 rida andmeid)
@@ -157,7 +159,8 @@
 	function doneTasks(){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("SELECT id, aine, opetaja, ylesanne, kuupaev, raskus, olulisus FROM koolike WHERE done IS NOT NULL");
+		$stmt = $mysqli->prepare("SELECT id, aine, opetaja, ylesanne, kuupaev, raskus, olulisus FROM koolike WHERE done IS NOT NULL AND user_id=?");
+		$stmt->bind_param("i", $_SESSION["logged_in_user_id"]);
 		$stmt->bind_result($id, $aine, $opetaja, $ylesanne, $kuupaev, $raskus, $olulisus);
 		$stmt->execute();
 		//tühi massiiv kus hoiame objekte( 1 rida andmeid)

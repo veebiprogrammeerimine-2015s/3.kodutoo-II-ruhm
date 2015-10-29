@@ -38,7 +38,7 @@
 		editTask($_GET["edit"]);
 		
 	}		
-	$ylesanded = koolike();
+	$ylesanded = tasks();
 	
 
 ?>
