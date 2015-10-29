@@ -2,15 +2,15 @@
 	require_once("edit_functions.php");
 	//kas kasutaja uuendab andmeid
 	if(isset($_POST["update"])){
-		updateCar($_POST["id"],$_POST["number_plate"],$_POST["color"]);
+		updatePost($_POST["id"],$_POST["post_title"],$_POST["post"]);
 	}
 	if(!isset($_GET["edit"])){
 		//kui aadressi real ei ole ?edit=, suuname table lehele
 		header("location: table.php");
 	}else{
 		//küsime andmebaasist andmed id järgi
-		$car_object = getSingleCarData($_GET["edit"]);
-		var_dump($car_object);
+		$post_object = getSinglePostData($_GET["edit"]);
+		var_dump($post_object);
 	}
 	//id mida muudame
 	//echo $_GET["edit"];
@@ -18,12 +18,12 @@
 	
 ?>
 
-<h2>Muuda auto</h2>
+<h2>Change Post</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 	<input type="hidden" name="id" value="<?=$_GET["edit"];?>">
-  	<label for="number_plate" >auto nr</label><br>
-	<input id="number_plate" name="number_plate" type="text" value="<?=$car_object->number_plate;?>"><br><br>
-  	<label for="color">värv</label><br>
-	<input id="color" name="color" type="text" value="<?=$car_object->color;?>"><br><br>
-  	<input type="submit" name="update" value="Salvesta">
+  	<label for="post_title" >Title</label><br>
+	<input id="post_title" name="post_title" type="text" value="<?=$post_object->post_title;?>"><br><br>
+  	<label for="post">Text</label><br>
+	<input id="post" name="post" type="text" value="<?=$post_object->post;?>"><br><br>
+  	<input type="submit" name="update" value="Save">
   </form>

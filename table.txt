@@ -1,7 +1,7 @@
-CREATE TABLE posts (
+CREATE TABLE user_posts (
   id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   user_id INT NOT NULL,
-  user_headline VARCHAR(200),   
-  user_post TEXT,
+  post_title VARCHAR(200),   
+  post TEXT,
   FOREIGN KEY (user_id) REFERENCES user_info(id)
 );
