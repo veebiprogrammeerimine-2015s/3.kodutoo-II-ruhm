@@ -3,5 +3,6 @@ CREATE TABLE user_posts (
   user_id INT NOT NULL,
   post_title VARCHAR(200),   
   post TEXT,
+  deleted date,
   FOREIGN KEY (user_id) REFERENCES user_info(id)
 );

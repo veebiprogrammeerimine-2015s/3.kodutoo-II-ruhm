@@ -39,8 +39,8 @@
 				$msg = createPost($post_title, $post);
 				if($msg != ""){
 					//salvestamine õnnestus, teen väljad tühjaks
-					$car_plate = "";
-					$color = "";
+					$post_title = "";
+					$post = "";
 					echo $msg;
 				}
 		}

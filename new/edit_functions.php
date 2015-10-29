@@ -8,7 +8,7 @@
 		$stmt->bind_param("i", $edit_id);
 		$stmt->bind_result($post_title, $post);
 		$stmt->execute();
-		$car = new Stdclass();
+		$posts = new Stdclass();
 		if($stmt->fetch()){
 			$posts->post_title = $post_title;
 			$posts->post = $post;

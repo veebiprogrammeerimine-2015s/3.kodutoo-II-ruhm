@@ -16,11 +16,11 @@
 		//tee tsüklit nii palju kordi kui saad ab'st ühe rea andmeid
 		while($stmt->fetch()){
 			//loon objekti
-			$car = new StdClass();
-			$car->id = $id;
-			$car->post_title = $post;
-			$car->post = $post;
-			$car->user_id = $user_id;
+			$posts = new StdClass();
+			$posts->id = $id;
+			$posts->post_title = $post_title;
+			$posts->post = $post;
+			$posts->user_id = $user_id;
 			array_push($array, $posts);
 		}
 		$stmt->close();

@@ -47,7 +47,7 @@
 		$message = "";
 		if($stmt->execute()){
 			//täpne kui sisestus AB'i õnnestus
-			$message = "Post has been enteredd";
+			$message = "Post has been entered";
 		}else{
 			//kui midagi läks sisestuse käigus katki
 			echo $stmt->error;

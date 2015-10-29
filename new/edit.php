@@ -10,7 +10,7 @@
 	}else{
 		//küsime andmebaasist andmed id järgi
 		$post_object = getSinglePostData($_GET["edit"]);
-		var_dump($post_object);
+		//var_dump($post_object);
 	}
 	//id mida muudame
 	//echo $_GET["edit"];
