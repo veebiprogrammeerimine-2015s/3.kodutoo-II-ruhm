@@ -1,0 +1,35 @@
+body
+{
+	background-color: 87D7FA;
+	/*background-image: url("../images/tlu_h200.png");
+	background-repeat: no-repeat; /*repeat, no-repeat, repeat-x, repeat-y*/
+	/*background-position: 800px 120px;/*koordinaadid (px või %)  või asukoha konstandid (top,center,bottom) (left,center,right)*/
+	/*background-attachment: fixed; /*scroll, fixed, local*/
+}
+section
+{
+	margin: 50px;
+	padding: 20px;
+}
+
+section
+{
+	/*background-color: rgba(255,255,200,0.3);*/
+	background-image: url("../images/poker.jpg");
+	background-repeat: no-repeat;
+	background-position: center;
+	
+	/*background-size: 100px/*contain, cover*/
+}
+table
+{
+	background-image: url("../images/bg2.jpg");	
+	/*background-color: rgb(111,237,92);
+	table-layout: auto;*/
+	color: white;
+	text-shadow:
+   -1px -1px 0 #000,  
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+     1px 1px 0 #000;
+}
