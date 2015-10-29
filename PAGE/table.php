@@ -27,7 +27,7 @@ $file_name = "table.php";
 
 <?php require_once("../header.php");?>
 
-<h2>Posts</h2>
+<h2>Your posts</h2>
 <table border=1>
 	<tr>
 		<th>id</th>
@@ -39,7 +39,7 @@ $file_name = "table.php";
 	<?php
 			//iga massiivis oleva elemendi kohta, masiivi pikkus, $i++ = $i=$i+1
 		for($i = 0; $i<count($post_list); $i++){
-			//kui kasutaja tahab muuta kuvan imput välja
+			if($post_list[$i]->user_id == $_SESSION["id_from_db"]){
 				echo"<tr>";
 				echo"<td>".$post_list[$i]->id."</td>";
 				echo"<td>".$post_list[$i]->user_id."</td>";
@@ -48,6 +48,7 @@ $file_name = "table.php";
 				echo"<td><a href='edit.php?edit=".$post_list[$i]->id."'>X</a></td>";
 				echo"</tr>";
 			}
+		}
 	?>
 </table>
 

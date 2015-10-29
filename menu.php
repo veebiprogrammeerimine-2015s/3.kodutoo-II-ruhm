@@ -1,9 +1,10 @@
 <h3>Menu</h3>
+<?php require_once("functions.php");?>
 <ul>
 	<?php if($file_name == "home.php"){
-		echo "<li>Avaleht</li>";
+		echo "<li>Home Page</li>";
 	}else{
-		echo '<li><a href="home.php">Avaleht</a></li>';}
+		echo '<li><a href="home.php">Home Page</a></li>';}
 	?>
 
 	<?php if($file_name == "login.php"){
@@ -19,9 +20,15 @@
 	?>
 	
 	<?php if($file_name == "table.php"){
+		echo "<li>Your Posts</li>";
+	}else{
+		echo '<li><a href="table.php">Your Posts</a></li>';}
+	?>
+	
+	<?php if($file_name == "table2.php"){
 		echo "<li>Posts</li>";
 	}else{
-		echo '<li><a href="table.php">Posts</a></li>';}
+		echo '<li><a href="table2.php">Posts</a></li>';}
 	?>
 </ul>
 

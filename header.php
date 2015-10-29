@@ -5,6 +5,5 @@
 </head>
 <body>
 <?php 
-	require_once("functions.php");
 	require_once("menu.php");
 ?>
