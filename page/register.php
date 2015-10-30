@@ -97,7 +97,7 @@
 	$file_name = "register.php";
 ?>
 <?php require_once("../header.php") ?>
-		<h2>Register</h2>
+		<h2>Registreerimine</h2>
 		<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 		<input name="fname" type="text" placeholder="Eesnimi"> <br><br>
 		<input name="lname" type="text" placeholder="Perekonnanimi"> <br><br>
@@ -106,7 +106,7 @@
 		<input name="email" type="email" placeholder="E-post"> <?php echo $email_error; ?> <br><br>
 		<input name="password" type="password" placeholder="Parool" > <?php echo $password_error; echo $password_error_length; ?> <br><br>
 		<input name="password2" type="password" placeholder="Parool" > <?php echo $password_error2; echo $password_error3;?> <br><br>
-		<input name="register" type="submit" value="register"> <br><br>
+		<input name="register" type="submit" value="Registreeri"> <br><br>
 		</form>
 		
 <?php require_once("../footer.php") ?>

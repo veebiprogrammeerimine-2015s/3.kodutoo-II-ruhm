@@ -48,7 +48,14 @@
 		// mõlemad on kohustuslikud
 		if($color_error == "" && $number_plate_error == ""){
 			//salvestate ab'i fn kaudu addCarPlate
-			addCarPlate($number_plate, $color);
+			$msg =addCarPlate($number_plate, $color);
+			
+			if($msg != ""){
+				//salvestamine õnnestus, teen tühjaks input value'd
+				$car_plate = "";
+				$color = "";
+				echo $msg;
+			}
 			
 		}
 		

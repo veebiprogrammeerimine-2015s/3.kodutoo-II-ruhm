@@ -2,108 +2,108 @@
 require_once("functions.php");
 $create = "";
 $someError = "";
-$aine_error = $opetaja_error = $ylesanne_error = $kuupaev_error = $raskus_error = $olulisus_error = "";
-$aine = $opetaja = $ylesanne = $kuupaev = $raskus = $olulisus = "";
+$subject_error = $lecturer_error = $task_error = $date_error = $difficulty_error = $importance_error = "";
+$subject = $lecturer = $task = $date = $difficulty = $importance = "";
 if(isset($_POST["create"]))
 {	
 	if(isset($_POST['formSubmit']) )
 	{
-		$aine_error = "*";
+		$subject_error = "*";
 	}
 	else
 	{
-		$aine = $_POST['aine'];
+		$subject = $_POST['subject'];
 	}
-	//if ( empty($_POST["opetaja"]) ) 
+	//if ( empty($_POST["lecturer"]) ) 
 	//{
-	//	$opetaja_error = "*";
+	//	$lecturer_error = "*";
 	//} 
 	//else 
 	//{
-	//	$opetaja = cleanInput($_POST["opetaja"]);
+	//	$lecturer = cleanInput($_POST["lecturer"]);
 	//}
-	if ( empty($_POST["ylesanne"]) ) 
+	if ( empty($_POST["task"]) ) 
 	{
-		$ylesanne_error = "See väli on kohustuslik";
+		$task_error = "See väli on kohustuslik";
 	}
 	else 
 	{
-		$ylesanne = cleanInput($_POST["ylesanne"]);
+		$task = cleanInput($_POST["task"]);
 	}
-	if ( empty($_POST["kuupaev"]) ) 
+	if ( empty($_POST["date"]) ) 
 	{
-		$kuupaev_error = "See väli on kohustuslik";
+		$date_error = "See väli on kohustuslik";
 	} 
 	else 
 	{
-		$kuupaev = cleanInput($_POST["kuupaev"]);
+		$date = cleanInput($_POST["date"]);
 	}
-	if ( empty($_POST["raskus"]) ) 
+	if ( empty($_POST["difficulty"]) ) 
 	{
-		$raskus_error = "See väli on kohustuslik";
+		$difficulty_error = "See väli on kohustuslik";
 	} 
 	else 
 	{
-		$raskus = cleanInput($_POST["raskus"]);
+		$difficulty = cleanInput($_POST["difficulty"]);
 	}
-	if ( empty($_POST["olulisus"]) ) 
+	if ( empty($_POST["importance"]) ) 
 	{
-		$olulisus_error = "See väli on kohustuslik";
+		$importance_error = "See väli on kohustuslik";
 	} 
 	else 
 	{
-		$olulisus = cleanInput($_POST["olulisus"]);
+		$importance = cleanInput($_POST["importance"]);
 	}
-	if($aine_error != "" || $opetaja_error != "" || $ylesanne_error != "" || $kuupaev_error != "" || $raskus_error != "" || $olulisus_error != "")
+	if($subject_error != "" || $lecturer_error != "" || $task_error != "" || $date_error != "" || $difficulty_error != "" || $importance_error != "")
 	{
 		$someError = "<font color='red'> Kõik väljad peavad täidetud olema!</font>";
 	}
-	if($aine == "Arvuti töövahendina")
+	if($subject == "Arvuti töövahendina")
 	{
-		$opetaja = "Kalle Kivi";
+		$lecturer = "Kalle Kivi";
 	}
-	if($aine == "Andmebaaside projekteerimine")
+	if($subject == "Andmebaaside projekteerimine")
 	{
-		$opetaja = "Jaagup Kippar";
+		$lecturer = "Jaagup Kippar";
 	}
-	if($aine == "MS Windows")
+	if($subject == "MS Windows")
 	{
-		$opetaja = "Tanel Toova";
+		$lecturer = "Tanel Toova";
 	}
-	if($aine == "Veebilehtede loomine")
+	if($subject == "Veebilehtede loomine")
 	{
-		$opetaja = "Andrus Rinde";
+		$lecturer = "Andrus Rinde";
 	}
-	if($aine == "ITSPEA")
+	if($subject == "ITSPEA")
 	{
-		$opetaja = "Kaido Kikkas";
+		$lecturer = "Kaido Kikkas";
 	}
-	if($aine == "Intelligentne arvutikasutus")
+	if($subject == "Intelligentne arvutikasutus")
 	{
-		$opetaja = "Andrus Rinde";
+		$lecturer = "Andrus Rinde";
 	}
-	if($aine == "Programmeerimise alused")
+	if($subject == "Programmeerimise alused")
 	{
-		$opetaja = "Inga Petuhhov";
+		$lecturer = "Inga Petuhhov";
 	}
-	if($aine == "Veebiprogrammeerimine")
+	if($subject == "Veebiprogrammeerimine")
 	{
-		$opetaja = "Romil Rõbtšenkov";
+		$lecturer = "Romil Rõbtšenkov";
 	}
-	if($aine == "Arvutiriistvara")
+	if($subject == "Arvutiriistvara")
 	{
-		$opetaja = "Teet Evartson";
+		$lecturer = "Teet Evartson";
 	}
-	if($aine == "Suuline ja kirjalik kommunikatsioon")
+	if($subject == "Suuline ja kirjalik kommunikatsioon")
 	{
-		$opetaja = "Krista Kerge";
+		$lecturer = "Krista Kerge";
 	}
-	if($aine_error == "" && $opetaja_error == "" && $ylesanne_error == "" && $kuupaev_error == "" && $raskus_error == "" && $olulisus_error == "")
+	if($subject_error == "" && $lecturer_error == "" && $task_error == "" && $date_error == "" && $difficulty_error == "" && $importance_error == "")
 	{
-		addTask($aine, $opetaja, $ylesanne, $kuupaev, $raskus, $olulisus);
+		addTask($subject, $lecturer, $task, $date, $difficulty, $importance);
 		echo "Salvestatud!";
-		echo $opetaja;
-		echo $kuupaev;
+		echo $lecturer;
+		echo $date;
 	}
 }
 	function cleanInput($data) 
@@ -122,8 +122,8 @@ if(isset($_POST["create"]))
 
   <h2>Lisa kodune töö</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-	<label for="aine">Aine</label><br>
-  	<select name = "aine">
+	<label for="subject">Aine</label><br>
+  	<select name = "subject">
 		<option value="Arvuti töövahendina">Arvuti töövahendina</option> 
 		<option value="Andmebaaside projekteerimine">Andmebaaside projekteerimine</option>
 		<option value="MS Windows">MS Windows</option>
@@ -135,14 +135,14 @@ if(isset($_POST["create"]))
 		<option value="Arvutiriistvara">Arvutiriistvara</option>
 		<option value="Suuline ja kirjalik kommunikatsioon">Suuline ja kirjalik kommunikatsioon</option>
 	</select><br><br>
-	<label for="ylesanne">Ülesande kirjeldus</label><br>
-	<input name="ylesanne" type="text" placeholder="Ülesande kirjeldus"  value="<?=$ylesanne; ?>"> <br><br>
-	<label for="kuupaev">Tähtaeg</label><br>
-	<input name="kuupaev" type="date" placeholder="Kuupäev"  value="<?=$kuupaev; ?>"> <br><br>
-	<label for="raskus">Ülesande keerukus</label><br>
-	<input name="raskus" type="number" min="1" max="3" value="1"><br><br>
-	<label for="olulisus">Ülesande olulisus</label><br>
-	<input name="olulisus" type="number" min="1" max="3" value="1"><br><br>
+	<label for="task">Ülesande kirjeldus</label><br>
+	<input name="task" type="text" placeholder="Ülesande kirjeldus"  value="<?=$task; ?>"> <br><br>
+	<label for="date">Tähtaeg</label><br>
+	<input name="date" type="date" placeholder="Kuupäev"  value="<?=$date; ?>"> <br><br>
+	<label for="difficulty">Ülesande keerukus</label><br>
+	<input name="difficulty" type="number" min="1" max="3" value="1"><br><br>
+	<label for="importance">Ülesande olulisus</label><br>
+	<input name="importance" type="number" min="1" max="3" value="1"><br><br>
 	<input type="submit" name="create" value="Lisa" value="<?=$create; ?>"><?=$someError; ?>	
   </form>
 	<br><a href="ylesanded.php"><button>Tagasi</button></a>
