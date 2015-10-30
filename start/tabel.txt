@@ -1,0 +1,11 @@
+CREATE TABLE user_register1 (
+	id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	email VARCHAR(255) NOT NULL,
+	password VARCHAR(128),
+	name VARCHAR(50),
+	secondname VARCHAR(255),
+	age INT,
+	eriala VARCHAR(50),
+	created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+	UNIQUE(email)
+);
