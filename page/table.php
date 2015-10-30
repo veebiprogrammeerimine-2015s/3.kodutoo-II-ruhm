@@ -1,5 +1,6 @@
 <?php
-	
+	$page_title = "Tabelid";
+	$file_name = "table.php";
 	// table.php
 	require_once("funtions.php");
 	require_once("edit_functions.php");
@@ -22,7 +23,13 @@
 ?>
 
 
+<?php
+	
+	require_once("../header.php");
 
+
+
+?>
 
 
 
@@ -81,4 +88,11 @@
 	
 ?>
 </table>
+<?php
+	
+	require_once("../footer.php");
+
+
+
+?>
 

@@ -1,9 +1,5 @@
 <h3>Menüü</h3>
-<?php
 
-	echo $file_name;
-
-?>
 
 <ul>
 	<?php if($file_name == "index.php"){ ?>
@@ -22,14 +18,42 @@
 	<?php } ?>
 	
 	
-	<?php if($file_name == "login.php"){ 
+	<?php 
+
+
+		if(isset($_SESSION["id_from_db"]) || $file_name == "login.php") {
+		
+		
+
+			echo '<li>Logi Sisse</li>';
+
+
+		} 
 	
-	echo '<li>Logi Sisse</li>';
+
+	
+	
+		else{
+		
+		echo '<li><a href="login.php">Logi Sisse</a></li>';
+		
+	}
+
+	
+	
+	
+	
+	
+	?>
+	
+	<?php if($file_name == "table.php"){ 
+	
+	echo '<li>Vaata retsepte</li>';
 	
 	
 	}else{
 		
-		echo '<li><a href="login.php">Logi Sisse</a></li>';
+		echo '<li><a href="table.php">Vaata retsepte</a></li>';
 		
 	}
 	
@@ -37,8 +61,6 @@
 	
 	
 	?>
-	
-	<li><a href="table.php">Vaata Retsepte</a></li>
 	
 
 </ul>

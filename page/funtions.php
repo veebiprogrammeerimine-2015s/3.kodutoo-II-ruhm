@@ -33,11 +33,11 @@
 				
 				$stmt->bind_result($id_from_db, $username_from_db, $email_from_db, $firstname_from_db, $lastname_from_db, $tel_from_db, $amet_from_db);
 				$stmt->execute();
-				echo "<br>";
+
 				
 				if($stmt->fetch()){
 					
-					echo "Kasutaja id=".$id_from_db;
+					
 					
 					$_SESSION["id_from_db"] = $id_from_db;
 					$_SESSION["user_email"] = $email_from_db;

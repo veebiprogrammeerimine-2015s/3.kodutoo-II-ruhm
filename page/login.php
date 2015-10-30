@@ -145,7 +145,7 @@
 	      
 	// Kui oleme siia jõudnud, võime kasutaja sisse logida
 			if($logpassword_error == "" && $logemail_error == ""){
-				echo "Võib sisse logida!";
+				
 				
 				$password_hash = hash("sha512", $password);
 				

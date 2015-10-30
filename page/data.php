@@ -1,5 +1,6 @@
 <?php
-
+		$page_title = "Data";
+		$file_name = "index.php";
 		require_once("funtions.php");
 		
 		
@@ -84,6 +85,13 @@ if(isset($_POST["add_retsept"])){
 	
 
 ?>
+<?php
+	
+	require_once("../header.php");
+
+
+
+?>
 
 
 
@@ -97,7 +105,7 @@ if(isset($_POST["add_retsept"])){
 <p>
 	Tere, <?=$_SESSION["user_email"]; ?>
 	<a href="?logout=1">Logi väljalja</a><br><br>
-	<a href="table.php">Vaata retsepte</a>
+
 </p>
 
   <h2>Lisa Retsept</h2>
@@ -111,3 +119,10 @@ if(isset($_POST["add_retsept"])){
   
 <body>
 <html>
+<?php
+	
+	require_once("../footer.php");
+
+
+
+?>
