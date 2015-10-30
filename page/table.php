@@ -59,9 +59,19 @@
 					echo "<form action='table.php' method='post'>";
 						echo "<td>".$task_list[$i]->id."</td>";
 						echo "<td>".$task_list[$i]->user_id."</td>";
-						echo "<input type=hidden name='id' value='".$task_list[$i]->id."'>";
-						echo "<td><input name='day' value='".$task_list[$i]->day."'></td>";
-						echo "<td><input type=time name='d_time' value='".$task_list[$i]->d_time."'></td>";
+						echo "<input type='hidden' name='id' value='".$task_list[$i]->id."'>";
+						echo "<td>";
+						
+						if(  ){
+							echo '<option value="esmaspäev" selected>Esmaspäev</option>';
+							
+						}else{
+							
+							echo '<option value="esmaspäev">Esmaspäev</option>';
+						}
+						
+						echo "</td>";
+						echo "<td><input type='time' name='d_time' value='".$task_list[$i]->d_time."'></td>";
 						echo "<td><input name='d_task' value='".$task_list[$i]->d_task."'></td>";
 						echo "<td><input type='submit' name='update'></td>";
 						echo "<td><a href='table.php'>cancel</a></td>";

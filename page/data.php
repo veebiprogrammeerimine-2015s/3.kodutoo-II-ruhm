@@ -76,8 +76,16 @@
  <h2>Lisa uus ülesanne</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
   	<label for="day" >päev</label><br>
-	<input id="day" name="day" type="text" value="<?=$day; ?>"> <?=$day_error; ?><br><br>
-  	<label>kellaaeg</label><br>
+	 <select name="day">
+		<option value="esmaspäev">Esmaspäev</option>
+		<option value="teisipäev">Teisipäev</option>
+		<option value="kolmapäev">Kolmapäev</option>
+		<option value="neljapäev">Neljapäev</option>
+		<option value="reede">Reede</option>
+		<option value="laupäev">Laupäev</option>
+		<option value="pühapäev">Pühapäev</option>
+	 </select> <br><br>
+	<label>kellaaeg</label><br>
 	<input name="time" type="time" value="<?=$time; ?>"> <?=$time_error; ?><br><br>
   	<label>ülesanne</label><br>
 	<input name="task" type="text" value="<?=$task; ?>"> <?=$task_error; ?><br><br>
