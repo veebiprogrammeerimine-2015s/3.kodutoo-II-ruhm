@@ -1,6 +1,7 @@
 <?php
 	//edit.php
 	require_once("edit_functions.php");
+	require_once("funtions.php");
 	
 	
 	
