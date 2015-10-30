@@ -10,6 +10,7 @@
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
  		
 		$stmt = $mysqli->prepare("SELECT id, name, secondname, age, eriala FROM user_register1");
+		echo $mysqli->error;
 		$stmt->bind_result($id, $name, $secondname, $age, $eriala);
 		$stmt->execute();
  		
@@ -24,20 +25,40 @@
 			$kul = new StdClass();
 			$kul->id = $id;
 			$kul->name = $name;
-			$kul->secondname = $second;
+			$kul->secondname = $secondname;
 			$kul->age = $age;
 			$kul->eriala = $eriala;
 			
 			// lisame selle massiivi
-			array_push($array, $car);
-			echo "<pre>";
-			var_dump($array);
-			echo "</pre>";
+			array_push($array, $kul);
+			//echo "<pre>";
+			//var_dump($array);
+			//echo "</pre>";
 		}
 			
 			
 		
 		$stmt->close();
 		$mysqli->close();
+		return $array;
 	}
+	
+	function deleteKULUTUS($id_to_be_deleted){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("UPDATE user_register1 SET deleted=NOW() WHERE id=?");
+		$stmt->bind_param("i", $id_to_be_deleted);
+		
+		if($stmt->execute()){
+			// sai edukalt kustutatud
+			header("Location: table.php");
+			
+		}
+		
+		$stmt->close();
+		$mysqli->close();
+		
+	}
+	
 ?>

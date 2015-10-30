@@ -3,6 +3,13 @@
  	// table.php
 	require_once("1functions.php");
 	
+	// kas aadressireal on ?delete=??!??!?!
+	if(isset($_GET["delete"])){
+		
+		// saadan kaasa id, mida kustutada
+		deleteKULUTUS($_GET["delete"]);
+	}
+	
 	$kuulutus = getKULUTUS();
  
  ?> 
@@ -14,6 +21,7 @@
 		<th>secondname</th>
 		<th>age</th>
 		<th>eriala</th>
+		<th>X</th
 	</tr>
 	
 	<?php
@@ -29,7 +37,7 @@
 			echo "<td>".$kuulutus[$i]->secondname."</td>";
 			echo "<td>".$kuulutus[$i]->age."</td>";
 			echo "<td>".$kuulutus[$i]->eriala."</td>";
-			
+			echo "<td><a href='?delete=".$kuulutus[$i]->id."'>X</a></td>";
 			echo "</tr>";
 		}
 	
