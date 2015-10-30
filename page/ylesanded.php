@@ -12,6 +12,7 @@
 	require_once("functions.php");
 	if(!isset($_SESSION["logged_in_user_id"])){
 		header("Location: login.php");
+		
 	}
 	//kasutaja tahab välja logida
 	if(isset($_GET["logout"])){
@@ -65,12 +66,12 @@
 			echo "<tr>";
 			
 			//echo "<td>".$ylesanded[$i]->id."</td>";
-			echo "<td align=center>".$ylesanded[$i]->aine."</td>";
-			echo "<td align=center>".$ylesanded[$i]->opetaja."</td>";
-			echo "<td align=center>".$ylesanded[$i]->ylesanne."</td>";
-			echo "<td align=center>".$ylesanded[$i]->kuupaev."</td>";
-			echo "<td align=center>".$ylesanded[$i]->raskus."</td>";
-			echo "<td align=center>".$ylesanded[$i]->olulisus."</td>";
+			echo "<td align=center>".$ylesanded[$i]->subject."</td>";
+			echo "<td align=center>".$ylesanded[$i]->lecturer."</td>";
+			echo "<td align=center>".$ylesanded[$i]->task."</td>";
+			echo "<td align=center>".$ylesanded[$i]->datee."</td>";
+			echo "<td align=center>".$ylesanded[$i]->difficulty."</td>";
+			echo "<td align=center>".$ylesanded[$i]->importance."</td>";
 			//echo "<td align=center><a href='?edit=".$ylesanded[$i]->id."'><input type='submit' name='edit' value='Muuda'></a></td>";
 			echo "<td align=center><a href='?done=".$ylesanded[$i]->id."'><input type='submit' name='done' value='Tehtud'></a></td>";
 			echo "<td align=center><a href='?delete=".$ylesanded[$i]->id."'><input type='submit' name='delete' value='X'></a></td>";

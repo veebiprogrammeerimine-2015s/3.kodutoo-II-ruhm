@@ -42,12 +42,12 @@
 			echo "<tr>";
 			
 			//echo "<td>".$ylesanded[$i]->id."</td>";
-			echo "<td align=center>".$ylesanded[$i]->aine."</td>";
-			echo "<td align=center>".$ylesanded[$i]->opetaja."</td>";
-			echo "<td align=center>".$ylesanded[$i]->ylesanne."</td>";
-			echo "<td align=center>".$ylesanded[$i]->kuupaev."</td>";
-			echo "<td align=center>".$ylesanded[$i]->raskus."</td>";
-			echo "<td align=center>".$ylesanded[$i]->olulisus."</td>";
+			echo "<td align=center>".$ylesanded[$i]->subject."</td>";
+			echo "<td align=center>".$ylesanded[$i]->lecturer."</td>";
+			echo "<td align=center>".$ylesanded[$i]->task."</td>";
+			echo "<td align=center>".$ylesanded[$i]->datee."</td>";
+			echo "<td align=center>".$ylesanded[$i]->difficulty."</td>";
+			echo "<td align=center>".$ylesanded[$i]->importance."</td>";
 			//echo "<td><a href='?delete=".$car_list[$i]->id."'>X</a></td>";
 			
 			echo "</tr>";
