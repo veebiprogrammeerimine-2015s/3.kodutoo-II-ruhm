@@ -56,6 +56,13 @@
 		return $data;
 	  }
 ?>
+
+<?php 
+	$file_name = "data.php";
+	$page_title = "Lisa uus auto";
+	require_once("start/header.php"); 
+?>
+
 <p>
 	Tere, <?=$_SESSION["user_email"];?>, your account id = <?=$_SESSION["id_from_db"];?>
 	<a href="?logout=1"> logi välja </a>
@@ -70,3 +77,6 @@
 	<input name="color" type="text" value="<?=$color; ?>"> <?=$color_error; ?><br><br>
 	<input type="submit" name="create" value="Salvesta">
 	</form> 
+
+
+<?php require_once("start/footer.php"); ?>

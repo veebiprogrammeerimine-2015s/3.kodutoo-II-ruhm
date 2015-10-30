@@ -5,7 +5,13 @@
 
 <h2>Tere tulemast!</h2>
 <body> 
-<p>Here you can post your messages for work. Please log in if you re not.</p>
+ooooooooooooooooooooIIoooooooooooIIIIIIIIIooooIIooooooooooooooooooooooooooooooooooooooooooooo<br/>
+ooooooooooooooooooooIIoooooooooooIIoooooIIoooIIooooooooooooooooooooooooooooooooooooooooooooo<br/>
+ooooooooooooooooooooIIoooooooooooIIoooooIIoooIIooooooooooooooooooooooooooooooooooooooooooooo<br/>
+ooooooooooooooooooooIIoooooooooooIIoooooIIoooIIooooooooooooooooooooooooooooooooooooooooooooo<br/>
+ooooooooooooooooooooIIoooooooooooIIoooooIIoooIIooooooooooooooooooooooooooooooooooooooooooooo<br/>
+ooooooooooooooooooooIIIIIIIIIIooooooIIIIIIIIIoooIIIIIIIIIIooooooooooooooooooooooooooooooooooooo<br/>
+
 <body/> 
 
 

@@ -74,10 +74,7 @@
 ?>
 
 
-<?php
-	$page_title = "logi sisse";
-	$file_name = "login.php";
-?>
+
 
 
 
@@ -89,6 +86,10 @@
 			<input name="login" type="submit" value="Login">
 		</form> 
 		
-		<?php require_once("start/header.php"); ?>
+		<?php 
+	$file_name = "login.php";
+	$page_title = "LogIN";
+	require_once("start/header.php"); 
+?>
 		<?php require_once("start/footer.php"); ?>
 	

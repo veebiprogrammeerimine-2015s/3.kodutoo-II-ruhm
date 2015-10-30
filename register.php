@@ -2,6 +2,12 @@
 	
 <?php
 	require_once("functions.php");
+	//kontrollin, kas kasutaja on sisseligunud
+	
+	//kontrollin, kas kasutaja on registreerinud
+	
+		
+	
 	
 	$create_password_error = "";
 	$create_email_error = "";
@@ -58,7 +64,7 @@
 			if ( empty($_POST["create_eriala"]) ) {
 				$create_eriala_error = "See väli on kohustuslik";
 			}else{
-				$create_eriala = cleanInput($_POST["create_age"]);
+				$create_eriala = cleanInput($_POST["create_eriala"]);
 			}
    
 			if(	$create_email_error == "" && $create_password_error == ""){
@@ -100,5 +106,9 @@
 			<input name="create" type="submit" value="create user" > <br><br>
 			
 		</form>
-<?php require_once("start/header.php"); ?>
+<?php 
+	$file_name = "register.php";
+	$page_title = "Register";
+	require_once("start/header.php"); ?>
+	
 <?php require_once("start/footer.php"); ?>
