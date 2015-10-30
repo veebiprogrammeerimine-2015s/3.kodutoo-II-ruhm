@@ -1,7 +1,6 @@
  <?php
  
 	require_once("../../konfig_global.php");
-	require_once("table.php");
 	$database = "if13_rene_p";
 	
 	//paneme sessiooni k2ima, saame kasutada $_session muutujaid
@@ -139,13 +138,13 @@
 		
 		if(isset($_SESSION["id_from_db"])) {
 			
-				if($_SESSION["id_from_db"] == $user_id_from_db){
+				
 				
 					if($stmt->execute()){
 						// sai edukalt kustutatud
 						header("Location: table.php");
 					}
-				}
+				
 			
 		}
 		$stmt->close();

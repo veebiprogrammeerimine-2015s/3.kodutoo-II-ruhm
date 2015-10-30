@@ -1,5 +1,6 @@
 <?php
 	require_once("../../konfig_global.php");
+	require_once("funtions.php");
 	$database = "if13_rene_p";
 	
 	function getSingleRetseptData($edit_id){
@@ -8,9 +9,9 @@
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT title, ingredients, preparation FROM create_retsept WHERE id=? AND deleted IS NULL");
+		$stmt = $mysqli->prepare("SELECT title, ingredients, preparation FROM create_retsept WHERE id=? AND user_id=? AND  deleted IS NULL");
 		//var_dump();//asendan ? märgi
-		$stmt->bind_param("i", $edit_id);
+		$stmt->bind_param("ii", $edit_id, $_SESSION["id_from_db"]);
 		$stmt->bind_result($title, $ingredients, $preparation);
 		$stmt->execute();
 		
@@ -42,7 +43,7 @@
 
 	function updateRetsept($id, $title, $ingredients, $preparation){
 
-				$title = cleanInput($_POST["title"]);
+			$title = cleanInput($_POST["title"]);
 			$ingredients = cleanInput($_POST["ingredients"]);
 			$preparation = cleanInput($_POST["preparation"]);
 		
@@ -51,10 +52,13 @@
 		$stmt = $mysqli->prepare("UPDATE create_retsept SET title=?, ingredients=?, preparation=? WHERE id=?");
 		$stmt->bind_param("sssi",$title, $ingredients, $preparation, $id);
 		
+
+		if(isset($_SESSION["id_from_db"])) {
 		// kas õnnestus salvestada
-		if($stmt->execute()){
-			// õnnestus
-			echo "Uuendus l2ks l2bi!";
+			if($stmt->execute()){
+				// õnnestus
+				echo "Uuendus l2ks l2bi!";
+			}
 		}
 		
 		
