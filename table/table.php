@@ -4,14 +4,14 @@
 
 
 	//table php
-	require_once("functions.php");
+	require_once("1functions.php");
 	require_once("edit_function.php");
 	
 	
 	//kasutaja tahab midagi muuta 
 	if(isset($_POST["uptade"])){
 		
-		uptadeCar($_POST["id"], $_POST["number_plate"], $_POST["color"]);
+		updateKUL($_POST["id"], $_POST["kuulutus_name"], $_POST["nimi"]);
 		
 		
 	}
@@ -27,7 +27,7 @@
 	}
 	
 	
-	$car_list = getCarData();
+	$kuulutus_list = getKULdata();
 	//var_dump($car_list);
 
 
@@ -37,8 +37,8 @@
 
 		<th>id</th>
 		<th>user id</th>
-		<th>number plate</th>
-		<th>color</th>
+		<th>kulutus nimi</th>
+		<th>nimi</th>
 		<th>X</th>
 
 	</tr>

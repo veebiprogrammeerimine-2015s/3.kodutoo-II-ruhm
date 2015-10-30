@@ -39,11 +39,11 @@
 
 ?>
 
-<h2>Muuda autod</h2>
+<h2>Kuulutused</h2>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-	<label for="number_plate" >auto nr</label><br>
+	<label for="Kuulutus_nimi" >kuulutus nr</label><br>
 	<input type="hidden" name="id" value="<?=$_GET["edit"];?>">
-	<input id="number_plate" name="number_plate" type="text" value="<?php echo $car_object->number_plate;?>"><br><br>
+	<input id="kuulutus_nr" name="kuulutus_nr" type="text" value="<?php echo $car_object->number_plate;?>"><br><br>
 	<label for="color">Varv</label><br>
 	<input name="color" type="text" value="<?=$car_object->color;?>"> <br><br>
 	<input type="submit" name="uptade" value="Salvesta">

@@ -1,6 +1,6 @@
 <?php
 	//function.php
-	require_once("../configGLOBAL.php");
+	require_once("../../configGLOBAL.php");
 	$database = "if15_vitamak";
 
 	

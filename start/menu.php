@@ -37,10 +37,9 @@
 		}
 		
 	?>
-	
-	<?php 
+<?php 
 		
-		if($file_name == "data.php"){ 
+		if($file_name == "../data.php"){ 
 		
 			echo "<li>Lisa auto</li>";
 		
