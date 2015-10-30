@@ -47,8 +47,8 @@
 			echo "<tr>";
 			
 			echo "<td>".$result_list[$i]->id."</td>";
-			echo "<td>".$result_list[$i]->par."</td>";
 			echo "<td>".$result_list[$i]->user_id."</td>";
+			echo "<td>".$result_list[$i]->par."</td>";
 			echo "<td>".$result_list[$i]->result_from_db."</td>";
 			echo "<td><a href='?delete=".$result_list[$i]->id."'>X</a></td>";
 			echo "<td><a href='?edit=".$result_list[$i]->id."'>edit</a></td>";

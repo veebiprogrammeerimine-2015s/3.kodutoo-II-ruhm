@@ -79,8 +79,7 @@
 	
 		return $message;
 	}
-?>
-<?php
+
 	
 	//Loome uue funktsiooni, et ab'st andmeid
 	function getResultData(){
@@ -88,10 +87,36 @@
 	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
 	$stmt = $mysqli->prepare("SELECT id, user_id, par, result FROM results"); //WHERE deleted IS NULL
-	$stmt->bind_result($id, $user_id, $par, $result); //algselt oli $color_from_db
+	$stmt->bind_result($id, $user_id, $par, $result_from_db); //algselt oli $color_from_db
 	
 	$stmt->execute();
+	
+	$row = 0;
+	
+	//tyhi massiiv, kus hoiame objekte (1rida andmeid)
+	$array = array();
+	
+	//tee tsüklit nii mitu korda, kui saad ab'st ühe rea andmeid
+	while($stmt->fetch()){
+		
+		$result = new StdClass();
+		$result->id = $id;
+		$result->user_id = $user_id;
+		$result->par = $par;
+		$result->result_from_db = $result_from_db;
+		
+		//lisame selle massiivi
+		array_push($array, $result);
+		//echo "<pre>";
+		//var_dump($array);
+		//echo "</pre>";
 	}
+	
+	$stmt->close();
+	$mysqli->close();
+		
+		return $array;
+}
 	
 	
 	
