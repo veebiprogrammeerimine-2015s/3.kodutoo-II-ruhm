@@ -14,7 +14,8 @@
 			$posts->post = $post;
 		}else{
 			//ei saanud andmeid kätte, sellist id'd ei ole või on kustutatud
-			header("Location: table.php");
+			//header("Location: home.php");
+			echo("test");
 		}
 		return $posts;
 		
@@ -23,8 +24,8 @@
 	}
 	function updatePost($id, $post_title, $post){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("UPDATE user_posts SET post_title=?, post=? WHERE id=?");
-		$stmt->bind_param("ssi", $post_title, $post, $id);
+		$stmt = $mysqli->prepare("UPDATE user_posts SET post_title=?, post=? WHERE id=? AND user_id=?");
+		$stmt->bind_param("ssii", $post_title, $post, $id, $_SESSION["id_from_db"]);
 		//kas õnnestus salvestada
 		if($stmt->execute()){
 			//echo"jee";

@@ -33,8 +33,6 @@ $file_name = "table.php";
 		<th>id</th>
 		<th>User id</th>
 		<th>post title</th>
-		<th>Delete</th>
-		<th>Edit</th>
 	</tr>
 	<?php
 			//iga massiivis oleva elemendi kohta, masiivi pikkus, $i++ = $i=$i+1
@@ -44,8 +42,8 @@ $file_name = "table.php";
 				echo"<td>".$post_list[$i]->id."</td>";
 				echo"<td>".$post_list[$i]->user_id."</td>";
 				echo"<td>".$post_list[$i]->post_title."</td>";
-				echo"<td style='text-align:center'><a href='?delete=".$post_list[$i]->id."'>X</a></td>";
-				echo"<td style='text-align:center'><a href='edit.php?edit=".$post_list[$i]->id."'>X</a></td>";
+				echo"<td style='text-align:center'><a href='?delete=".$post_list[$i]->id."'>Remove</a></td>";
+				echo"<td style='text-align:center'><a href='edit.php?edit=".$post_list[$i]->id."'>Edit</a></td>";
 				echo"</tr>";
 			}
 		}

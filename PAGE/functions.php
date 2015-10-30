@@ -46,7 +46,7 @@
 		$stmt->bind_param("iss", $_SESSION["id_from_db"], $post_title, $post);
 		$message = "";
 		if($stmt->execute()){
-			//täpne kui sisestus AB'i õnnestus
+			//kui sisestus AB'i õnnestus
 			$message = "Post has been entered";
 		}else{
 			//kui midagi läks sisestuse käigus katki
@@ -58,8 +58,10 @@
 	}
 	function getPostData(){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("SELECT id, user_id, post_title, post FROM user_posts WHERE deleted IS NULL");
-		$stmt->bind_result($id, $user_id, $post_title, $post);
+		$stmt = $mysqli->prepare("SELECT user_posts.id, user_id, post_title, post, username
+        FROM user_posts
+        INNER JOIN user_info ON user_posts.user_id = user_info.id WHERE deleted IS NULL;");
+		$stmt->bind_result($id, $user_id, $post_title, $post, $username);
 		$stmt->execute();
 		
 		//tühi masiiv kus hoiame objekte(1rida andmeid)
@@ -72,6 +74,7 @@
 			$posts->post_title = $post_title;
 			$posts->post = $post;
 			$posts->user_id = $user_id;
+			$posts->username = $username;
 			array_push($array, $posts);
 		}
 		$stmt->close();
@@ -80,8 +83,8 @@
 	}
 	function deletePost($id_to_be_deleted){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("UPDATE user_posts SET deleted=NOW() WHERE id=?");
-		$stmt->bind_param("i", $id_to_be_deleted);
+		$stmt = $mysqli->prepare("UPDATE user_posts SET deleted=NOW() WHERE id=? AND user_id=?");
+		$stmt->bind_param("ii", $id_to_be_deleted, $_SESSION["id_from_db"]);
 		if($stmt->execute()){
 			//kui on edukas
 			header("Location: table.php");

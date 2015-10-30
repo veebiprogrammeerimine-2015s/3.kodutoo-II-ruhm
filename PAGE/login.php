@@ -5,8 +5,8 @@
 	
 	//kontrollin, kas kasutaja on sisse loginud
 	if(isset($_SESSION["id_from_db"])){
-		//suuname data lehele kui on sisseloginud
-		header("Location: data.php");
+		//suuname home lehele kui on sisseloginud
+		header("Location: home.php");
 	}
 	
 	//errorid
