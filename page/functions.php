@@ -37,7 +37,7 @@
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
-		$stmt = $mysqli->prepare("INSERT INTO koolike (user_id, subject, lecturer, task, date, difficulty, importance) VALUES (?, ?, ?, ?, ?, ?, ?)");
+		$stmt = $mysqli->prepare("INSERT INTO tasks (user_id, subject, lecturer, task, date, difficulty, importance) VALUES (?, ?, ?, ?, ?, ?, ?)");
 		$stmt->bind_param("issssii", $_SESSION["logged_in_user_id"], $subject, $lecturer, $task, $date, $difficulty, $importance);
 		
 		$message ="";
@@ -57,7 +57,7 @@
 	function tasks(){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("SELECT id, subject, lecturer, task, date, difficulty, importance FROM koolike WHERE deleted IS NULL AND done IS NULL AND user_id =?");
+		$stmt = $mysqli->prepare("SELECT id, subject, lecturer, task, date, difficulty, importance FROM tasks WHERE deleted IS NULL AND done IS NULL AND user_id =?");
 		$stmt->bind_param("i", $_SESSION["logged_in_user_id"]);
 		$stmt->bind_result($id, $subject, $lecturer, $task, $date, $difficulty, $importance);
 		$stmt->execute();
@@ -93,7 +93,7 @@
 	{
 	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
-	$stmt = $mysqli->prepare("UPDATE koolike SET deleted=NOW() WHERE id=? AND user_id=?");
+	$stmt = $mysqli->prepare("UPDATE tasks SET deleted=NOW() WHERE id=? AND user_id=?");
 	$stmt->bind_param("ii", $id_to_be_deleted, $_SESSION["logged_in_user_id"]);
 	
 	if($stmt->execute())
@@ -109,7 +109,7 @@
 	{
 	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
-	$stmt = $mysqli->prepare("UPDATE koolike SET done=NOW() WHERE id=? AND user_id=?");
+	$stmt = $mysqli->prepare("UPDATE tasks SET done=NOW() WHERE id=? AND user_id=?");
 	$stmt->bind_param("ii", $id_to_mark_as_done, $_SESSION["logged_in_user_id"]);
 	
 	if($stmt->execute())
@@ -124,7 +124,7 @@
 	function deletedTasks(){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("SELECT id, subject, lecturer, task, date, difficulty, importance FROM koolike WHERE deleted IS NOT NULL AND user_id=?");
+		$stmt = $mysqli->prepare("SELECT id, subject, lecturer, task, date, difficulty, importance FROM tasks WHERE deleted IS NOT NULL AND user_id=?");
 		$stmt->bind_param("i", $_SESSION["logged_in_user_id"]);
 		$stmt->bind_result($id, $subject, $lecturer, $task, $date, $difficulty, $importance);
 		$stmt->execute();
@@ -136,16 +136,16 @@
 		{
 		
 			//loon objekti
-			$koolike = new stdClass();
-			$koolike->id = $id;
-			$koolike->subject= $subject;
-			$koolike->lecturer = $lecturer;
-			$koolike->task = $task;
-			$koolike->datee = $date;
-			$koolike->difficulty = $difficulty;
-			$koolike->importance = $importance;
+			$tasks = new stdClass();
+			$tasks->id = $id;
+			$tasks->subject= $subject;
+			$tasks->lecturer = $lecturer;
+			$tasks->task = $task;
+			$tasks->datee = $date;
+			$tasks->difficulty = $difficulty;
+			$tasks->importance = $importance;
 			//lisame selle massiivi
-			array_push($array, $koolike);
+			array_push($array, $tasks);
 			//echo "<pre>";
 			//var_dump($array);
 			//echo "</pre>";
@@ -159,7 +159,7 @@
 	function doneTasks(){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		$stmt = $mysqli->prepare("SELECT id, subject, lecturer, task, date, difficulty, importance FROM koolike WHERE done IS NOT NULL AND user_id=?");
+		$stmt = $mysqli->prepare("SELECT id, subject, lecturer, task, date, difficulty, importance FROM tasks WHERE done IS NOT NULL AND user_id=?");
 		$stmt->bind_param("i", $_SESSION["logged_in_user_id"]);
 		$stmt->bind_result($id, $subject, $lecturer, $task, $date, $difficulty, $importance);
 		$stmt->execute();
@@ -171,16 +171,16 @@
 		{
 		
 			//loon objekti
-			$koolike = new stdClass();
-			$koolike->id = $id;
-			$koolike->subject= $subject;
-			$koolike->lecturer = $lecturer;
-			$koolike->task = $task;
-			$koolike->datee = $date;
-			$koolike->difficulty = $difficulty;
-			$koolike->importance = $importance;
+			$tasks = new stdClass();
+			$tasks->id = $id;
+			$tasks->subject= $subject;
+			$tasks->lecturer = $lecturer;
+			$tasks->task = $task;
+			$tasks->datee = $date;
+			$tasks->difficulty = $difficulty;
+			$tasks->importance = $importance;
 			//lisame selle massiivi
-			array_push($array, $koolike);
+			array_push($array, $tasks);
 			//echo "<pre>";
 			//var_dump($array);
 			//echo "</pre>";
@@ -195,7 +195,7 @@
 	{
 	header("Location: task.php");
 	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-	$stmt = $mysqli->prepare("SELECT subject, lecturer, task, date, difficulty, importance FROM koolike WHERE id=?");
+	$stmt = $mysqli->prepare("SELECT subject, lecturer, task, date, difficulty, importance FROM tasks WHERE id=?");
 	$stmt->bind_param("i", $id_to_be_edited);
 	$stmt->bind_result($esubject, $electurer, $etask, $edate, $edifficulty, $eimportance);
 	$stmt->execute();
