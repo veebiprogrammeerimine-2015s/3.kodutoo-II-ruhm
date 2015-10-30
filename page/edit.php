@@ -41,7 +41,7 @@
 		
 		//saadan kaasa id
 		$retsept_object = getSingleRetseptData($_GET["edit"]);
-		var_dump($retsept_object);
+		//var_dump($retsept_object);
 	}
 	
 

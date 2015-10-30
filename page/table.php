@@ -21,6 +21,12 @@
 	$retsept_list = getRetseptData();
 ?>
 
+
+
+
+
+
+
 <table border=1 >
 	<tr>
 		<th>ID</th>
@@ -33,33 +39,37 @@
 	
 	<?php
 	
+	
+	
+
+	
 		for($i = 0; $i < count($retsept_list); $i++){
-
-
-
-
-
-
 
 			echo "<tr>";
 			
 			echo "<td>".$retsept_list[$i]->id."</td>";
 			echo "<td>".$retsept_list[$i]->user_id."</td>";
-			echo "<td>".$retsept_list[$i]->title."</td>";
-			echo nl2br("<td>".$retsept_list[$i]->ingredients."</td>");
+			echo "<td nowrap>".$retsept_list[$i]->title."</td>";
+			echo nl2br("<td nowrap>".$retsept_list[$i]->ingredients."</td>");
 			echo nl2br("<td>".$retsept_list[$i]->preparation."</td>");
+			
+			
+			
+			
+			
+			
 
 
 			if(isset($_SESSION["id_from_db"])) {
 
-		
+				if($_SESSION["id_from_db"] == $retsept_list[$i]->user_id){
 					
 				
 			
 				echo "<td><a href='?delete=".$retsept_list[$i]->id."'>X</a></td>";
 
 				echo "<td><a href='edit.php?edit=".$retsept_list[$i]->id."'>edit</a></td>";
-				
+				}
 			}
 
 			echo "</tr>";
