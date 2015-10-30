@@ -88,8 +88,8 @@
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT id, title, ingredients, preparation  FROM create_retsept WHERE deleted IS NULL");
-		$stmt->bind_result($id_from_db, $title_from_db, $ingredients_from_db, $preparation_from_db);
+		$stmt = $mysqli->prepare("SELECT id, user_id, title, ingredients, preparation  FROM create_retsept WHERE deleted IS NULL");
+		$stmt->bind_result($id_from_db, $user_id_from_db, $title_from_db, $ingredients_from_db, $preparation_from_db);
 		$stmt->execute();
 		
 		$array = array();
@@ -100,6 +100,7 @@
 		//loon objekti
 		$retsept = new StdClass();
 		$retsept->id = $id_from_db;
+		$retsept->user_id = $user_id_from_db;
 		$retsept->title = $title_from_db;
 		$retsept->ingredients = $ingredients_from_db;
 		$retsept->preparation = $preparation_from_db;
@@ -127,12 +128,13 @@
 		$stmt = $mysqli->prepare("UPDATE create_retsept SET deleted=NOW() WHERE id=?");
 		$stmt->bind_param("i", $id_to_be_deleted);
 		
-		if($stmt->execute()){
-			// sai edukalt kustutatud
-			header("Location: table.php");
-			
+		if(isset($_SESSION["id_from_db"])) {
+			if($stmt->execute()){
+				// sai edukalt kustutatud
+				header("Location: table.php");
+				
+			}
 		}
-		
 		$stmt->close();
 		$mysqli->close();
 		

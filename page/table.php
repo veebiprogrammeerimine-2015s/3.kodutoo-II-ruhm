@@ -24,6 +24,7 @@
 <table border=1 >
 	<tr>
 		<th>ID</th>
+		<th>user_ID</th>
 		<th>Retsepti Nimi</th>
 		<th>Koostisosad</th>
 		<th>Valmistamine</th>
@@ -43,12 +44,13 @@
 			echo "<tr>";
 			
 			echo "<td>".$retsept_list[$i]->id."</td>";
+			echo "<td>".$retsept_list[$i]->user_id."</td>";
 			echo "<td>".$retsept_list[$i]->title."</td>";
 			echo nl2br("<td>".$retsept_list[$i]->ingredients."</td>");
 			echo nl2br("<td>".$retsept_list[$i]->preparation."</td>");
 
 
-			if(isset($_SESSION["id_from_db"])){
+			if(isset($_SESSION["id_from_db"])) {
 
 		
 					

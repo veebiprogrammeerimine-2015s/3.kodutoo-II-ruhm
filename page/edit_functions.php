@@ -42,7 +42,7 @@
 
 	function updateRetsept($id, $title, $ingredients, $preparation){
 
-				$title = cleanInput($_POST["title"]);
+			$title = cleanInput($_POST["title"]);
 			$ingredients = cleanInput($_POST["ingredients"]);
 			$preparation = cleanInput($_POST["preparation"]);
 		

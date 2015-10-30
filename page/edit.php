@@ -1,6 +1,15 @@
 <?php
 	//edit.php
 	require_once("edit_functions.php");
+	
+	
+	
+		if(!isset($_SESSION["id_from_db"])){
+		header("Location: table.php");
+		
+		
+		
+	}
 
 
 	
