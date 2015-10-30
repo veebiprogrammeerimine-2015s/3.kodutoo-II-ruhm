@@ -53,6 +53,7 @@
 		if($stmt->execute()){
 			
 			$message = "Edukalt sisestatud andmebaasi";
+			header("Location: table.php");
 			
 		}else{
 			
@@ -69,7 +70,8 @@
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT id, user_id, day, d_time, d_task FROM tasks WHERE deleted IS NULL");
+		$stmt = $mysqli->prepare("SELECT id, user_id, day, d_time, d_task FROM tasks WHERE deleted IS NULL AND user_id = ?");
+		$stmt->bind_param("i", $_SESSION["id_from_db"]);
 		$stmt->bind_result($id, $user_id, $day, $d_time, $d_task);
 		$stmt->execute();
 		
@@ -101,6 +103,7 @@
 		
 	}
 	
+
 	
 	function deleteTask($id_to_be_deleted){
 		
