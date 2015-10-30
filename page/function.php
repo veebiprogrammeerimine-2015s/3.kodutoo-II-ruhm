@@ -56,6 +56,30 @@
 				$mysqli->close();
 	}
 	
+	//discolfi mängu loomiseks
+	function createGame($game_name, $baskets){
+		// globals on muutuja kõigist php failidest mis on ühendatud
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("INSERT INTO game (user_id, game_name, baskets) VALUES (?, ?, ?)");
+		$stmt->bind_param("isi", $_SESSION["id_from_db"], $game_name, $baskets);
+		
+		if($stmt->execute()){
+			//see on tõene, kui sisestus ab'i õnnestus
+			$message = "Mäng edukalt loodud";
+			
+		}else {
+			// kui miski läks katki
+			echo $stmt->error;
+		}
+		
+		$stmt->close();
+		
+		$mysqli->close();		
+	
+		return $message;
+	}
+	
 	//discolfi tabeli jaoks
 	function createResult($par, $result){
 		// globals on muutuja kõigist php failidest mis on ühendatud
@@ -81,7 +105,7 @@
 	}
 
 	
-	//Loome uue funktsiooni, et ab'st andmeid
+	//Loome uue funktsiooni, et ab'st andmeid saada
 	function getResultData(){
 		
 	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
@@ -103,13 +127,13 @@
 		$result->id = $id;
 		$result->user_id = $user_id;
 		$result->par = $par;
-		$result->result_from_db = $result_from_db;
+		$result->result = $result_from_db;
 		
 		//lisame selle massiivi
 		array_push($array, $result);
-		//echo "<pre>";
-		//var_dump($array);
-		//echo "</pre>";
+		/* echo "<pre>";
+		var_dump($array);
+		echo "</pre>"; */
 	}
 	
 	$stmt->close();
@@ -117,6 +141,44 @@
 		
 		return $array;
 }
+
+	//Loome uue funktsiooni, et ab'st andmeid saada
+	function getGameData(){
+		
+	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+	
+	$stmt = $mysqli->prepare("SELECT id, game_name, baskets FROM game"); 
+	$stmt->bind_result($id, $name, $baskets); //algselt oli $color_from_db
+	
+	$stmt->execute();
+	
+	$row = 0;
+	
+	//tyhi massiiv, kus hoiame objekte (1rida andmeid)
+	$array = array();
+	
+	//tee tsüklit nii mitu korda, kui saad ab'st ühe rea andmeid
+	while($stmt->fetch()){
+		
+		$result = new StdClass();
+		$result->id = $id;
+		
+		$result->name = $name;
+		$result->baskets = $baskets;
+		
+		//lisame selle massiivi
+		array_push($array, $result);
+		/* echo "<pre>";
+		var_dump($array);
+		echo "</pre>"; */
+	}
+	
+	$stmt->close();
+	$mysqli->close();
+		
+		return $array;
+}
+
 
 //delete funktsiooni
 
