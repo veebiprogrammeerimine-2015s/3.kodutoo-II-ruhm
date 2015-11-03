@@ -35,7 +35,7 @@
 				$stmt->bind_param("ss", $email, $password_hash);
 				
 				//paneme vastused muutujatesse
-				$stmt->bind_result($id_from_db, $email_from_db);
+				$stmt->bind_my_result($id_from_db, $email_from_db);
 				$stmt->execute();
 				
 				if($stmt->fetch()){
@@ -81,12 +81,12 @@
 	}
 	
 	//discolfi tabeli jaoks
-	function createResult($par, $result){
+	function createmy_result($par, $my_result){
 		// globals on muutuja kõigist php failidest mis on ühendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO results (user_id, par, result) VALUES (?, ?, ?)");
-		$stmt->bind_param("iii", $_SESSION["id_from_db"], $par, $result);
+		$stmt = $mysqli->prepare("INSERT INTO my_results (user_id, par, my_result) VALUES (?, ?, ?)");
+		$stmt->bind_param("iii", $_SESSION["id_from_db"], $par, $my_result);
 		
 		if($stmt->execute()){
 			//see on tõene, kui sisestus ab'i õnnestus
@@ -106,12 +106,12 @@
 
 	
 	//Loome uue funktsiooni, et ab'st andmeid saada
-	function getResultData(){
+	function getresultData(){
 		
 	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
-	$stmt = $mysqli->prepare("SELECT id, user_id, par, result FROM results WHERE deleted IS NULL"); 
-	$stmt->bind_result($id, $user_id, $par, $result_from_db); //algselt oli $color_from_db
+	$stmt = $mysqli->prepare("SELECT id, user_id, par, my_result FROM results WHERE deleted IS NULL"); 
+	$stmt->bind_my_result($id, $user_id, $par, $my_result_from_db); //algselt oli $color_from_db
 	
 	$stmt->execute();
 	
@@ -123,14 +123,14 @@
 	//tee tsüklit nii mitu korda, kui saad ab'st ühe rea andmeid
 	while($stmt->fetch()){
 		
-		$result = new StdClass();
-		$result->id = $id;
-		$result->user_id = $user_id;
-		$result->par = $par;
-		$result->result = $result_from_db;
+		$my_result = new StdClass();
+		$my_result->id = $id;
+		$my_result->user_id = $user_id;
+		$my_result->par = $par;
+		$my_result->my_result = $my_result_from_db;
 		
 		//lisame selle massiivi
-		array_push($array, $result);
+		array_push($array, $my_result);
 		/* echo "<pre>";
 		var_dump($array);
 		echo "</pre>"; */
@@ -160,14 +160,14 @@
 	//tee tsüklit nii mitu korda, kui saad ab'st ühe rea andmeid
 	while($stmt->fetch()){
 		
-		$result = new StdClass();
-		$result->id = $id;
+		$my_result = new StdClass();
+		$my_result->id = $id;
 		
-		$result->name = $name;
-		$result->baskets = $baskets;
+		$my_result->name = $name;
+		$my_result->baskets = $baskets;
 		
 		//lisame selle massiivi
-		array_push($array, $result);
+		array_push($array, $my_result);
 		/* echo "<pre>";
 		var_dump($array);
 		echo "</pre>"; */
@@ -182,15 +182,15 @@
 
 //delete funktsiooni
 
-	function deleteResult($id_to_be_deleted){
+	function deleteGame($id){
 		
 	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 
-	$stmt = $mysqli->prepare("UPDATE results SET deleted=NOW() WHERE id=?");
+	$stmt = $mysqli->prepare("UPDATE game SET deleted=NOW() WHERE id=?");
 	$stmt->bind_param("i", $id_to_be_deleted);
 	if($stmt->execute()){
 			// sai edukalt kustutatud
-			header("Location: table.php");
+			//header("Location: table.php");
 			$stmt->close();
 			$mysqli->close();
 		

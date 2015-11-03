@@ -60,24 +60,32 @@
 			if ( empty($_POST["result"]) ) {
 				$result = "See väli on kohustuslik";
 			} else {
-				$result = cleanInput($_POST["result"]);
+				$result = cleanInput($_POST["my_result"]);
 			}
-	if(	$par_error == "" && $result_error == ""){
+	if(	$par_error == "" && $my_result_error == ""){
 		// functions.php failis käivina funktsiooni
 				//msg on message
-				$msg = createResult ($par, $result);
+				$msg = createResult ($par, $my_result);
 				
 				if($msg != ""){
 					//salvestamine õnnestus
 					//teen tühjaks input väljad
 					$par	= "";
-					$result = "";
+					$my_result = "";
 					
 					echo $msg;
 					
 				}
 			}
 	}	// create if end
+	
+	//kas kasutaja tahab kustutada
+	//kas aadressireal on ?delete=???
+	if(isset($_GET["delete"])){
+		
+		//saadan kaasa id, mida kustutada
+		deleteGame($_GET["delete"]);
+	}
 	
 	function cleanInput($data) {
 		$data = trim($data);
@@ -87,7 +95,7 @@
 	  }
 	  
 	  
-	  $result_list = getGameData();
+	  $game_list = getGameData();
 ?>
 
 <p>
@@ -99,7 +107,7 @@
 <h2>Mängu lisamine</h2><br>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
   	<label for="game_name" >Mängu nimetus</label> <input id="game_name" name="game_name" type="text" value="<?=$game_name; ?>"> <?=$game_name_error; ?>
-  	<label for="baskets">Korvide arv</label> <input name="baskets" type="number" value="<?=$baskets; ?>"> <?=$baskets_error; ?><br><br>
+  	<label for="baskets">Korvide arv</label> <input name="baskets" type="number" value="<?=$baskets; ?>"> <?=$baskets_error; ?>
   	<input type="submit" name="create_game" value="Salvesta">
   </form>
   <table border=1 >
@@ -108,21 +116,24 @@
 	<th>mängu nimetus</th>
 	
 </tr>
-<?php for($i = 0; $i < count($result_list); $i++){
+<?php for($i = 0; $i < count($game_list); $i++){
+	
+	
+		
 			
 
 			
 			echo "<tr>";
 			
-			echo "<td>".$result_list[$i]->id."</td>";
-			echo "<td>".$result_list[$i]->name."</td>";
-			echo "<td><a href='?add_result=".$result_list[$i]->id."&baskets=".$result_list[$i]->baskets."'>lisa tulemus</a></td>";
+			echo "<td>".$game_list[$i]->id."</td>";
+			echo "<td>".$game_list[$i]->name."</td>";
+			echo "<td><a href='?add_result=".$game_list[$i]->id."&baskets=".$game_list[$i]->baskets."'>lisa tulemus</a></td>";
+			echo "<td><a href='?delete=".$game_list[$i]->id."'>kustuta mäng</a></td>";
 			
 			echo "</tr>";
 			
-			
-			
-		}
+		
+}			
 ?>
 </table>
 <?php 
@@ -132,10 +143,12 @@ if(isset($_GET["add_result"])){
 ?>
 
 	<h2>Tulemuse lisamine</h2>
+	Korv/Par/My result
+
 	  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-		
 		<?php for($i=1; $i <= $_GET["baskets"]; $i++){ ?>
-		<label for="basket" >Korv <?=$i;?></label> <input id="basket" name="basket" type="number"><input type="submit" name="add_result" value="Salvesta"><br>
+		<label>Korv <?=$i;?></label>  <input id="par" name="par" type="number"><input id="my_result" name="my_result" type="number"><input type="submit" name="add_result" value="Salvesta"><br>
+	
 		
 	  
 		<?php 

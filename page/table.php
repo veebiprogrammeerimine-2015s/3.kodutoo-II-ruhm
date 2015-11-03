@@ -42,7 +42,7 @@
 	<th>id</th>
 	<th>kasutaja id</th>
 	<th>raja par</th>
-	<th>tulemus</th>
+	<th>minu tulemus</th>
 </tr>
 
 	<?php
