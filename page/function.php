@@ -81,12 +81,14 @@
 	}
 	
 	//discolfi tabeli jaoks
-	function createGame_results($par, $my_result){
+	function createResult($par, $my_result){
 		// globals on muutuja kõigist php failidest mis on ühendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
 		$stmt = $mysqli->prepare("INSERT INTO game_results (user_id, basket1_par, basket1_my_result) VALUES (?, ?, ?)");
 		$stmt->bind_param("iii", $_SESSION["id_from_db"], $par, $my_result);
+		
+		$message = "";
 		
 		if($stmt->execute()){
 			//see on tõene, kui sisestus ab'i õnnestus
@@ -106,7 +108,7 @@
 
 	
 	//Loome uue funktsiooni, et ab'st andmeid saada
-	function getResultData(){
+/* 	function getResultData(){
 		
 	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
@@ -131,16 +133,16 @@
 		
 		//lisame selle massiivi
 		array_push($array, $my_result);
-		/* echo "<pre>";
+		echo "<pre>";
 		var_dump($array);
-		echo "</pre>"; */
+		echo "</pre>";
 	}
 	
 	$stmt->close();
 	$mysqli->close();
 		
 		return $array;
-}
+} */
 
 	//Loome uue funktsiooni, et ab'st andmeid saada
 	function getGameData(){

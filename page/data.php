@@ -22,12 +22,12 @@
 	
 	if(isset($_POST["create_game"])){
 			if ( empty($_POST["game_name"]) ) {
-				$game_name = "See väli on kohustuslik";
+				$game_name_error = "See väli on kohustuslik";
 			}else{
 				$game_name = cleanInput($_POST["game_name"]);
 			}
 			if ( empty($_POST["baskets"]) ) {
-				$baskets = "See väli on kohustuslik";
+				$baskets_error = "See väli on kohustuslik";
 			} else {
 				$baskets = cleanInput($_POST["baskets"]);
 			}
@@ -49,18 +49,18 @@
 	}	// create if end
 	
 //tulemuse lisamise errorid	
-	$par = $result = $par_error = $my_result_error = "";
+	$par = $my_result = $par_error = $my_result_error = "";
 	
 	if(isset($_POST["create"])){
 			if ( empty($_POST["par"]) ) {
-				$par = "See väli on kohustuslik";
+				$par_error = "See väli on kohustuslik";
 			}else{
 				$par = cleanInput($_POST["par"]);
 			}
 			if ( empty($_POST["my_result"]) ) {
-				$result = "See väli on kohustuslik";
+				$my_result_error = "See väli on kohustuslik";
 			} else {
-				$result = cleanInput($_POST["my_result"]);
+				$my_result = cleanInput($_POST["my_result"]);
 			}
 	if(	$par_error == "" && $my_result_error == ""){
 		// functions.php failis käivina funktsiooni
@@ -147,7 +147,8 @@ if(isset($_GET["add_result"])){
 
 	  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 		<?php for($i=1; $i <= $_GET["baskets"]; $i++){ ?>
-		<label>Korv <?=$i;?></label>  <input id="par" name="par" type="number"><input id="my_result" name="my_result" type="number"><input type="submit" name="add_result" value="Salvesta"><br>
+		<label>Korv <?=$i;?></label>  <input id="par" name="par" type="number" value="<?=$par;?>"><?=$par_error; ?><input id="my_result" name="my_result" type="number" value="<?=$my_result;?><?=$my_result_error; ?>"><input type="submit" name="add_result" value="Salvesta"><br>
+		
 	
 		
 	  
