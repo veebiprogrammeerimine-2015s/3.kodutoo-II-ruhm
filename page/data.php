@@ -75,7 +75,7 @@
 
  <h2>Lisa uus ülesanne</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	<label for="day" >päev</label><br>
+  	<label for="day" method="post" action="table.php">päev</label><br>
 	 <select name="day">
 		<option value="esmaspäev">Esmaspäev</option>
 		<option value="teisipäev">Teisipäev</option>

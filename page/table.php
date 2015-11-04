@@ -2,7 +2,7 @@
      	
 	require_once("functions.php");
 	require_once("edit_functions.php");
-	
+		
 	if(isset($_GET["delete"])){
 		
 		deleteTask($_GET["delete"]);
@@ -47,7 +47,6 @@
 
 
 
-	
 	<?php
 	
 		for($i = 0; $i < count($task_list); $i++){
@@ -61,8 +60,8 @@
 						echo "<td>".$task_list[$i]->user_id."</td>";
 						echo "<input type='hidden' name='id' value='".$task_list[$i]->id."'>";
 						echo "<td>";
-						
-						if(  ){
+												
+				        if("day" == "esmaspäev"){
 							echo '<option value="esmaspäev" selected>Esmaspäev</option>';
 							
 						}else{
