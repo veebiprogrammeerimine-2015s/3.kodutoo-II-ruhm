@@ -81,11 +81,11 @@
 	}
 	
 	//discolfi tabeli jaoks
-	function createmy_result($par, $my_result){
+	function createGame_results($par, $my_result){
 		// globals on muutuja kõigist php failidest mis on ühendatud
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO my_results (user_id, par, my_result) VALUES (?, ?, ?)");
+		$stmt = $mysqli->prepare("INSERT INTO game_results (user_id, basket1_par, basket1_my_result) VALUES (?, ?, ?)");
 		$stmt->bind_param("iii", $_SESSION["id_from_db"], $par, $my_result);
 		
 		if($stmt->execute()){
@@ -106,12 +106,12 @@
 
 	
 	//Loome uue funktsiooni, et ab'st andmeid saada
-	function getresultData(){
+	function getResultData(){
 		
 	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
-	$stmt = $mysqli->prepare("SELECT id, user_id, par, my_result FROM results WHERE deleted IS NULL"); 
-	$stmt->bind_my_result($id, $user_id, $par, $my_result_from_db); //algselt oli $color_from_db
+	$stmt = $mysqli->prepare("SELECT id, user_id, par, my_result FROM game_results"); 
+	$stmt->bind_result($id, $user_id, $par, $my_result); //algselt oli $color_from_db
 	
 	$stmt->execute();
 	
