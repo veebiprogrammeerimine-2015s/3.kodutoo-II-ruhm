@@ -35,7 +35,7 @@
 				$stmt->bind_param("ss", $email, $password_hash);
 				
 				//paneme vastused muutujatesse
-				$stmt->bind_my_result($id_from_db, $email_from_db);
+				$stmt->bind_result($id_from_db, $email_from_db);
 				$stmt->execute();
 				
 				if($stmt->fetch()){
@@ -147,7 +147,7 @@
 		
 	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
-	$stmt = $mysqli->prepare("SELECT id, game_name, baskets FROM game"); 
+	$stmt = $mysqli->prepare("SELECT id, game_name, baskets FROM game WHERE deleted IS NULL"); 
 	$stmt->bind_result($id, $name, $baskets); //algselt oli $color_from_db
 	
 	$stmt->execute();
@@ -182,7 +182,7 @@
 
 //delete funktsiooni
 
-	function deleteGame($id){
+	function deleteGame($id_to_be_deleted){
 		
 	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 

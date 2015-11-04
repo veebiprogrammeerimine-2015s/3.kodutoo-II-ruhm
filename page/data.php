@@ -49,7 +49,7 @@
 	}	// create if end
 	
 //tulemuse lisamise errorid	
-	$par = $result = $par_error = $result_error = "";
+	$par = $result = $par_error = $my_result_error = "";
 	
 	if(isset($_POST["create"])){
 			if ( empty($_POST["par"]) ) {
@@ -57,7 +57,7 @@
 			}else{
 				$par = cleanInput($_POST["par"]);
 			}
-			if ( empty($_POST["result"]) ) {
+			if ( empty($_POST["my_result"]) ) {
 				$result = "See väli on kohustuslik";
 			} else {
 				$result = cleanInput($_POST["my_result"]);

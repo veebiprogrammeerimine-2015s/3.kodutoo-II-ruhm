@@ -9,7 +9,7 @@
 		header("Location: data.php");
 	}
 	
-// muutujad errorite
+// muutujad errorite jaoks
 	$email_error = "";
 	$password_error = "";
 	$first_name_error = "";
