@@ -58,4 +58,31 @@
 		
 		$mysqli->close();
 	}
+	
+	function createTournamen($tournament, $team_one, $team_two, $time){
+		
+	
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("INSERT INTO car_plates (user_id, tournament, team_one, team_two, time) VALUE (?, ?, ?, ?, ?)");
+				
+		echo $mysqli->error;
+		$stmt->bind_param("issss", $_SESSION["id_from_db"], $tournament, $team_one, $team_two, $time);
+		
+		$message = "";
+		
+		if($stmt->execute()){
+			$message = "Edukalt sisestatud andmebaasi";
+			
+		}else{
+			echo$stmt->error;
+		}
+		
+		
+		$stmt->close();
+		$mysqli->close();
+		
+		return $message;
+		
+	}
 ?>
