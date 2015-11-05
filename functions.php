@@ -85,4 +85,57 @@
 		return $message;
 		
 	}
+	
+	function getTournamentData(){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("SELECT id, user_id, tournament, team_one, team_two, time FROM tournaments WHERE deleted IS NULL");
+		$stmt->bind_result($id, $user_id, $tournament, $team_one, $team_two, $time);
+		$stmt->execute();
+		
+		$array = array();
+		
+		while($stmt->fetch()){
+			$tourney = new StdClass();
+			$tourney->id = $id;
+			$tourney->tournament = $tournament;
+			$tourney->user_id = $user_id;
+			$tourney->team_one = $team_one;
+			$tourney->team_two = $team_two;
+			$tourney->time = $time;
+			
+			array_push($array, $tourney);
+			
+			//echo "<pre>";
+			//var_dump($array);
+			//echo "</pre>";
+			
+		}
+		
+		$stmt->close();
+		
+		$mysqli->close();
+		
+		return $array;
+	}
+	
+	function deleteTournament($id_to_be_deleted){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("UPDATE tournaments SET deleted=NOW() WHERE id=?");
+		$stmt->bind_param("i", $id_to_be_deleted);
+		
+		if($stmt->execute()){
+			
+			header("Location: table.php");
+			
+		}
+		
+		$stmt->close();
+		$mysqli->close();
+	}
+	
+	getTournamentData();
 ?>
