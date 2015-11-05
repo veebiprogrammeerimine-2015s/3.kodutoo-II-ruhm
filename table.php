@@ -1,6 +1,12 @@
 <?php
 	
 	require_once("functions.php");
+	require_once("edit_functions.php");
+	
+	if(isset($_POST["update"])){
+		
+		updateTournament($_POST["id"], $_POST["tournament"], $_POST["team_one"], $_POST["team_two"], $_POST["time"]);
+	}
 	
 	if(isset($_GET["delete"])){
 		
