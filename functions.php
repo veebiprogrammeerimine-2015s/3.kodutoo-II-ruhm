@@ -59,12 +59,12 @@
 		$mysqli->close();
 	}
 	
-	function createTournamen($tournament, $team_one, $team_two, $time){
+	function createTournament($tournament, $team_one, $team_two, $time){
 		
 	
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO car_plates (user_id, tournament, team_one, team_two, time) VALUE (?, ?, ?, ?, ?)");
+		$stmt = $mysqli->prepare("INSERT INTO tournaments (user_id, tournament, team_one, team_two, time) VALUE (?, ?, ?, ?, ?)");
 				
 		echo $mysqli->error;
 		$stmt->bind_param("issss", $_SESSION["id_from_db"], $tournament, $team_one, $team_two, $time);
