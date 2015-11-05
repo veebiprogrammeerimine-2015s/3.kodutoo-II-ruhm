@@ -23,7 +23,7 @@
 			$_SESSION["logged_in_user_email"] = $email_from_db;
 			
 			//suunan data.php lehele
-			header("Location: ylesanded.php");
+			header("Location: tasks.php");
 			
 		}else{
 			// ei leidnud
@@ -99,7 +99,7 @@
 	if($stmt->execute())
 	{
 		//sai edukalt kustutatud
-		header("Location: ylesanded.php");
+		header("Location: tasks.php");
 		
 	}
 	$stmt->close();
@@ -115,7 +115,7 @@
 	if($stmt->execute())
 	{
 		//sai edukalt kustutatud
-		header("Location: ylesanded.php");
+		header("Location: tasks.php");
 		
 	}
 	$stmt->close();

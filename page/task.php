@@ -145,7 +145,7 @@ if(isset($_POST["create"]))
 	<input name="importance" type="number" min="1" max="3" value="1"><br><br>
 	<input type="submit" name="create" value="Lisa" value="<?=$create; ?>"><?=$someError; ?>	
   </form>
-	<br><a href="ylesanded.php"><button>Tagasi</button></a>
+	<br><a href="tasks.php"><button>Tagasi</button></a>
 <body>
 <html>
 <?php require_once("../footer.php") ?>

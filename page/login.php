@@ -5,7 +5,7 @@
 	//kui kasutaja on sisseloginud,
 	//siis suuunan data.php lehele
 	if(isset($_SESSION["logged_in_user_id"])){
-		header("Location: ylesanded.php");
+		header("Location: tasks.php");
 	}
 
 	// ühenduse loomiseks kasuta
