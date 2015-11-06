@@ -1,0 +1,8 @@
+CREATE TABLE results (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  varv VARCHAR(25),   
+  nrmark VARCHAR(15),
+  mark VARCHAR(40),
+  date VARCHAR(35)
+);
