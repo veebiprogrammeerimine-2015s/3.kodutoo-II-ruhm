@@ -87,6 +87,6 @@
 	<label for="team_two" >Teine tiim</label><br>
 	<input id="team_two" name="team_two" type="text" value="<?=$team_two; ?>"> <?=$team_two_error; ?><br><br>
 	<label for="time" >Turniiri toimumisaeg</label><br>
-	<input id="time" name="time" type="text" value="<?=$time; ?>"> <?=$time_error; ?><br><br>
+	<input id="time" name="time" type="text" placeholder="YYYY-DD-MM HH-MM-SS" value="<?=$time; ?>"> <?=$time_error; ?><br><br>
   	<input type="submit" name="create" value="Salvesta">
   </form>

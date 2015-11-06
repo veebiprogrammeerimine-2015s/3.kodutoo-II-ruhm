@@ -40,7 +40,7 @@
 				
 				echo "<tr>";
 				echo "<form action='table.php' method='post'>";
-				echo "<td>".$tournament_list[$i]->id."</td>";
+				echo "<td>".$tournament_list[$i]->id."<input type='hidden' name='id' value='".$tournament_list[$i]->id."'></td>";
 				echo "<td>".$tournament_list[$i]->user_id."</td>";
 				echo "<td><input name='tournament' value='".$tournament_list[$i]->tournament."'></td>";
 				echo "<td><input name='team_one' value='".$tournament_list[$i]->team_one."'></td>";
