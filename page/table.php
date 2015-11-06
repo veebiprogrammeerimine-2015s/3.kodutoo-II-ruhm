@@ -20,7 +20,7 @@
 		
 	if(isset($_POST["update"])){
 		
-		updateTasks($_POST["id"], $_POST["day"], $_POST["d_time"], $_POST["d_task"]);
+		updatetasks($_POST["id"], $_POST["day"], $_POST["d_time"], $_POST["d_task"]);
 		
 	}
 	
@@ -59,14 +59,43 @@
 						echo "<td>".$task_list[$i]->id."</td>";
 						echo "<td>".$task_list[$i]->user_id."</td>";
 						echo "<input type='hidden' name='id' value='".$task_list[$i]->id."'>";
-						echo "<td>";
+						echo "<td><select name='day' value='".$task_list[$i]->day."'>";
 												
-				        if("day" == "esmaspäev"){
+												
+				        if($task_list[$i]->day == "esmaspäev"){
 							echo '<option value="esmaspäev" selected>Esmaspäev</option>';
-							
 						}else{
-							
 							echo '<option value="esmaspäev">Esmaspäev</option>';
+						}
+						if($task_list[$i]->day == "teisipäev"){
+							echo '<option value="teisipäev" selected>Teisipäev</option>';
+						}else{
+							echo '<option value="teisipäev">Teisipäev</option>';
+						}
+						if($task_list[$i]->day == "kolmapäev"){
+							echo '<option value="kolmapäev" selected>Kolmapäev</option>';
+						}else{
+							echo '<option value="kolmapäev">Kolmapäev</option>';
+						}
+						if($task_list[$i]->day == "neljapäev"){
+							echo '<option value="neljapäev" selected>Neljapäev</option>';
+						}else{
+							echo '<option value="neljapäev">Neljapäev</option>';
+						}
+						if($task_list[$i]->day == "reede"){
+							echo '<option value="reede" selected>Reede</option>';
+						}else{
+							echo '<option value="reede">Reede</option>';
+						}
+						if($task_list[$i]->day == "laupäev"){
+							echo '<option value="laupäev" selected>Laupäev</option>';
+						}else{
+							echo '<option value="laupäev">Laupäev</option>';
+						}
+						if($task_list[$i]->day == "pühapäev"){
+							echo '<option value="pühapäev" selected>Pühapäev</option>';
+						}else{
+							echo '<option value="pühapäev">Pühapäev</option>';
 						}
 						
 						echo "</td>";
