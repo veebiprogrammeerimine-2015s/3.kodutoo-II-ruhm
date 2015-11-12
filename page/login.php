@@ -50,6 +50,8 @@
 				echo "Võib sisse logida! Kasutajanimi on ".$email." ja parool on ".$password;
 				
 				$password_hash = hash("sha512", $password);
+				
+				// käivitan funktsiooni function.php failis
 				loginUser($email, $password_hash);
 				
 				
@@ -111,15 +113,10 @@
 				echo "<br>";
 				echo $password_hash;
 				
-				$stmt = $mysqli->prepare("INSERT INTO user (firstname, lastname, email, password) VALUES (?, ?, ?, ?)");
+				// käivitan funktsiooni function.php failis
+				createUser($create_email, $password_hash);
 				
-				echo $mysqli->error;
 				
-		
-				$stmt->bind_param("ssss", $create_first_name, $create_last_name, $create_email, $password_hash);
-				$stmt->execute();
-				echo $stmt->error;
-				$stmt->close();
 
 			}
 		
