@@ -1,7 +1,7 @@
 <?php
-//Kõik andmebaasiga seonduv siin
+//KÃµik andmebaasiga seonduv siin
 
-//ühenduse loomiseks kasuta
+//Ã¼henduse loomiseks kasuta
 	require_once("../../configglobal.php");
 	$database = "if15_jarmhab";
 	
@@ -56,20 +56,21 @@
 				$mysqli->close();
 	}
 	
-	//discolfi mängu loomiseks
-	function createGame($game_name, $baskets){
-		// globals on muutuja kõigist php failidest mis on ühendatud
+	//rÃ¤Ã¤ma pargis mÃ¤ngu alustamine
+	function createGameRaama($game_name){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO game (user_id, game_name, baskets) VALUES (?, ?, ?)");
-		$stmt->bind_param("isi", $_SESSION["id_from_db"], $game_name, $baskets);
+		$stmt = $mysqli->prepare("INSERT INTO discgolf_raama (user_id, game_name, basket1_par, basket2_par, basket3_par, basket4_par, basket5_par, basket6_par, basket7_par, basket8_par, basket9_par,) VALUES (?, ?, '3', '3', '3', '3', '3', '3', '3', '3', '3')");
+		$stmt->bind_param("is", $_SESSION["id_from_db"], $game_name);
+		
+		
 		
 		if($stmt->execute()){
-			//see on tõene, kui sisestus ab'i õnnestus
-			$message = "Mäng edukalt loodud";
+			//see on tÃµene, kui sisestus ab'i Ãµnnestus
+			$message = "MÃ¤ng edukalt loodud!";
 			
 		}else {
-			// kui miski läks katki
+			// kui miski lÃ¤ks katki
 			echo $stmt->error;
 		}
 		
@@ -80,126 +81,7 @@
 		return $message;
 	}
 	
-	//discolfi tabeli jaoks
-	function createResult($par, $my_result){
-		// globals on muutuja kõigist php failidest mis on ühendatud
-		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		
-		$stmt = $mysqli->prepare("INSERT INTO game_results (user_id, basket1_par, basket1_my_result) VALUES (?, ?, ?)");
-		$stmt->bind_param("iii", $_SESSION["id_from_db"], $par, $my_result);
-		
-		$message = "";
-		
-		if($stmt->execute()){
-			//see on tõene, kui sisestus ab'i õnnestus
-			$message = "Edukalt sisestatud andmebaasi";
-			
-		}else {
-			// kui miski läks katki
-			echo $stmt->error;
-		}
-		
-		$stmt->close();
-		
-		$mysqli->close();		
-	
-		return $message;
-	}
 
-	
-	//Loome uue funktsiooni, et ab'st andmeid saada
-/* 	function getResultData(){
-		
-	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-	
-	$stmt = $mysqli->prepare("SELECT id, user_id, par, my_result FROM game_results"); 
-	$stmt->bind_result($id, $user_id, $par, $my_result); //algselt oli $color_from_db
-	
-	$stmt->execute();
-	
-	$row = 0;
-	
-	//tyhi massiiv, kus hoiame objekte (1rida andmeid)
-	$array = array();
-	
-	//tee tsüklit nii mitu korda, kui saad ab'st ühe rea andmeid
-	while($stmt->fetch()){
-		
-		$my_result = new StdClass();
-		$my_result->id = $id;
-		$my_result->user_id = $user_id;
-		$my_result->par = $par;
-		$my_result->my_result = $my_result_from_db;
-		
-		//lisame selle massiivi
-		array_push($array, $my_result);
-		echo "<pre>";
-		var_dump($array);
-		echo "</pre>";
-	}
-	
-	$stmt->close();
-	$mysqli->close();
-		
-		return $array;
-} */
-
-	//Loome uue funktsiooni, et ab'st andmeid saada
-	function getGameData(){
-		
-	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-	
-	$stmt = $mysqli->prepare("SELECT id, game_name, baskets FROM game WHERE deleted IS NULL"); 
-	$stmt->bind_result($id, $name, $baskets); //algselt oli $color_from_db
-	
-	$stmt->execute();
-	
-	$row = 0;
-	
-	//tyhi massiiv, kus hoiame objekte (1rida andmeid)
-	$array = array();
-	
-	//tee tsüklit nii mitu korda, kui saad ab'st ühe rea andmeid
-	while($stmt->fetch()){
-		
-		$my_result = new StdClass();
-		$my_result->id = $id;
-		
-		$my_result->name = $name;
-		$my_result->baskets = $baskets;
-		
-		//lisame selle massiivi
-		array_push($array, $my_result);
-		/* echo "<pre>";
-		var_dump($array);
-		echo "</pre>"; */
-	}
-	
-	$stmt->close();
-	$mysqli->close();
-		
-		return $array;
-}
-
-
-//delete funktsiooni
-
-	function deleteGame($id_to_be_deleted){
-		
-	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-
-	$stmt = $mysqli->prepare("UPDATE game SET deleted=NOW() WHERE id=?");
-	$stmt->bind_param("i", $id_to_be_deleted);
-	if($stmt->execute()){
-			// sai edukalt kustutatud
-			//header("Location: table.php");
-			$stmt->close();
-			$mysqli->close();
-		
-		}
-		
-}
-	
 	
 	
 	
