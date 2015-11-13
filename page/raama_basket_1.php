@@ -17,21 +17,21 @@
 		header("Location: login.php");
 	}
 	
-	$basket1 = $basket1_error = "";
+	$basket = $basket_error = "";
 	
-	if(isset($_POST["basket1"])){
-			if ( empty($_POST["basket1"]) ) {
-				$basket1_error = "Palun sisesta tulemus";
+	if(isset($_POST["save"])){
+			if ( empty($_POST["basket"]) ) {
+				$basket_error = "Palun sisesta tulemus";
 			}else{
-				$basket1 = cleanInput($_POST["basket1"]);
+				$basket = cleanInput($_POST["basket"]);
 			}
 			
-	if(	$basket1_error == ""){
+	if(	$basket_error == ""){
 				
 				
 				// functions.php failis käivina funktsiooni
 				//msg on message
-				$msg = savebasket1 ($basket1);
+				$msg = saveBasket(1,$basket,$id);
 				
 				if($msg != ""){
 					//salvestamine õnnestus
@@ -59,7 +59,7 @@
 <h2>1. korv</h2>
 <p>Par=3</p>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	<label for="basket1" >Minu tulemus</label>
-	<input id="basket1" name="basket1" type="number" value="<?=$basket1; ?>"> <?=$basket1_error; ?><br>	
+  	<label for="basket" >Minu tulemus</label>
+	<input id="basket" name="basket" type="number" value="<?=$basket; ?>"> <?=$basket_error; ?><br>	
   	<input type="submit" name="save" value="Salvesta">
   </form>

@@ -60,7 +60,7 @@
 	function createGameRaama($game_name){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("INSERT INTO discgolf_raama (user_id, game_name, basket1_par, basket2_par, basket3_par, basket4_par, basket5_par, basket6_par, basket7_par, basket8_par, basket9_par,) VALUES (?, ?, '3', '3', '3', '3', '3', '3', '3', '3', '3')");
+		$stmt = $mysqli->prepare("INSERT INTO discgolf_raama (user_id, game_name, basket1_par, basket2_par, basket3_par, basket4_par, basket5_par, basket6_par, basket7_par, basket8_par, basket9_par) VALUES (?, ?, '3', '3', '3', '3', '3', '3', '3', '3', '3')");
 		$stmt->bind_param("is", $_SESSION["id_from_db"], $game_name);
 		
 		
@@ -81,8 +81,23 @@
 		return $message;
 	}
 	
-
+	function saveBasket($nr, $result, $id){
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("UPDATE discgolf_raama SET basket".$nr."_result=? WHERE id=?");
+		$stmt->bind_param("ii", $result, $id);
+		if($stmt->execute()){
+			//see on tõene, kui sisestus ab'i õnnestus
+			$message = "Tulemus salvestatud!";
+			
+		}else {
+			// kui miski läks katki
+			echo $stmt->error;
+		}
+		$stmt->close();
+		$mysqli->close();		
 	
+		return $message;
 	
-	
+	}
 ?>
