@@ -76,16 +76,29 @@
 		
 		$stmt->close();
 		
-		$mysqli->close();		
+		
+		
+		//kuidas siin ikkagi mängu id kätte saaks, et selle järgi tulemusi salvestada?
+		
+		/* $stmt = $mysqli->prepare("SELECT id FROM discgolf_raama WHERE user_id=? AND game_name=?");
+		echo $mysqli->error;
+		$stmt->bind_param("is", $_SESSION["id_from_db"], $game_name);
+		
+		$stmt->bind_result($game_id);
+				$stmt->execute();
+		
+		$_SESSION["game_id"] = $game_id;
+		
+		$mysqli->close(); */		
 	
 		return $message;
 	}
-	
-	function saveBasket($nr, $result, $id){
+	//tulemuste salvestamine toimub siin
+	function saveBasket($nr, $result){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("UPDATE discgolf_raama SET basket".$nr."_result=? WHERE id=?");
-		$stmt->bind_param("ii", $result, $id);
+		$stmt = $mysqli->prepare("UPDATE discgolf_raama SET basket".$nr."_result=? WHERE user_id=?");
+		$stmt->bind_param("is", $result, $_SESSION["id_from_db"]);
 		if($stmt->execute()){
 			//see on tõene, kui sisestus ab'i õnnestus
 			$message = "Tulemus salvestatud!";
@@ -98,6 +111,42 @@
 		$mysqli->close();		
 	
 		return $message;
+	
+	}
+	
+	//Loome uue funktsiooni, et ab'st andmeid saada
+	function getGameData(){
+		
+	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+	
+	$stmt = $mysqli->prepare("SELECT basket1_par, basket1_result, comment FROM discgolf_raama");
+	
+	
+	$stmt->execute();
+	
+			// tühi massiiv kus hoiame objekte (1 rida andmeid)
+		$array = array();
+		
+		// tee tsüklit nii mitu korda, kui saad 
+		// ab'ist ühe rea andmeid
+		while($stmt->fetch()){
+			
+			// loon objekti iga while tsükli kord
+			$game_raama = new StdClass();
+			$game_raama->basket1_par = $basket1_par;
+			$game_raama->basket1_result = $basket1_result;
+			$game_raama->comment = $comment;
+			
+			// lisame selle massiivi
+			array_push($array, $game_raama);
+		}
+		
+		$stmt->close();
+		$mysqli->close();
+		
+		return $array;
+		
+	
 	
 	}
 ?>

@@ -16,7 +16,7 @@
 		
 		header("Location: login.php");
 	}
-	
+//tulemuse salvestamine	
 	$basket = $basket_error = "";
 	
 	if(isset($_POST["save"])){
@@ -29,7 +29,7 @@
 	if(	$basket_error == ""){
 				
 				
-				// functions.php failis käivina funktsiooni
+				// function.php failis käivitan funktsiooni
 				//msg on message
 				$msg = saveBasket(1,$basket,$id);
 				
@@ -52,7 +52,7 @@
 	  }
 ?>
 <p>
-	Tere, <?php echo $_SESSION["user_email"];?>
+	Sisse logitud kasutajaga <?php echo $_SESSION["user_email"];?>
 	<a href="?logout=1"> Logi välja</a>
 </p>
 <h1>Rääma Discgolf</h1>

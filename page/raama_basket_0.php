@@ -16,7 +16,7 @@
 		
 		header("Location: login.php");
 	}
-	
+//mängu alustamine	
 	$game_name =  $game_name_error =  "";
 	
 	if(isset($_POST["create_game_raama"])){
@@ -49,7 +49,7 @@
 	  }
 ?>
 <p>
-	Tere, <?php echo $_SESSION["user_email"];?>
+	Sisse logitud kasutajaga <?php echo $_SESSION["user_email"];?>
 	<a href="?logout=1"> Logi välja</a>
 </p>
 <h1>Rääma Discgolf</h1>
