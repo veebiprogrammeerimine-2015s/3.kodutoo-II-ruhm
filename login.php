@@ -19,68 +19,6 @@
 	$cpassword_error ="";
 	
 	
-	//kontrollin, kas keegi vajutas nuppu
-	if($_SERVER["REQUEST_METHOD"] == "POST") {
-		echo "jah";
-	
-		//kas e-post on tühi
-		if ( empty($_POST["email"])	) {
-			
-			//jah oli tühi
-			$email_error = "See väli on kohustuslik";
-	
-		}
-	// kas parool on tühi
-		if ( empty($_POST["password"]) ) {
-			$password_error = "See väli on kohustuslik";
-		} else {
-			
-			//Parool pole tühi
-			if(strlen($_POST["password"]) < 6) {
-				
-				$password_error = "Parool peab olema vähemalt 6 tähemärki pikk.";
-			}		
-		}
-		
-		
-		if ( empty($_POST["first_name"])	) {
-			
-			//jah oli tühi
-			$first_name_error = "See väli on kohustuslik";
-	
-		}
-		
-		if ( empty($_POST["last_name"])	) {
-			
-			//jah oli tühi
-			$last_name_error = "See väli on kohustuslik";
-	
-		}
-		
-		if ( empty($_POST["date"])	) {
-			
-			//jah oli tühi
-			$date_error = "See väli on kohustuslik";
-	
-		}
-		
-				if ( empty($_POST["cemail"])	) {
-			
-			//jah oli tühi
-			$cemail_error = "See väli on kohustuslik";
-	
-		}
-		
-						if ( empty($_POST["cpass"])	) {
-			
-			//jah oli tühi
-			$cpassword_error = "See väli on kohustuslik";
-	
-		}
-		
-	}
-	
-	
 	
   // muutujad väärtuste jaoks
 	$email ="";
@@ -124,38 +62,57 @@
 
 		} // login if end
 
-    // *********************
+    // *********************siia tuleb lisada logi sisse issetid, et süstemaatika 
     // ** LOO KASUTAJA *****
     // *********************
     if(isset($_POST["create"])){
-
-			if ( empty($_POST["create_email"]) ) {
-				$create_email_error = "See väli on kohustuslik";
+		
+		
+		if ( empty($_POST["first_name"]) ) {
+				$first_name_error = "See väli on kohustuslik";
 			}else{
-				$create_email = cleanInput($_POST["create_email"]);
+        // puhastame muutuja võimalikest üleliigsetest sümbolitest
+				$first_name = cleanInput($_POST["first_name"]);
+			}
+		
+		if ( empty($_POST["last_name"])	) {			
+				$last_name_error = "See väli on kohustuslik";
+			}else{
+				$last_name = cleanInput($_POST["last_name"]);
+			}
+		
+		if ( empty($_POST["date"])	) {
+				$date_error = "See väli on kohustuslik";
+			}else{
+				$date = cleanInput($_POST["date"]);
+			}
+		
+		
+		
+		if ( empty($_POST["cemail"])	) {
+				$cemail_error = "See väli on kohustuslik";	
+			}else{
+				$cemail = cleanInput($_POST["cemail"]);
+			}
+		
+		if ( empty($_POST["cpass"])	) {
+			$cpassword_error = "See väli on kohustuslik";
+			}else{
+			$cpassword = cleanInput($_POST["cpass"]);
 			}
 
-			if ( empty($_POST["create_password"]) ) {
-				$create_password_error = "See väli on kohustuslik";
-			} else {
-				if(strlen($_POST["create_password"]) < 8) {
-					$create_password_error = "Peab olema vähemalt 8 tähemärki pikk!";
-				}else{
-					$create_password = cleanInput($_POST["create_password"]);
-				}
-			}
 
-			if(	$create_email_error == "" && $create_password_error == ""){
-				echo "Võib kasutajat luua! Kasutajanimi on ".$create_email." ja parool on ".$create_password;
-				
-				$password_hash = hash("sha512", $create_password);
-				echo "<br>";
-				echo $password_hash;
-				
-				// functions.php failis käivina funktsiooni
-				createUser($create_email, $password_hash);
-				
-			}
+		if(	$cemail_error == "" && $cpassword_error == ""){
+			echo "Võib kasutajat luua! Kasutajanimi on ".$cemail." ja parool on ".$cpassword; //cepass ja cemail siia kirja
+			
+			$password_hash = hash("sha512", $cpassword);
+			echo "<br>";
+			echo $password_hash;
+			
+			// functions.php failis käivina funktsiooni
+			createUser($cemail, $password_hash);
+			
+		}
 
     } // create if end
 
