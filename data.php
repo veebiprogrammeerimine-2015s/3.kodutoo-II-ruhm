@@ -38,7 +38,7 @@
 			
 			// functions.php failis käivina funktsiooni
 			// msq on message funktsioonist mis tagasi saadame
-			$msg = createFlowerColor($flower, $color);
+			$msg = createFlower($flower, $color);
 			
 			if($msg != ""){
 				//salvestamine õnnestus
@@ -77,6 +77,3 @@
 	<input name="color" type="text" value="<?=$color; ?>"> <?=$color_error; ?><br><br>
   	<input type="submit" name="create" value="Salvesta">
   </form>
-	
-	
-?>

@@ -55,7 +55,7 @@
 		}else{ 
 			$email = cleanInput($_POST["email"]);
 		}
-		
+		echo "siin";
 		//kas parool on tühi
 		if( empty($_POST["password"])){
 			$password_error = "See väli on kohustuslik";
@@ -69,25 +69,8 @@
 				
 				$password_hash = hash("sha512", $password);
 				
-				$stmt = $mysqli->prepare("SELECT id, email FROM user_php WHERE email=? AND password=?");
-				$stmt->bind_param("ss", $email, $password_hash);
-				
-				//paneme vastuse muutujatesse
-				$stmt->bind_result($id_from_db, $email_from_db);
-				$stmt->execute();
-				
-				//küsima kas AB'ist saime kätte
-				if($stmt->fetch()){
-					//leidis
-					echo "kasutaja id=".$id_from_db;
-				}else{
-					// tühi, ei leidnud , ju siis midagi valesti
-					echo "Wrong password or email!";
-					
-				}
-				
-				$stmt->close();
-			}	
+				loginUser($email, $password_hash);
+			}
 	}//login if end
 	
 	
@@ -144,16 +127,8 @@
 					echo "<br>";
 					echo $password_hash;
 
-					
-					$stmt = $mysqli->prepare("INSERT INTO user_php (email, password, login, adress, telephone) VALUES (?, ?, ?, ?, ?)");
-					
-					//echo $mysqli->error;
-					//echo $stmt->error;
-					//asendame ? märgid muutujate väärtuste
-					// ss - s tähendab string iga muutuja kohta
-					$stmt->bind_param("sssss", $createuseremail, $password_hash, $createuserlogin, $createuseradress, $createusertelephone);
-					$stmt->execute();
-					$stmt->close(); 
+					createUser($create_email, $password_hash);
+ 
 			}//create if end
 		}
 
@@ -164,8 +139,7 @@
 			$data = stripslashes($data);
 			$data = htmlspecialchars($data);
 			return $data;
-	// paneme ühenduse kinni
-   $mysqli->close();
+
 	}
 ?>
 

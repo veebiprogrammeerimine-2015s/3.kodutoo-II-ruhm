@@ -43,6 +43,7 @@
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
 		$stmt = $mysqli->prepare("UPDATE car_plates SET flower=?, color=? WHERE id=?");
+		echo "mysqli_error";
 		$stmt->bind_param("ssi",$flower, $color, $id);
 		
 		// kas õnnestus salvestada
