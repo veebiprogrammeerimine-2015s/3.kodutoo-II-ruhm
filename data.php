@@ -1,77 +1,82 @@
 <?php
-	//kõik AB'iga seonduv
+
+	require_once("functions.php");
 	
-	// ühenduse loomiseks kasuta
-	require_once("../configglobal.php");
-	$database = "if15_tanjak";
-	
-	// paneme sessiooni käima, saame kasutada $_SESSION muutujaid
-	session_start();
-	
-	// lisame kasutaja ab'i
-	function createUser($createuseremail, $password_hash, $createuserlogin, $createuseradress, $createusertelephone){
-		// globals on muutuja kõigist php failidest mis on ühendatud
-		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		
-		$stmt = $mysqli->prepare("INSERT INTO user_php (email, password, login, adress, telephone) VALUES (?, ?, ?, ?, ?)");
-		$stmt->bind_param("sssss", $createuseremail, $password_hash, $createuserlogin, $createuseradress, $createusertelephone);
-		$stmt->execute();
-		$stmt->close();
-		
-		$mysqli->close();		
+	//kontrollin, kas kasutaja ei ole sisseloginud
+	if(!isset($_SESSION["id_from_db"])){
+		// suunan login lehele
+		header("Location: login.php");
 	}
 	
-	//logime sisse
-	function loginUser($email, $password_hash){
+	//login välja, aadressireal on ?logout=1
+	if(isset($_GET["logout"])){
+		//kustutab kõik sessiooni muutujad
+		session_destroy();
 		
-		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		header("Location: login.php");
 		
-		$stmt = $mysqli->prepare("SELECT id, email FROM user_php WHERE email=? AND password=?");
-		$stmt->bind_param("ss", $email, $password_hash);
-		$stmt->bind_result($id_from_db, $email_from_db);
-		$stmt->execute();
-		if($stmt->fetch()){
-			echo "kasutaja id=".$id_from_db;
-			
-			$_SESSION["id_from_db"] = $id_from_db;
-			$_SESSION["user_email"] = $email_from_db;
-			
-			//suunan kasutaja data.php lehele
-			header("Location: data.php");
-			
-			
+	}
+	
+	$flower = $color = $flower_error = $color_error = "";
+	
+	// et ei ole tühjad
+	// clean input
+	// salvestate
+	
+	if(isset($_POST["create"])){
+		if ( empty($_POST["flower"]) ) {
+			$flower_error = "See väli on kohustuslik";
 		}else{
-			echo "Wrong password or email!";
+			$flower = cleanInput($_POST["flower"]);
 		}
-		$stmt->close();
-		
-		$mysqli->close();
-	}
-	
-	
-	function createFlowerColor($flower, $color){
-		// globals on muutuja kõigist php failidest mis on ühendatud
-		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		
-		$stmt = $mysqli->prepare("INSERT INTO car_plates (user_id, flower, color) VALUES (?, ?, ?)");
-		$stmt->bind_param("iss", $_SESSION["id_from_db"], $flower, $color);
-		
-		$message = "";
-		
-		if($stmt->execute()){
-			// see on tõene siis kui sisestus ab'i õnnestus
-			$message = "Edukalt sisestatud andmebaasi";
+		if ( empty($_POST["color"]) ) {
+			$color_error = "See väli on kohustuslik";
+		} else {
+			$color = cleanInput($_POST["color"]);
+		}
+		if(	$car_plate_error == "" && $color_error == ""){
 			
-		}else{
-			// execute on false, miski läks katki
-			echo $stmt->error;
+			// functions.php failis käivina funktsiooni
+			// msq on message funktsioonist mis tagasi saadame
+			$msg = createFlowerColor($flower, $color);
+			
+			if($msg != ""){
+				//salvestamine õnnestus
+				// teen tühjaks input value'd
+				$flower = "";
+				$color = "";
+								
+				echo $msg;
+				
+			}
+			
 		}
-		
-		$stmt->close();
-		$mysqli->close();
-		return $message;
-		
-	}
+    } // create if end
+	
+	function cleanInput($data) {
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	  }
+	
+	
+	
+?>
+
+<p>
+	Tere, <?=$_SESSION["user_email"];?>
+	<a href="?logout=1"> Logi välja</a>
+</p>
+
+ <h2>Lisa auto</h2>
+  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+  	<label for="flower" >auto nr</label><br>
+	<input id="flower" name="flower" type="text" value="<?=$flower; ?>"> <?=$flower_error; ?><br><br>
+  	<label>värv</label><br>
+	<input name="color" type="text" value="<?=$color; ?>"> <?=$color_error; ?><br><br>
+  	<input type="submit" name="create" value="Salvesta">
+  </form>
 	
 	
 ?>
