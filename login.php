@@ -14,10 +14,16 @@
 	//ma tahaksin tegeleda kunstitarbete e-poega, kus on registreerimissüsteem, 
 	//tarbete nimikiri, iga tarbete kirjeldus, on võimalik tarbed tellida, ja tellimise vorm
 	
-	// ühenduse loomiseks kasuta
- 	require_once("../config.php");
- 	$database = "if15_tanjak";
- 	$mysqli = new mysqli($servername, $username, $password, $database);
+	
+		//laeme funktsiooni failis
+	require_once("functions.php");
+	
+		//kontrollin, kas kasutaja on sisseloginud
+	if(isset($_SESSION["id_from_db"])){
+		// suunan data lehele
+		header("Location: data.php");
+	}
+	
 	
 	//Defineerime muutujad vigased
 	$email_error = "";
@@ -43,7 +49,7 @@
 		//LOGI SISSE*
 		//***********
 		if(isset($_POST["login"])){
-		//kas epost on tühi
+	//kas epost on tühi
 		if( empty($_POST["email"])){
 			$email_error = "See väli on kohustuslik";
 		}else{ 
@@ -56,6 +62,7 @@
 		}else{
 			$password = cleanInput($_POST["password"]);
 		} 		
+		
  //Kui oleme siia jõudnud, võime kasutaja sisse logida
  			if($password_error == "" && $email_error == ""){
  				echo "Võib sisse logida! Kasutajanimi on ".$email." ja parool on ".$password;
@@ -127,8 +134,11 @@
 		}else {
 				$createusertelephone = cleanInput($_POST["createusertelephone"]);
 		}
+		//echo "siin";
 		
-			if(	$createuserlogin_error = "" && $createuseremail_error == "" && $createuserpassword_error == "" &&$createuseradress_error == "" && $createusertelephone_error = ""){
+			if(	$createuserlogin_error == "" && $createuseremail_error == "" && $createuserpassword_error == "" && $createuseradress_error == "" && $createusertelephone_error == ""){
+				//echo "siin";
+				
 					echo "Võib kasutajat luua! Kasutajanimi on ".$createuseremail." ja parool on ".$createuserpassword;
 					$password_hash = hash("sha512", $createuserpassword);
 					echo "<br>";
@@ -170,7 +180,7 @@
 	 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 		<input name="email" type="email" placeholder="E-post"> <?php echo $email_error; ?><br><br>
 		<input name="password" type="password" placeholder="Parool"> <?php echo $password_error; ?><br><br>
-		<input type="submit" value="Logi sisse"><br><br>
+		<input type="submit" name="login" value="Logi sisse"><br><br>
 	</form>
 	<h2>Create User</h2>
 	<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >

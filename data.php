@@ -34,7 +34,7 @@
 		} else {
 			$color = cleanInput($_POST["color"]);
 		}
-		if(	$car_plate_error == "" && $color_error == ""){
+		if(	$flower_error == "" && $color_error == ""){
 			
 			// functions.php failis käivina funktsiooni
 			// msq on message funktsioonist mis tagasi saadame
@@ -69,9 +69,9 @@
 	<a href="?logout=1"> Logi välja</a>
 </p>
 
- <h2>Lisa auto</h2>
+ <h2>Lisa lill</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	<label for="flower" >auto nr</label><br>
+  	<label for="flower" >lille nimetus</label><br>
 	<input id="flower" name="flower" type="text" value="<?=$flower; ?>"> <?=$flower_error; ?><br><br>
   	<label>värv</label><br>
 	<input name="color" type="text" value="<?=$color; ?>"> <?=$color_error; ?><br><br>

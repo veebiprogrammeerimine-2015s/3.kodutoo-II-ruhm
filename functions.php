@@ -9,8 +9,9 @@
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT id, user_id, flower, color FROM car_plates WHERE deleted IS NULL");
-		$stmt->bind_result($id, $user_id, $flower_plate, $color_from_db);
+		$stmt = $mysqli->prepare("SELECT id, user_id, flower, color FROM flowers WHERE deleted IS NULL");
+		echo $mysqli->error;
+		$stmt->bind_result($id, $user_id, $flower, $color_from_db);
 		$stmt->execute();
 		
 		// tühi massiiv kus hoiame objekte (1 rida andmeid)
