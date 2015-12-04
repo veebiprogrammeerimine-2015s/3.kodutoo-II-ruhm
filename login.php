@@ -88,7 +88,7 @@
 		//LOO KASUTAJA*
 		//*************
 		
-	if(isset($_POST["create"])){
+	if(isset($_POST["create"])){ 
 		//kas kasutajanime loomine on tühi
 		if( empty($_POST["createuserlogin"]) ){
 			$createuserlogin_error = "See väli on kohustuslik";
@@ -114,7 +114,7 @@
  					$createuserpassword = cleanInput($_POST["createuserpassword"]);
 		
  				}
-	
+		}
 		//kas aadressi loomine on tühi
 		if(empty($_POST["createuseradress"])){
 			$createuseradress_error = "See väli on kohustuslik";
@@ -141,7 +141,7 @@
 					//echo $stmt->error;
 					//asendame ? märgid muutujate väärtuste
 					// ss - s tähendab string iga muutuja kohta
-					$stmt->bind_param("sssss",  $createuserlogin, $createuseremail, $password_hash, $createuseradress, $createusertelephone);
+					$stmt->bind_param("sssss", $createuseremail, $password_hash, $createuserlogin, $createuseradress, $createusertelephone);
 					$stmt->execute();
 					$stmt->close(); 
 			}//create if end
