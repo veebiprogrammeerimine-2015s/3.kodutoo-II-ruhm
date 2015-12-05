@@ -60,6 +60,23 @@
 	function createGameRaama($game_name){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
+		
+		/*
+		$stmt = $mysqli->prepare("SELECT id FROM discgolf_raama WHERE user_id=? AND game_name=?");
+		$stmt->bind_param("is", $_SESSION["id_from_db"], $game_name);
+		
+		$stmt->bind_result($game_id);
+		$stmt->execute();
+		if($stmt->fetch()){
+			
+			//oli olemas 
+			return>
+		}
+		
+		$stmt->close();
+		
+		*/
+		
 		$stmt = $mysqli->prepare("INSERT INTO discgolf_raama (user_id, game_name, basket1_par, basket2_par, basket3_par, basket4_par, basket5_par, basket6_par, basket7_par, basket8_par, basket9_par) VALUES (?, ?, '3', '3', '3', '3', '3', '3', '3', '3', '3')");
 		$stmt->bind_param("is", $_SESSION["id_from_db"], $game_name);
 		
@@ -78,18 +95,19 @@
 		
 		
 		
-		//kuidas siin ikkagi mängu id kätte saaks, et selle järgi tulemusi salvestada?
+		//küsin mängu id
 		
-		/* $stmt = $mysqli->prepare("SELECT id FROM discgolf_raama WHERE user_id=? AND game_name=?");
-		echo $mysqli->error;
+		$stmt = $mysqli->prepare("SELECT id FROM discgolf_raama WHERE user_id=? AND game_name=?");
 		$stmt->bind_param("is", $_SESSION["id_from_db"], $game_name);
 		
 		$stmt->bind_result($game_id);
-				$stmt->execute();
+		$stmt->execute();
+		if($stmt->fetch()){
+			$_SESSION["game_id"] = $game_id;
+		}
 		
-		$_SESSION["game_id"] = $game_id;
 		
-		$mysqli->close(); */		
+		$stmt->close(); 	
 	
 		return $message;
 	}
@@ -97,8 +115,8 @@
 	function saveBasket($nr, $result){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("UPDATE discgolf_raama SET basket".$nr."_result=? WHERE user_id=?");
-		$stmt->bind_param("is", $result, $_SESSION["id_from_db"]);
+		$stmt = $mysqli->prepare("UPDATE discgolf_raama SET basket".$nr."_result=? WHERE id=?");
+		$stmt->bind_param("is", $result, $_SESSION["game_id"]);
 		if($stmt->execute()){
 			//see on tõene, kui sisestus ab'i õnnestus
 			$message = "Tulemus salvestatud!";
@@ -119,7 +137,10 @@
 		
 	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
-	$stmt = $mysqli->prepare("SELECT basket1_par, basket1_result, comment FROM discgolf_raama");
+	$stmt = $mysqli->prepare("SELECT basket1_par, basket1_result, basket2_par, basket2_result, basket3_par, basket3_result, basket4_par, basket4_result, basket5_par, basket5_result, basket6_par, basket6_result, basket7_par, basket7_result, basket8_par, basket8_result, basket9_par, basket9_result, comment FROM discgolf_raama WHERE id=?");
+	$stmt->bind_param("i", $_SESSION["game_id"]);
+	$stmt->bind_result($basket1_par, $basket1_result, $basket2_par, $basket2_result, $basket3_par, $basket3_result, $basket4_par, $basket4_result, $basket5_par, $basket5_result, $basket6_par, $basket6_result, $basket7_par, $basket7_result, $basket8_par, $basket8_result, $basket9_par, $basket9_result, $comment );
+	
 	
 	
 	$stmt->execute();
@@ -135,7 +156,24 @@
 			$game_raama = new StdClass();
 			$game_raama->basket1_par = $basket1_par;
 			$game_raama->basket1_result = $basket1_result;
+			$game_raama->basket2_par = $basket2_par;
+			$game_raama->basket2_result = $basket2_result;
+			$game_raama->basket3_par = $basket3_par;
+			$game_raama->basket3_result = $basket3_result;
+			$game_raama->basket4_par = $basket4_par;
+			$game_raama->basket4_result = $basket4_result;
+			$game_raama->basket5_par = $basket5_par;
+			$game_raama->basket5_result = $basket5_result;
+			$game_raama->basket6_par = $basket6_par;
+			$game_raama->basket6_result = $basket6_result;
+			$game_raama->basket7_par = $basket7_par;
+			$game_raama->basket7_result = $basket7_result;
+			$game_raama->basket8_par = $basket8_par;
+			$game_raama->basket8_result = $basket8_result;
+			$game_raama->basket9_par = $basket9_par;
+			$game_raama->basket9_result = $basket9_result;
 			$game_raama->comment = $comment;
+			
 			
 			// lisame selle massiivi
 			array_push($array, $game_raama);
@@ -145,8 +183,52 @@
 		$mysqli->close();
 		
 		return $array;
-		
-	
-	
 	}
+	
+	//küsin siin ab-st tulemuste summa
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("SELECT (basket1_result + basket2_result + basket3_result + basket4_result + basket5_result + basket6_result + basket7_result + basket8_result + basket9_result) as total_result, (basket1_par+basket2_par+basket3_par+basket4_par+basket5_par+basket6_par+basket7_par+basket8_par+basket9_par) as total_par, ((basket1_result + basket2_result + basket3_result + basket4_result + basket5_result + basket6_result + basket7_result + basket8_result + basket9_result)-(basket1_par+basket2_par+basket3_par+basket4_par+basket5_par+basket6_par+basket7_par+basket8_par+basket9_par)) as difference FROM discgolf_raama WHERE id=?");
+		$stmt->bind_param("i", $_SESSION["game_id"]);
+		echo $stmt->error;
+		$stmt->bind_result($total_result, $total_par, $difference);
+		
+		$stmt->execute();
+		
+		if($stmt->fetch()){
+			$_SESSION["total_result"] = $total_result;
+			$_SESSION["total_par"] = $total_par;
+			$_SESSION["difference"] = $difference;
+		}
+		
+		$stmt->close();
+		$mysqli->close();
+		
+	//loon funktsiooni mängude ajaloo jaoks
+		function getGameHistory(){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("SELECT date, game_name FROM discgolf_raama WHERE user_id=?");
+		$stmt->bind_param("i", $_SESSION["id_from_db"]);
+		$stmt->bind_result($game_date, $game_name);
+		
+		$stmt->execute();
+			$array = array();
+			while($stmt->fetch()){
+				
+				$game_history = new StdClass();
+				$game_history->date = $game_date;
+				$game_history->game_name = $game_name;
+				
+				array_push($array, $game_history);
+			}
+		
+		$stmt->close();
+		$mysqli->close();
+		
+		return $array;
+			
+		}
+
 ?>

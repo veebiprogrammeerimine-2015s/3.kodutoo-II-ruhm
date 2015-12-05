@@ -15,10 +15,15 @@
 		
 		header("Location: login.php");
 	}	
-	  
-	 if(isset($_POST["start_game"])){
+
+//alusta mängu Rääma pargis	
+	 if(isset($_GET["start_game_raama"])){
 		 header("Location: raama_basket_0.php");
 	 }
+//suunan ajaloo lehele
+	if (isset($_GET["my_history"])){
+		header("Location: my_history.php");
+	}
 ?>
 
 <p>
@@ -27,11 +32,12 @@
 </p>
 
 <h1>Discgolfi pargid</h1><br>
-<h2>Rääma discgolfi park</h2>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	<input type="submit" name="start_game" value="Mine mängima">
-  </form>
-<h2>Jõekääru discgolfi park</h2>
-<h2>Nõmme discgolfi park</h2>
-<h2>Jõulumäe discgolfi park</h2>
+<p>
+<a href="?start_game_raama=1"> Rääma discgolfi park</a><br>
+Jõekääru discgolfi park<br>
+Nõmme discgolfi park<br>
+Jõulumäe discgolfi park<br><br>
+
+<a href="?my_history=1"> Mängude ajalugu</a>
+</p>
 	

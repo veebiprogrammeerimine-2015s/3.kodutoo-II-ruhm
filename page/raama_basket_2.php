@@ -29,11 +29,17 @@
 	if(	$basket_error == ""){
 				
 
-				$msg = saveBasket(2,$basket,$id);
+				$msg = saveBasket($_GET["k"],$basket);
 				
 				if($msg != ""){
-		
-					header("Location: raama_basket_3.php");
+					
+					if($_GET["k"] == "9"){
+						header("Location: raama_basket_final.php");
+						var_dump($_GET["k"]);
+						exit();
+					}
+					$k = $_GET["k"]+1;
+					header("Location: raama_basket_2.php?k=".$k);
 						
 				}
 			}
@@ -52,9 +58,9 @@
 </p>
 <h1>Rääma Discgolf</h1>
 
-<h2>2. korv</h2>
+<h2><?=$_GET["k"];?>. korv</h2>
 <p>Par=3</p>
-  <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+  <form action="raama_basket_2.php?k=<?php echo $_GET["k"]; ?>" method="post" >
   	<label for="basket" >Minu tulemus</label>
 	<input id="basket" name="basket" type="number" value="<?=$basket; ?>"> <?=$basket_error; ?><br>	
   	<input type="submit" name="save" value="Salvesta">

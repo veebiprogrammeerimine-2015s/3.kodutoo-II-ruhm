@@ -33,7 +33,7 @@
 				if($msg != ""){
 					//salvestamine õnnestus
 					//suunan 1. korvi lehele
-					header("Location: raama_basket_1.php");
+					header("Location: raama_basket_2.php?k=1");
 					
 					echo $msg;
 					

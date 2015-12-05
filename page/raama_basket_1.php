@@ -31,12 +31,12 @@
 				
 				// function.php failis käivitan funktsiooni
 				//msg on message
-				$msg = saveBasket(1,$basket,$id);
+				$msg = saveBasket(1,$basket);
 				
 				if($msg != ""){
 					//salvestamine õnnestus
 					//suunan 2. korvi lehele
-					header("Location: raama_basket_2.php");
+					header("Location: raama_basket_2.php?k=2");
 					
 					
 					
@@ -55,7 +55,7 @@
 	Sisse logitud kasutajaga <?php echo $_SESSION["user_email"];?>
 	<a href="?logout=1"> Logi välja</a>
 </p>
-<h1>Rääma Discgolf</h1>
+<h1>Rääma Discgolf (<?=$_SESSION["game_id"];?>)</h1>
 <h2>1. korv</h2>
 <p>Par=3</p>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
