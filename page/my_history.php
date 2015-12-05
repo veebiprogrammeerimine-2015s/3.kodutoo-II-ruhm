@@ -20,6 +20,13 @@
 	if (isset($_GET["welcome_page"])){
 		header("Location: data.php");
 	}
+
+//mängu kustutamiseks	
+	if(isset($_GET["delete"])){
+		
+		//saadan kaasa id, mida kustutada
+		deleteGame($_GET["delete"]);
+	}
 	
 	$game_history = getGameHistory();
 	
@@ -50,6 +57,7 @@
 		echo "<tr>";
 			echo "<td>".$game_history[$i]->date."</td>";
 			echo "<td>".$game_history[$i]->game_name."</td>";
+			echo "<td><a href='?delete=".$game_history[$i]->id."'>kustuta</a></td>";
 		echo "</tr>";
 		
 	}

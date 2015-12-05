@@ -209,15 +209,16 @@
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT date, game_name FROM discgolf_raama WHERE user_id=?");
+		$stmt = $mysqli->prepare("SELECT id, date, game_name FROM discgolf_raama WHERE user_id=? AND deleted IS NULL");
 		$stmt->bind_param("i", $_SESSION["id_from_db"]);
-		$stmt->bind_result($game_date, $game_name);
+		$stmt->bind_result($game_id, $game_date, $game_name);
 		
 		$stmt->execute();
 			$array = array();
 			while($stmt->fetch()){
 				
 				$game_history = new StdClass();
+				$game_history->id = $game_id;
 				$game_history->date = $game_date;
 				$game_history->game_name = $game_name;
 				
@@ -230,5 +231,21 @@
 		return $array;
 			
 		}
+		
+	//mängu kustutamine
+		function deleteGame($id_to_be_deleted){
+			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("UPDATE discgolf_raama SET deleted=NOW() WHERE id=?");
+		$stmt->bind_param("i", $id_to_be_deleted);
+			if($stmt->execute()){
+			// sai edukalt kustutatud
+			header("Location: my_history.php");
+			$stmt->close();
+			$mysqli->close();
+		
+		}
+		
+	}
 
 ?>
