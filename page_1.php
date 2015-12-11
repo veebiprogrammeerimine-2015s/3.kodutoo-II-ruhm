@@ -2,7 +2,7 @@
 	
 	require_once("session.php");
 	
-	$_SESSION["name"] = "Romil";
+	$_SESSION["name"] = "tanja";
 	
 	echo($_SESSION["name"]);
 ?>

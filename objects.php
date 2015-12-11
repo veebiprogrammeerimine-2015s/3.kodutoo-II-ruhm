@@ -2,8 +2,8 @@
 	
 	$user = new StdClass();
 	
-	$user->name = "Romil";
-	$user->gender = "male";
+	$user->name = "tanja";
+	$user->gender = "female";
 	
 	
 	var_dump($user);
