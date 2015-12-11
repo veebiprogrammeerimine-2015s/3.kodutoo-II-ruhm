@@ -75,14 +75,17 @@
 				echo "<td>".$flower_list[$i]->user_id."</td>";
 				echo "<td>".$flower_list[$i]->flower."</td>";
 				echo "<td>".$flower_list[$i]->color."</td>";
+			}
+				// if $flower_list[$i]->user_id == $_SESSION["id_from_db"]
+			if( $flower_list[$i]->user_id == $_SESSION["id_from_db"]){
 				echo "<td><a href='?delete=".$flower_list[$i]->id."'>X</a></td>";
 				echo "<td><a href='?edit=".$flower_list[$i]->id."'>edit</a></td>";
 				echo "<td><a href='edit.php?edit=".$flower_list[$i]->id."'>edit.php</a></td>";
-			
+				//
 				echo "</tr>";
+			}else{
+				echo "Teil ei ole võimalust selle taabeli muudata!";
 			}
-			
-			
 		}
 	
 	?>
