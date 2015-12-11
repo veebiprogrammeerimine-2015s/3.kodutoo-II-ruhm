@@ -8,7 +8,6 @@
 	
 	var_dump($user);
 	
-	$user->name = "Juku";
 	
 	echo("<br>");
 	echo($user->name);

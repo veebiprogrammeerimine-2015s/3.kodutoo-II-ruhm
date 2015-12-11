@@ -4,6 +4,19 @@
 	require_once("functions.php");
 	require_once("edit_functions.php");
 	
+	if(!isset($_SESSION["id_from_db"])){
+		
+		header("Location: login.php");
+	}
+	
+	
+	if(isset($_GET["logout"])){
+		
+		session_destroy();
+		
+		header("Location: login.php");
+		
+	}
 	
 	//kasutaja tahab midagi muuta
 	if(isset($_POST["update"])){
