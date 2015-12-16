@@ -19,6 +19,7 @@
 	if (isset($_GET["my_history"])){
 		header("Location: my_history.php");
 	}
+	
 	$results_list = getGameData();
 	
 	
@@ -104,4 +105,4 @@ echo $total_result. '('.$difference.')';
 	?>
 </table>
 
-<a href="?my_history=1"> Mängude ajalugu</a>
+<a href="my_history.php"> Mängude ajalugu</a>

@@ -236,16 +236,19 @@
 		function deleteGame($id_to_be_deleted){
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("UPDATE discgolf_raama SET deleted=NOW() WHERE id=?");
-		$stmt->bind_param("i", $id_to_be_deleted);
-			if($stmt->execute()){
+			$stmt = $mysqli->prepare("UPDATE discgolf_raama SET deleted=NOW() WHERE id=?");
+			$stmt->bind_param("i", $id_to_be_deleted);
+				if($stmt->execute()){
 			// sai edukalt kustutatud
-			header("Location: my_history.php");
+				header("Location: my_history.php");
 			$stmt->close();
 			$mysqli->close();
 		
 		}
 		
 	}
+	
+	//mängu detailid
+		
 
 ?>

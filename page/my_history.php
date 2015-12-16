@@ -16,10 +16,6 @@
 		header("Location: login.php");
 	}
 
-//suunan avalehele
-	if (isset($_GET["welcome_page"])){
-		header("Location: data.php");
-	}
 
 //mängu kustutamiseks	
 	if(isset($_GET["delete"])){
@@ -28,7 +24,12 @@
 		deleteGame($_GET["delete"]);
 	}
 	
+// detailsemalt vaatamiseks
+	
+	
+	
 	$game_history = getGameHistory();
+	
 	
 
 	
@@ -58,6 +59,7 @@
 			echo "<td>".$game_history[$i]->date."</td>";
 			echo "<td>".$game_history[$i]->game_name."</td>";
 			echo "<td><a href='?delete=".$game_history[$i]->id."'>kustuta</a></td>";
+			echo "<td><a href='?details=".$game_history[$i]->id."'>vaata lähemalt</a></td>";
 		echo "</tr>";
 		
 	}
@@ -65,4 +67,5 @@
 	?>
 </table>
 
-<a href="?welcome_page=1"> Avalehele</a>
+<a href="data.php"> Avalehele</a>
+

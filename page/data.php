@@ -20,10 +20,7 @@
 	 if(isset($_GET["start_game_raama"])){
 		 header("Location: raama_basket_0.php");
 	 }
-//suunan ajaloo lehele
-	if (isset($_GET["my_history"])){
-		header("Location: my_history.php");
-	}
+
 ?>
 
 <p>
@@ -33,11 +30,11 @@
 
 <h1>Discgolfi pargid</h1><br>
 <p>
-<a href="?start_game_raama=1"> Rääma discgolfi park</a><br>
+<a href="raama_basket_0.php"> Rääma discgolfi park</a><br>
 Jõekääru discgolfi park<br>
 Nõmme discgolfi park<br>
 Jõulumäe discgolfi park<br><br>
 
-<a href="?my_history=1"> Mängude ajalugu</a>
+<a href="my_history.php"> Mängude ajalugu</a>
 </p>
 	
