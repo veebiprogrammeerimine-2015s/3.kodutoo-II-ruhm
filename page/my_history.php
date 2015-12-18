@@ -24,7 +24,11 @@
 		deleteGame($_GET["delete"]);
 	}
 	
-// detailsemalt vaatamiseks
+// kasutaja tahab muuta nime
+	if(isset($_POST["edit"])){
+		
+		editGame($_POST["id"], $_POST["game_name"]);
+	}
 	
 	
 	
@@ -47,6 +51,7 @@
 
 <table border=1 >
 <tr>
+	<th>Id</th>
 	<th>Kuupäev</th>
 	<th>Mängu nimi</th>
 </tr>
@@ -55,12 +60,27 @@
 	
 	for($i = 0; $i < count($game_history); $i++){
 		
-		echo "<tr>";
-			echo "<td>".$game_history[$i]->date."</td>";
-			echo "<td>".$game_history[$i]->game_name."</td>";
-			echo "<td><a href='?delete=".$game_history[$i]->id."'>kustuta</a></td>";
-			echo "<td><a href='?details=".$game_history[$i]->id."'>vaata lähemalt</a></td>";
-		echo "</tr>";
+		if(isset($_GET["edit"]) && $game_history[$i]->game_name == $_GET["edit"]){
+			
+			echo "<tr>";
+			echo "<form action=my_history.php method='post'>";
+				
+				echo "<td><input type='hidden' name='id' value='".$game_history[$i]->id."'</td>";
+				echo "<td>".$game_history[$i]->date."</td>";
+				echo "<td><input name='game_name' value='".$game_history[$i]->game_name."'</td>";
+				echo "<td><a href='my_history.php'>cancel</a></td>";
+				echo "<td><input type='submit' name='edit' value='muuda' ></td>";
+			echo "</tr>";
+		
+		}else{
+			echo "<tr>";
+				echo "<td>".$game_history[$i]->id."</td>";
+				echo "<td>".$game_history[$i]->date."</td>";
+				echo "<td>".$game_history[$i]->game_name."</td>";
+				echo "<td><a href='?delete=".$game_history[$i]->id."'>kustuta</a></td>";
+				echo "<td><a href='?edit=".$game_history[$i]->game_name."'><input type='submit' name='edit' value='muuda'></a></td>";
+			echo "</tr>";
+		}
 		
 	}
 	

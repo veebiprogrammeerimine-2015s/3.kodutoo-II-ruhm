@@ -222,6 +222,8 @@
 				$game_history->date = $game_date;
 				$game_history->game_name = $game_name;
 				
+				
+				
 				array_push($array, $game_history);
 			}
 		
@@ -248,7 +250,21 @@
 		
 	}
 	
-	//mängu detailid
+	//mängu nime muutmine
+		function editGame($id, $game_name){
+			
+			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+	
+			$stmt = $mysqli->prepare("UPDATE discgolf_raama SET game_name=? WHERE id=?");
+			$stmt->bind_param("si", $game_name, $id);
+			
+			if($stmt->execute()){
+				echo "Mängu nimi edukalt muudetud!";
+			}
+			
+			$stmt->close();
+			$mysqli->close();
 		
+	}
 
 ?>
