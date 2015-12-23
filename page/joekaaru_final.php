@@ -15,29 +15,21 @@
 		session_destroy();
 		header("Location: login.php");
 	}
-//suunan ajaloo lehele
-	if (isset($_GET["my_history"])){
-		header("Location: my_history.php");
-	}
 	
-	$results_list = getGameData();
-	
-	
-
+	$results_list = getJoekaaruData();
 ?>
 <p>
 	Sisse logitud kasutajaga <?php echo $_SESSION["user_email"];?>
 	<a href="?logout=1"> Logi välja</a>
 </p>
-<h1>Rääma Discgolf</h1>
-
+<h1>Jõekääru Discgolf</h1>
 <p>
 Par =  <?php 
-echo $total_par_raama;
+echo $total_par_joekaaru;
 ?><br>
 Sinu tulemus oli 
 <?php 
-echo $total_result_raama. '('.$difference_raama.')';
+echo $total_result_joekaaru. '('.$difference_joekaaru.')';
 ?>
 </p>
 
@@ -98,11 +90,60 @@ echo $total_result_raama. '('.$difference_raama.')';
 			echo "<td>".$results_list[$i]->basket9_par."</td>";
 			echo "<td>".$results_list[$i]->basket9_result."</td>";
 		echo "</tr>";
+		echo "<tr>";
+			echo "<td>".'10'."</td>";
+			echo "<td>".$results_list[$i]->basket10_par."</td>";
+			echo "<td>".$results_list[$i]->basket10_result."</td>";
+		echo "</tr>";
+		echo "<tr>";
+			echo "<td>".'11'."</td>";
+			echo "<td>".$results_list[$i]->basket11_par."</td>";
+			echo "<td>".$results_list[$i]->basket11_result."</td>";
+		echo "</tr>";	
+		echo "<tr>";
+			echo "<td>".'12'."</td>";
+			echo "<td>".$results_list[$i]->basket12_par."</td>";
+			echo "<td>".$results_list[$i]->basket12_result."</td>";
+		echo "</tr>";
+		echo "<tr>";
+			echo "<td>".'13'."</td>";
+			echo "<td>".$results_list[$i]->basket13_par."</td>";
+			echo "<td>".$results_list[$i]->basket13_result."</td>";
+		echo "</tr>";
+		echo "<tr>";
+			echo "<td>".'14'."</td>";
+			echo "<td>".$results_list[$i]->basket14_par."</td>";
+			echo "<td>".$results_list[$i]->basket14_result."</td>";
+		echo "</tr>";
+		echo "<tr>";
+			echo "<td>".'15'."</td>";
+			echo "<td>".$results_list[$i]->basket15_par."</td>";
+			echo "<td>".$results_list[$i]->basket15_result."</td>";
+		echo "</tr>";	
+		echo "<tr>";
+			echo "<td>".'16'."</td>";
+			echo "<td>".$results_list[$i]->basket16_par."</td>";
+			echo "<td>".$results_list[$i]->basket16_result."</td>";
+		echo "</tr>";
+		echo "<tr>";
+			echo "<td>".'17'."</td>";
+			echo "<td>".$results_list[$i]->basket17_par."</td>";
+			echo "<td>".$results_list[$i]->basket17_result."</td>";
+		echo "</tr>";
+		echo "<tr>";
+			echo "<td>".'18'."</td>";
+			echo "<td>".$results_list[$i]->basket18_par."</td>";
+			echo "<td>".$results_list[$i]->basket18_result."</td>";
+		echo "</tr>";
 		
 	}
 
 
 	?>
 </table>
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get" >
+<label for="comment" ></label> <input id="joekaaru_comment" name="joekaaru_comment" type="text" ><br>
+<input type="submit" name="add_comment" value="Lisa kommentaar"><br><br>
+
 
 <a href="my_history.php"> Mängude ajalugu</a>

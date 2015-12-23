@@ -16,10 +16,6 @@
 		header("Location: login.php");
 	}	
 
-//alusta mängu Rääma pargis	
-	 if(isset($_GET["start_game_raama"])){
-		 header("Location: raama_basket_0.php");
-	 }
 
 ?>
 
@@ -31,7 +27,7 @@
 <h1>Discgolfi pargid</h1><br>
 <p>
 <a href="raama_basket_0.php"> Rääma discgolfi park</a><br>
-Jõekääru discgolfi park<br>
+<a href="joekaaru_0.php">Jõekääru discgolfi park</a><br>
 Nõmme discgolfi park<br>
 Jõulumäe discgolfi park<br><br>
 
