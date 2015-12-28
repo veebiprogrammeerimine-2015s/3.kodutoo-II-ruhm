@@ -17,6 +17,35 @@
 	}
 	
 	$results_list = getJoekaaruData();
+	
+//kommentaari jätmiseks
+	$joekaaru_comment =  $joekaaru_comment_error =  "";
+
+	if(isset($_POST["add_comment_joekaaru"])){
+		if ( empty($_POST["joekaaru_comment"]) ) {
+				$joekaaru_comment_error = "Sisesta kõigepealt kommentaar!";
+		}else{
+				$joekaaru_comment = cleanInput($_POST["joekaaru_comment"]);
+			}
+	if(	$joekaaru_comment_error == ""){
+		//käivitan funktsiooni
+				$msg = commentJoekaaru($joekaaru_comment);
+				if($msg != ""){
+					//salvestamine õnnestus
+					
+					echo $msg;
+					
+				}
+		
+		}
+	}
+	
+	function cleanInput($data) {
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	  }
 ?>
 <p>
 	Sisse logitud kasutajaga <?php echo $_SESSION["user_email"];?>
@@ -141,9 +170,10 @@ echo $total_result_joekaaru. '('.$difference_joekaaru.')';
 
 	?>
 </table>
-<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="get" >
-<label for="comment" ></label> <input id="joekaaru_comment" name="joekaaru_comment" type="text" ><br>
-<input type="submit" name="add_comment" value="Lisa kommentaar"><br><br>
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+<label for="joekaaru_comment" ></label> <input id="joekaaru_comment" name="joekaaru_comment" type="text" value="<?=$joekaaru_comment; ?>"> <?=$joekaaru_comment_error; ?><br>
+<input type="submit" name="add_comment_joekaaru" value="Lisa kommentaar"><br><br>
+</form>
 
 
 <a href="my_history.php"> Mängude ajalugu</a>
