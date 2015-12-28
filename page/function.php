@@ -197,9 +197,9 @@
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT id, date, game_name FROM discgolf_raama WHERE user_id=? AND deleted IS NULL");
+		$stmt = $mysqli->prepare("SELECT id, date, game_name, comment FROM discgolf_raama WHERE user_id=? AND deleted IS NULL");
 		$stmt->bind_param("i", $_SESSION["id_from_db"]);
-		$stmt->bind_result($game_id, $game_date, $game_name);
+		$stmt->bind_result($game_id, $game_date, $game_name, $comment);
 		
 		$stmt->execute();
 			$array = array();
@@ -209,6 +209,7 @@
 				$game_history->id = $game_id;
 				$game_history->date = $game_date;
 				$game_history->game_name = $game_name;
+				$game_history->comment = $comment;
 				
 				
 				
@@ -221,6 +222,27 @@
 		return $array;
 			
 		}
+		
+	//mängule kommentaari jätmine
+		function commentRaama($raama_comment){
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("UPDATE discgolf_raama SET comment=? WHERE id=?");
+		$stmt->bind_param("si", $raama_comment, $_SESSION["game_id"]);
+		if($stmt->execute()){
+			//see on tõene, kui sisestus ab'i õnnestus
+			$message = "Kommentaar lisatud!";
+			
+		}else {
+			// kui miski läks katki
+			echo $stmt->error;
+		}
+		$stmt->close();
+		$mysqli->close();		
+	
+		return $message;
+	
+	}
 		
 	//mängu kustutamine
 		function deleteGame($id_to_be_deleted){
@@ -238,16 +260,16 @@
 		
 	}
 	
-	//mängu nime muutmine
-		function editGame($id, $game_name){
+	//mängu nime ja kommentaari muutmine
+		function editGame($id, $game_name, $comment){
 			
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
-			$stmt = $mysqli->prepare("UPDATE discgolf_raama SET game_name=? WHERE id=?");
-			$stmt->bind_param("si", $game_name, $id);
+			$stmt = $mysqli->prepare("UPDATE discgolf_raama SET game_name=?, comment=? WHERE id=?");
+			$stmt->bind_param("ssi", $game_name, $comment, $id);
 			
 			if($stmt->execute()){
-				echo "Mängu nimi edukalt muudetud!";
+				echo "Muudatused edukalt sisseviidud!";
 			}
 			
 			$stmt->close();
@@ -476,13 +498,13 @@
 		
 	}
 	
-	//mängu nime muutmine
-		function editGameJoekaaru($id, $game_name){
+	//mängu nime ja kommentaari muutmine
+		function editGameJoekaaru($id, $game_name, $comment){
 			
 			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
-			$stmt = $mysqli->prepare("UPDATE discgolf_joekaaru SET game_name=? WHERE id=?");
-			$stmt->bind_param("si", $game_name, $id);
+			$stmt = $mysqli->prepare("UPDATE discgolf_joekaaru SET game_name=?, comment=? WHERE id=?");
+			$stmt->bind_param("ssi", $game_name, $comment, $id);
 			
 			if($stmt->execute()){
 				

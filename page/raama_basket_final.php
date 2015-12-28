@@ -19,6 +19,34 @@
 	if (isset($_GET["my_history"])){
 		header("Location: my_history.php");
 	}
+//kommentaari jätmiseks
+	$raama_comment =  $raama_comment_error =  "";
+
+	if(isset($_POST["add_comment_raama"])){
+		if ( empty($_POST["raama_comment"]) ) {
+				$raama_comment_error = "Sisesta kõigepealt kommentaar!";
+		}else{
+				$raama_comment = cleanInput($_POST["raama_comment"]);
+			}
+	if(	$raama_comment_error == ""){
+		//käivitan funktsiooni
+				$msg = commentRaama($raama_comment);
+				if($msg != ""){
+					//salvestamine õnnestus
+					
+					echo $msg;
+					
+				}
+		
+		}
+	}
+	
+	function cleanInput($data) {
+		$data = trim($data);
+		$data = stripslashes($data);
+		$data = htmlspecialchars($data);
+		return $data;
+	  }
 	
 	$results_list = getGameData();
 	
@@ -104,5 +132,10 @@ echo $total_result_raama. '('.$difference_raama.')';
 
 	?>
 </table>
+<p>Siin saad mängule kommentaari jätta:</p>
+<form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
+<label for="raama_comment" ></label> <input id="raama_comment" name="raama_comment" type="text" value="<?=$raama_comment; ?>"> <?=$raama_comment_error; ?><br>
+<input type="submit" name="add_comment_raama" value="Lisa kommentaar"><br><br>
+</form>
 
 <a href="my_history.php"> Mängude ajalugu</a>

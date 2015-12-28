@@ -34,13 +34,13 @@
 // Rääma pargis mängitud mängude muutmine
 	if(isset($_POST["edit"])){
 		
-		editGame($_POST["id"], $_POST["game_name"]);
+		editGame($_POST["id"], $_POST["game_name"], $_POST["comment"]);
 	}
 	
-	// Jõekääru pargis mängitud mängude muutmine
+// Jõekääru pargis mängitud mängude muutmine
 	if(isset($_POST["edit"])){
 		
-		editGameJoekaaru($_POST["id"], $_POST["game_name"]);
+		editGameJoekaaru($_POST["id"], $_POST["game_name"], $_POST["comment"]);
 	}
 	
 	
@@ -69,6 +69,7 @@
 	<th>Id</th>
 	<th>Kuupäev</th>
 	<th>Mängu nimi</th>
+	<th>Kommentaar</th>
 </tr>
 
 <?php
@@ -82,6 +83,7 @@
 				echo "<td><input type='hidden' name='id' value='".$game_history[$i]->id."'</td>";
 				echo "<td>".$game_history[$i]->date."</td>";
 				echo "<td><input name='game_name' value='".$game_history[$i]->game_name."'</td>";
+				echo "<td><input name ='comment' value='".$game_history[$i]->comment."'</td>";
 				echo "<td><a href='my_history.php'>cancel</a></td>";
 				echo "<td><input type='submit' name='edit' value='muuda' ></td>";
 			echo "</tr>";
@@ -91,6 +93,7 @@
 				echo "<td>".$game_history[$i]->id."</td>";
 				echo "<td>".$game_history[$i]->date."</td>";
 				echo "<td>".$game_history[$i]->game_name."</td>";
+				echo "<td>".$game_history[$i]->comment."</td>";
 				echo "<td><a href='?delete=".$game_history[$i]->id."'>kustuta</a></td>";
 				echo "<td><a href='?edit=".$game_history[$i]->game_name."'><input type='submit' name='edit' value='muuda'></a></td>";
 			echo "</tr>";
@@ -123,7 +126,7 @@
 				echo "<td><input type='hidden' name='id' value='".$game_history_joekaaru[$i]->id."'</td>";
 				echo "<td>".$game_history_joekaaru[$i]->date."</td>";
 				echo "<td><input name='game_name' value='".$game_history_joekaaru[$i]->game_name."'</td>";
-				echo "<td>".$game_history_joekaaru[$i]->comment."</td>";
+				echo "<td><input name='comment' value='".$game_history_joekaaru[$i]->comment."'</td>";
 				echo "<td><a href='my_history.php'>cancel</a></td>";
 				echo "<td><input type='submit' name='edit' value='muuda' ></td>";
 			echo "</tr>";

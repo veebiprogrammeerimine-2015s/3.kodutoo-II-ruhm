@@ -25,6 +25,7 @@
 </p>
 
 <h1>Discgolfi pargid</h1><br>
+<p>Mängimiseks vajuta lingile</p>
 <p>
 <a href="raama_basket_0.php"> Rääma discgolfi park</a><br>
 <a href="joekaaru_0.php">Jõekääru discgolfi park</a><br>

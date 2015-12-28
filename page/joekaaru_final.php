@@ -170,6 +170,7 @@ echo $total_result_joekaaru. '('.$difference_joekaaru.')';
 
 	?>
 </table>
+<p>Siin saad mängule kommentaari jätta:</p>
 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
 <label for="joekaaru_comment" ></label> <input id="joekaaru_comment" name="joekaaru_comment" type="text" value="<?=$joekaaru_comment; ?>"> <?=$joekaaru_comment_error; ?><br>
 <input type="submit" name="add_comment_joekaaru" value="Lisa kommentaar"><br><br>
