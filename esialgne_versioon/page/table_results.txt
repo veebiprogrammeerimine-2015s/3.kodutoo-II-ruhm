@@ -1,0 +1,6 @@
+CREATE TABLE results (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  par VARCHAR(200),   
+  result VARCHAR(200)
+);

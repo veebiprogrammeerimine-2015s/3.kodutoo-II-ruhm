@@ -1,0 +1,6 @@
+CREATE TABLE game (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  user_id INT NOT NULL,
+  game_name TEXT,   
+  baskets VARCHAR(200)
+);
