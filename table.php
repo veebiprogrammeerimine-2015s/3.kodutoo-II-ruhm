@@ -1,4 +1,13 @@
 <?php
+
+	$page_title = "Tabeli leht";
+	$file_name = "table.php";
+	
+?>
+
+
+<?php require_once("menu.php")?>
+<?php
 	
 	require_once("functions.php");
 	require_once("edit_functions.php");

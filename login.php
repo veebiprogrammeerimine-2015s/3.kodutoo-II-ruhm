@@ -1,4 +1,13 @@
 <?php
+
+	$page_title = "Login leht";
+	$file_name = "login.php";
+	
+?>
+
+
+<?php require_once("menu.php")?>
+<?php
 	
  
 	require_once("functions.php");

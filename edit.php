@@ -1,4 +1,14 @@
 <?php
+
+	$page_title = "Muudatuste leht";
+	$file_name = "edit.php";
+	
+?>
+
+
+<?php require_once("menu.php")?>
+
+<?php
 	
 	require_once("edit_functions.php");
 	

@@ -1,4 +1,15 @@
+
 <?php
+
+	$page_title = "Andmete leht";
+	$file_name = "data.php";
+	
+?>
+
+<?php require_once("menu.php")?>
+
+<?php
+	
 	
 	require_once("../configglobal.php");
 	$database = "if15_kertkulp";
