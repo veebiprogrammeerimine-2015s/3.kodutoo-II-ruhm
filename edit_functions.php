@@ -19,7 +19,7 @@
 			$tourney->tounrament = $tournament;
 			$tourney->team_one = $team_one;
 			$tourney->team_one = $team_two;
-			$tourney->team_one = $time;
+			$tourney->time = $time;
 			
 			
 			
