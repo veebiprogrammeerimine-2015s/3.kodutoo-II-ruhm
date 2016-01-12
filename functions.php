@@ -1,4 +1,6 @@
 <?php
+	session_start();
+
 	require_once("../configglobal.php");
 	$database = "if15_sizen";
 
@@ -6,8 +8,8 @@
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		
-		$stmt = $mysqli->prepare("SELECT id, user_name, book_name, book_description FROM book_list WHERE deleted IS NULL");
-		$stmt->bind_result($id, $user_name, $book_name, $book_description);
+		$stmt = $mysqli->prepare("SELECT id, user_name, book_name, book_description, book_rating FROM book_list WHERE deleted IS NULL");
+		$stmt->bind_result($id, $user_name, $book_name, $book_description, $book_rating);
 		$stmt->execute();
 		$array = array();
 		while($stmt->fetch()){
@@ -16,6 +18,7 @@
 			$book->user_name = $user_name;
 			$book->book_name = $book_name;
 			$book->book_description = $book_description;
+			$book->book_rating = $book_rating;
 			array_push($array, $book);
 			
 		}
@@ -26,10 +29,15 @@
 		return $array;
 		
 	}
-	function addBook(){
-		
+	
+	function updateBookData(){
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+			
 		
 		
 	}
+		
+		
+	
 	
 ?>

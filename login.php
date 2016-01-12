@@ -1,7 +1,15 @@
 <?php
-	require_once("../config.php");
+	require_once("../configglobal.php");
+	require_once("functions.php");
 	$database = "if15_sizen";
-	$mysqli = new mysqli($servername, $username, $password, $database);
+	
+	if(isset($_SESSION["id"])){
+		//suunan  login lehele
+		header("Location: table.php");
+	}
+	
+	
+	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
 	//Defineerime muutujad
 	$email_error = "";
@@ -19,6 +27,8 @@
 	$create_age = "";
 	$create_name = "";
 
+	
+	
 	
 	//kontrollin kas keegi vajutas nuppu
 	
@@ -47,22 +57,25 @@
 				$password = cleanInput($_POST["password"]);
 			}
 			if($password_error == "" && $email_error == ""){
-				echo "võib sisse logida! User on ".$email." ja pw on ".$password;
+				
+				
+				
+				
 				
 				$password_hash = hash("sha512", $password);
 				$stmt = $mysqli->prepare("SELECT id, email, name, age FROM users WHERE email=? AND password=?");
 				$stmt->bind_param("ss", $email, $password_hash);
 				$stmt->bind_result($id_from_db, $email_from_db, $name_from_db, $age_from_db);
-
+ 
 				$stmt->execute();
 				
 				//vaatame kas saime andmebaasist kätte
 				if($stmt->fetch()){
 					
-					echo "  kasutaja id=".$id_from_db;
-					
-					echo ". Nimi on:  ".$name_from_db;
-					echo ". Vanus on: ".$age_from_db;
+
+					$_SESSION["id"] = $id_from_db;	
+					$_SESSION["name"] = $name_from_db;
+					header("Location: table.php");
 				}else{
 					echo "wrong password or email";
 					//siis kui ei leidnud vastust tabelist
@@ -84,8 +97,8 @@
 			if(empty($_POST["create_password"])){
 				$create_password_error = "see väli on kohustuslik";
 			}else{
-				if(strlen($_POST["create_password"]) > 8) {
-					$create_password_error = "Peab olema vähemalt 8 tähemärki pikk!";
+				if(strlen($_POST["create_password"]) < 3) {
+					$create_password_error = "Peab olema vähemalt 3 tähemärki pikk!";
 				}else{
 						$create_password = cleanInput($_POST["create_password"]);
 					}
@@ -110,11 +123,10 @@
 						}
 			}
 			if($create_email_error == "" && $create_password_error == "" && $create_name_error == "" && $create_age_error == ""){
-				echo "Võib kasutajat luua!. user on ".$create_email." j parool on ".$create_password;
+				echo "Kasutaja emailiga ".$create_email." on loodud! Võite sisse logida.";
 				
 				$password_hash = hash("sha512", "$create_password");
-				echo "<br>";
-				echo $password_hash;
+				
 				
 				$stmt = $mysqli->prepare("INSERT INTO users (email, password, name, age) VALUES (?, ?, ?, ?)");
 				$stmt->bind_param("sssi", $create_email, $password_hash, $create_name, $create_age);
