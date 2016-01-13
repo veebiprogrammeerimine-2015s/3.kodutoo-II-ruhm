@@ -1,0 +1,42 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
+
+-- -----------------------------------------------------
+-- Schema if15_vitamak
+-- -----------------------------------------------------
+
+-- -----------------------------------------------------
+-- Schema if15_vitamak
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `if15_vitamak` DEFAULT CHARACTER SET utf8 ;
+USE `if15_vitamak` ;
+
+-- -----------------------------------------------------
+-- Table `if15_vitamak`.`user_kd`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `if15_vitamak`.`user_kd` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `email` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `if15_vitamak`.`text_kd`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `if15_vitamak`.`text_kd` (
+  `post_kd` INT NOT NULL AUTO_INCREMENT,
+  `user_id` INT NULL,
+  `text` TEXT NULL,
+  PRIMARY KEY (`post_kd`),
+  INDEX `fk_table2_user_kd_idx` (`user_id` ASC))
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
