@@ -30,7 +30,6 @@
 <h1>Olete sisselogitud!</h1>
 <p>Nuud te voite lisada sinu kuulutus, ja vaatama mida lisati teised.
 	<br>Ka te voite saada sonum teisele kasutajale! </p>
-
+<br> Vaata kõik kasutajad <a href="table.php"> siin!</a>
 </body>
 </html>
-
