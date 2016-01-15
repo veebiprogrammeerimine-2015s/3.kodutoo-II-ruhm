@@ -57,27 +57,15 @@
 	
 ?>
 
-
-
-
-<p>
-	Tere, <?=$_SESSION["user_email"];?>
-	<a href="?logout=1"> Logi välja</a>
-</p>
-
-<?php require_once("menu.php"); ?>
-
-
-
 <!DOCTYPE html>
 <html>
-<body style="background-color:lightgrey;">
+<body>
 
 
    
    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	<input name="send_tekst" type="text" placeholder="send_tekst" value="<?php echo $send_tekst; ?>"> <?php echo $send_tekst_error; ?><br><br>
-  	<input type="submit" name="salvesta" value="Log in">
+  	<input align="center"  name="send_tekst" type="text"  placeholder="lisa kuulutus" value="<?php echo $send_tekst; ?>"> <?php echo $send_tekst_error; ?><br><br>
+  	<input align="center"  type="submit" align="center" name="salvesta" value="SALVESTA KUULUTUS">
   </form>
   
   

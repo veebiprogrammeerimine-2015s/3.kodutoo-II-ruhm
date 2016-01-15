@@ -33,3 +33,7 @@
 <br> Vaata kõik kasutajad <a href="table.php"> siin!</a>
 </body>
 </html>
+
+<h1 align="center">Kõik kuulutused!</h1>
+<?php require_once("table_post.php");?>
+<?php require_once("post.php");?>

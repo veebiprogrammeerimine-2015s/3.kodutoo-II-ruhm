@@ -5,31 +5,31 @@
 	require_once("header.php");
 	
 	
-	$user_list = getUserData();
+	$text_list = getTextData();
 	//var_dump($car_list);
-
+	$emailtable = getEmailData();
 ?>
 
 <table border=1 align="center" >
 	<tr>
-		<th>USER ID</th>
-		<th>USER E-MAIL</th>
-		<th>SAADA SÕNUM</th>
+		<th>ID</th>
+		<th>user_id</th>
+		<th>text</th>
 	</tr>
 	
 	<?php
 	
 		// iga massiivis olema elemendi kohta
 		// count($car_list) - massiivi pikkus
-		for($i = 0; $i < count($user_list); $i++){
+		for($i = 0; $i < count($text_list); $i++){
 			// $i = $i +1; sama mis $i += 1; sama mis $i++;
 			
 				// tavaline rida
 				echo "<tr>";
 			
-				echo "<td>".$user_list[$i]->id."</td>";
-				echo "<td>".$user_list[$i]->email."</td>";
-				echo "<td><a href='comment.php?edit=".$user_list[$i]->id."'>comment.php</a></td>";
+				echo "<td>".$text_list[$i]->post_kd."</td>";
+				echo "<td>".$text_list[$i]->user_id."</td>";
+				echo "<td>".$text_list[$i]->text."</td>";
 			
 				echo "</tr>";
 			}
