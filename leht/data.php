@@ -19,25 +19,25 @@
 	$date = $car = $color = $plate = $color_error  = $car_error =  $date_error =  $plate_error = "";
 	
 	if(isset($_POST["create"])){
-			if ( empty($_POST["värv"]) ) {
+			if ( empty($_POST["color"]) ) {
 				$color_error = "See väli on kohustuslik";
 			}else{
-				$color = cleanInput($_POST["värv"]);
+				$color = cleanInput($_POST["color"]);
 			}
-			if ( empty($_POST["kuupaev"]) ) {
+			if ( empty($_POST["date"]) ) {
 				$date_error = "See väli on kohustuslik";
 			}else{
-				$date = cleanInput($_POST["kuupaev"]);
+				$date = cleanInput($_POST["date"]);
 			}
-			if ( empty($_POST["auto"]) ) {
+			if ( empty($_POST["car"]) ) {
 				$car_error = "See väli on kohustuslik";
 			}else{
-				$car = cleanInput($_POST["auto"]);
+				$car = cleanInput($_POST["car"]);
 			}
-			if ( empty($_POST["nrmark"]) ) {
+			if ( empty($_POST["plate"]) ) {
 				$plate_error = "See väli on kohustuslik";
 			} else {
-				$plate = cleanInput($_POST["nrmark"]);
+				$plate = cleanInput($_POST["plate"]);
 			}
 	if(	$color_error == "" && $plate_error == ""&& $car_error == ""&& $date_error == ""){
 		// functions.php failis käivina funktsiooni
@@ -73,10 +73,10 @@
 <h1>Autod</h1><br>
 <h2>Vaatluse lisamine</h2>
   <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post" >
-  	<label for="värv" >Värv</label> <input id="värv" name="värv" type="text" value="<?=$color; ?>">  <?=$color_error; ?><br><br>
-  	<label>Nr.märk</label>	<input name="nrmark" type="text" value="<?=$plate; ?>"><?=$plate_error; ?><br><br>
-	<label>Kuupäev</label>	<input name="kuupaev" type="text" value="<?=$date; ?>"> <?=$date_error; ?><br><br>
-	<label>Auto mark</label>	<input name="auto" type="text" value="<?=$car; ?>"> <?=$car_error; ?><br><br>
+  	<label>Värv</label> <input name="color" type="text" value="<?=$color; ?>">  <?=$color_error; ?><br><br>
+  	<label>Nr.märk</label>	<input name="plate" type="text" value="<?=$plate; ?>"><?=$plate_error; ?><br><br>
+	<label>Kuupäev</label>	<input name="date" type="date" value="<?=$date; ?>"> <?=$date_error; ?><br><br>
+	<label>Auto mark</label>	<input name="car" type="text" value="<?=$car; ?>"> <?=$car_error; ?><br><br>
   	<input type="submit" name="create" value="Salvesta">
   </form>
 

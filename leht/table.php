@@ -33,12 +33,12 @@
 			
 			echo "<tr>";
 			echo "<form>";
-			echo "<td><input name='kuupäev' value='".$result_list[$i]->kuupäev."'></td>";
-			echo "<td><input name='mark' value='".$result_list[$i]->mark."'></td>";
+			echo "<td><input name='date' value='".$result_list[$i]->date."'></td>";
+			echo "<td><input name='car' value='".$result_list[$i]->car."'></td>";
 			echo "<td>".$result_list[$i]->id."</td>";
 			echo "<td><input name='color' value='".$result_list[$i]->color."'></td>";
 			echo "<td>".$results_list[$i]->user_id."</td>";
-			echo "<td><input name='nr. märk' value='".$result_list[$i]->nr. märk."'></td>";
+			echo "<td><input name='plate' value='".$result_list[$i]->plate."'></td>";
 			echo "<td><input type='submit' name='update'></td>";
 			echo "<td><a href='table.php'>cancel</a></td>";			
 						
@@ -52,11 +52,11 @@
 			
 			
 			echo "<td>".$result_list[$i]->id."</td>";
-			echo "<td>".$result_list[$i]->kuupäev."</td>";
-			echo "<td>".$result_list[$i]->mark."</td>";
+			echo "<td>".$result_list[$i]->date."</td>";
+			echo "<td>".$result_list[$i]->car."</td>";
 			echo "<td>".$result_list[$i]->user_id."</td>";
 			echo "<td>".$result_list[$i]->color."</td>";
-			echo "<td>".$result_list[$i]->nr. märk_from_db."</td>";
+			echo "<td>".$result_list[$i]->plate_from_db."</td>";
 			echo "<td><a href='?delete=".$result_list[$i]->id."'>X</a></td>";
 			echo "<td><a href='?edit=".$result_list[$i]->id."'>edit</a></td>";
 			
