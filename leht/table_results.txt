@@ -1,0 +1,7 @@
+create table result(
+user_id int not null, 
+color varchar(20), 
+plate varchar(20), 
+date date, 
+car varchar(20)
+);
