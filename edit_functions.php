@@ -23,7 +23,7 @@
 			header("Location: table.php");
 		}
 		
-		return $tourney;
+		return $car;
 		$stmt->close();
 		$mysqli->close();
 	
@@ -32,7 +32,7 @@
 	function updateCars($id, $year, $make, $model, $horsepower, $topspeed, $transmission){
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		$stmt = $mysqli->prepare("UPDATE CarData SET year=?, make=?, model=?, horsepower=?, topspeed=?, transmission=?, WHERE id=?");
-		$stmt->bind_param("ssssi",$year, $make, $model, $horsepower, $topspeed, $transmission, $id );
+		$stmt->bind_param("ssssssi",$year, $make, $model, $horsepower, $topspeed, $transmission, $id); 
 		if($stmt->execute()){
 			echo "yay";
 		}
