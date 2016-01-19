@@ -1,7 +1,7 @@
 <?php
 //Kõik andmebaasiga seonduv siin
 //ühenduse loomiseks kasuta
-	require_once("../../configglobal.php");
+	require_once("../../../../configglobal.php");
 	$database = "if15_taunlai_";
 	
 	session_start();
@@ -80,13 +80,13 @@
 	}
 	
 	//Loome uue funktsiooni, et ab'st andmeid
-	function getResultData(){
+	function getResults(){
 		
 	$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 	
-	$stmt = $mysqli->prepare("SELECT id, user_id, aeg, pikkus, rada, kuup2ev FROM results WHERE deleted IS NULL"); 
+	$stmt = $mysqli->prepare("SELECT id, user_id, time, distance, track, date FROM results "); 
 	$stmt->bind_result($id, $user_id, $time, $distance_from_db, $track, $date); //algselt oli $color_from_db
-	
+	$stmt->bind_param("iiiisi", $_SESSION["id_from_db"], $id, $user_id, $time, $distance_from_db, $track, $date); 
 	$stmt->execute();
 	
 	$row = 0;

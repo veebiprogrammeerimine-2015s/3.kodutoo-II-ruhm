@@ -82,7 +82,11 @@
   </form>
  <br><br>
  <h3>Eelnevad jooksud:</h3>
+ 
+ <?php
  $result_list = getResults();
+ ?>
+ 
 <?php
 	
 	

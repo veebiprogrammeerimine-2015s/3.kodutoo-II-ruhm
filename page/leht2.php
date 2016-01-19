@@ -1,7 +1,7 @@
 
 <?php
 // ühenduse loomiseks kasuta
-	require_once("../../configglobal.php");
+	require_once("../../../../configglobal.php");
 	$database = "if15_taunlai_";
 	$mysqli = new mysqli($servername, $server_username, $server_password, $database);
 	
