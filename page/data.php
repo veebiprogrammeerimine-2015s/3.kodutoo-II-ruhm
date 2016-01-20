@@ -102,10 +102,10 @@
 					echo "<form action='table.php' method='post'>";
 						echo "<td>".$result_list[$i]->id."</td>";
 						echo "<td>".$result_list[$i]->user_id."</td>";
-						echo "<td><input name='time' value='".$result_list[$i]->aeg."'></td>";
-						echo "<td><input name='distance' value='".$result_list[$i]->pikkus."'></td>";
-						echo "<td><input name='track' value='".$result_list[$i]->Rada."'></td>";
-						echo "<td><input name='date' value='".$result_list[$i]->Kuupäev."'></td>";
+						echo "<td><input name='time' value='".$result_list[$i]->time."'></td>";
+						echo "<td><input name='distance' value='".$result_list[$i]->distance_from_db."'></td>";
+						echo "<td><input name='track' value='".$result_list[$i]->track_from_db."'></td>";
+						echo "<td><input name='date' value='".$result_list[$i]->date."'></td>";
 						echo "<td><input type='submit' name='update'></td>";
 						echo "<td><a href='table.php'>cancel</a></td>";
 					echo "</form>";
@@ -118,8 +118,8 @@
 				echo "<td>".$result_list[$i]->id."</td>";
 				echo "<td>".$result_list[$i]->user_id."</td>";
 				echo "<td>".$result_list[$i]->time."</td>";
-				echo "<td>".$result_list[$i]->distance."</td>";
-				echo "<td>".$result_list[$i]->track."</td>";
+				echo "<td>".$result_list[$i]->distance_from_db."</td>";
+				echo "<td>".$result_list[$i]->track_from_db."</td>";
 				echo "<td>".$result_list[$i]->date."</td>";
 				echo "<td><a href='?delete=".$result_list[$i]->id."'>X</a></td>";
 				echo "<td><a href='?edit=".$result_list[$i]->id."'>edit</a></td>";

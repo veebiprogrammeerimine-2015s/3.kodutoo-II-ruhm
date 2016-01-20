@@ -10,7 +10,7 @@
 		
 		
 	}
-	$result_list = getResultData();
+	$result_list = getResults();
 	//var_dump($array);
 ?>
 <table border=1 >
@@ -33,12 +33,12 @@
 			
 			echo "<tr>";
 			echo "<form>";
-			echo "<td><input name='kuupäev' value='".$result_list[$i]->kuupäev."'></td>";
-			echo "<td><input name='rada' value='".$result_list[$i]->rada."'></td>";
+			echo "<td><input name='kuupäev' value='".$result_list[$i]->date."'></td>";
+			echo "<td><input name='rada' value='".$result_list[$i]->track_from_db."'></td>";
 			echo "<td>".$result_list[$i]->id."</td>";
-			echo "<td><input name='aeg' value='".$result_list[$i]->aeg."'></td>";
+			echo "<td><input name='aeg' value='".$result_list[$i]->time."'></td>";
 			echo "<td>".$results_list[$i]->user_id."</td>";
-			echo "<td><input name='pikkus' value='".$result_list[$i]->pikkus."'></td>";
+			echo "<td><input name='pikkus' value='".$result_list[$i]->distance_from_db."'></td>";
 			echo "<td><input type='submit' name='update'></td>";
 			echo "<td><a href='table.php'>cancel</a></td>";			
 						
@@ -52,19 +52,19 @@
 			
 			
 			echo "<td>".$result_list[$i]->id."</td>";
-			echo "<td>".$result_list[$i]->kuupäev."</td>";
-			echo "<td>".$result_list[$i]->rada."</td>";
 			echo "<td>".$result_list[$i]->user_id."</td>";
-			echo "<td>".$result_list[$i]->aeg."</td>";
-			echo "<td>".$result_list[$i]->pikkus_from_db."</td>";
+			echo "<td>".$result_list[$i]->time."</td>";
+			echo "<td>".$result_list[$i]->distance_from_db."</td>";
+			echo "<td>".$result_list[$i]->track_from_db."</td>";
+			echo "<td>".$result_list[$i]->date."</td>";
 			echo "<td><a href='?delete=".$result_list[$i]->id."'>X</a></td>";
 			echo "<td><a href='?edit=".$result_list[$i]->id."'>edit</a></td>";
 			
 			echo "</tr>";}
 			
 			
-			$stmt->close();
-		$mysqli->close();
+				$stmt->close();
+				$mysqli->close();
 		
 		return $array;
 		

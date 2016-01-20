@@ -86,7 +86,7 @@
 	
 	$stmt = $mysqli->prepare("SELECT id, user_id, time, distance, track, date FROM results "); 
 	$stmt->bind_result($id, $user_id, $time, $distance_from_db, $track, $date); //algselt oli $color_from_db
-	$stmt->bind_param("iiiisi", $_SESSION["id_from_db"], $id, $user_id, $time, $distance_from_db, $track, $date); 
+	
 	$stmt->execute();
 	
 	$row = 0;
@@ -102,7 +102,7 @@
 		$result->user_id = $user_id;
 		$result->time = $time;
 		$result->distance_from_db = $distance_from_db;
-		$result->track = $track;
+		$result->track_from_db = $track;
 		$result-> date  = $date;
 		//lisame selle massiivi
 		array_push($array, $result);
