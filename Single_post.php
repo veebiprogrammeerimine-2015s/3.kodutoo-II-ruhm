@@ -43,7 +43,7 @@
 	//kasutaja tahab midagi muuta
 	if(isset($_POST["update"])){
 		
-		updatePost($_POST["post_kd"], $_POST["text"]);
+		updatePost($_POST["text"], $_POST["post_kd"]);
 		
 	}
 	

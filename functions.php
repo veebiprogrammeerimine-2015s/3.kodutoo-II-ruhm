@@ -212,7 +212,7 @@
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		$mysqli->error;
 		$stmt = $mysqli->prepare("UPDATE text_kd SET text=? WHERE post_kd=?");
-		$stmt->bind_param("is", $up_text, $up_id);
+		$stmt->bind_param("si", $up_text, $up_id);
 		
 		// kas õnnestus salvestada
 		if($stmt->execute()){
