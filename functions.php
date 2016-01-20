@@ -206,4 +206,22 @@
 			return $array;
 	}
 
+	
+	function updatePost($up_text, $up_id){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		
+		$stmt = $mysqli->prepare("UPDATE text_kd SET text=? WHERE post_kd=?");
+		$stmt->bind_param("is", $up_text, $up_id);
+		
+		// kas õnnestus salvestada
+		if($stmt->execute()){
+			// õnnestus
+			echo "jeeee";
+		}
+		
+		
+		$stmt->close();
+		$mysqli->close();
+		}
 ?>

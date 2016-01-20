@@ -43,7 +43,7 @@
 	//kasutaja tahab midagi muuta
 	if(isset($_POST["update"])){
 		
-		updateCar($_POST["id"], $_POST["number_plate"], $_POST["color"]);
+		updatePost($_POST["post_kd"], $_POST["text"]);
 		
 	}
 	
@@ -64,9 +64,11 @@
 	<tr>
 		<th>ID</th>
 		<th>user_id</th>
-		<th>text</th>
+		<th>email</th>
 		<th>text</th>
 		<th>Delete kuulutus!</th>
+		<th>EDIT!</th>
+		
 	</tr>
 	
 	<?php
@@ -76,6 +78,23 @@
 		for($i = 0; $i < count($user_table); $i++){
 			// $i = $i +1; sama mis $i += 1; sama mis $i++;
 			
+			//kui on see rida mida kasutaja tahab muuta siis kuvan input väljad
+			if(isset($_GET["edit"]) && $user_table[$i]->post_kd == $_GET["edit"]){
+				// kasutajale muutmiseks
+				echo "<tr>";
+					echo "<form action='Single_post.php' method='post'>";
+						echo "<td>".$user_table[$i]->post_kd."</td>";
+						echo "<td>".$user_table[$i]->user_kd_id."</td>";
+						echo "<td>".$user_table[$i]->user_kd_email."</td>";
+						echo "<td><input name='text' value='".$user_table[$i]->text."'></td>";
+						echo "<td><input type='hidden' name='post_kd' value='".$user_table[$i]->post_kd."'></td>";
+						echo "<td><input type='submit' name='update'></td>";
+						echo "<td><a href='Single_post.php'>cancel</a></td>";
+					echo "</form>";
+				echo "</tr>";
+			
+			
+			}else{
 				// tavaline rida
 				echo "<tr>";
 			
@@ -84,13 +103,13 @@
 				echo "<td>".$user_table[$i]->user_kd_email."</td>";
 				echo "<td>".$user_table[$i]->text."</td>";
 				echo "<td><a href='?delete=".$user_table[$i]->post_kd."'>X</a></td>";
-				
+				echo "<td><a href='?edit=".$user_table[$i]->post_kd."'>edit</a></td>";
 				echo "</tr>";
 			}
 			
 			
 		
-	
+		}
 	?>
 
 </table>
