@@ -82,7 +82,15 @@
   </form>
  <br><br>
  <h3>Eelnevad jooksud:</h3>
- 
+ <table border=1 >
+<tr>
+	<th>id</th>
+	<th>kasutaja id</th>
+	<th>Jooksu aeg</th>
+	<th>Jooksu pikkus</th>
+	<th>Kuupäev</th>
+	<th>Rada</th>
+</tr>
  <?php
  $result_list = getResults();
  ?>
