@@ -100,7 +100,7 @@
 		$result = new StdClass();
 		$result->id = $id;
 		$result->user_id = $user_id;
-		$result->time = $time;
+		$result->time= $time;
 		$result->distance_from_db = $distance_from_db;
 		$result->track_from_db = $track;
 		$result-> date  = $date;

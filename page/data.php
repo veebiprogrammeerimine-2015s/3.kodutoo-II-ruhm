@@ -86,10 +86,10 @@
 <tr>
 	<th>id</th>
 	<th>kasutaja id</th>
-	<th>Jooksu aeg</th>
 	<th>Jooksu pikkus</th>
-	<th>Kuupäev</th>
+	<th>Jooksu aeg(H)</th>
 	<th>Rada</th>
+	<th>Kuupäev</th>
 </tr>
  <?php
  $result_list = getResults();
