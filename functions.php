@@ -150,5 +150,60 @@
 		
 		
 	}
+	
+	function deletePost($id_to_deleted){
+		
+		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+		$stmt = $mysqli->prepare("UPDATE text_kd SET deleted=NOW() WHERE post_kd=?");
+		$stmt->bind_param("i", $id_to_deleted);
+		
+		if($stmt->execute()){
+			// sai edukalt kustutatud
+			header("Location: table_post.php");
+			
+		}
+		
+		$stmt->close();
+		$mysqli->close();
+		
+	}
+	
+	function getSelfData(){
+		
+			$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
+			
+			$stmt = $mysqli->prepare("SELECT post_kd, user_kd.id, user_kd.email, text FROM text_kd JOIN user_kd ON text_kd.user_id=user_kd.id WHERE user_kd.id = ?");
+			$stmt->bind_param("i", $_SESSION["id_from_db"]);
+			$stmt->bind_result($post_data, $user_data, $user_email_data, $text_data);
+			$stmt->execute();
+
+			
+			// tühi massiiv kus hoiame objekte (1 rida andmeid)
+			$array = array();
+			
+			// tee tsüklit nii mitu korda, kui saad 
+			// ab'ist ühe rea andmeid
+			while($stmt->fetch()){
+				
+				// loon objekti iga while tsükli kord
+				$self_data = new StdClass();
+				$self_data->post_kd = $post_data;
+				$self_data->user_kd_id = $user_data;
+				$self_data->user_kd_email = $user_email_data;
+				$self_data->text = $text_data;
+				
+				// lisame selle massiivi
+				array_push($array, $self_data);
+				//echo "<pre>";
+				//var_dump($array);
+				//echo "</pre>";
+				
+			}
+			
+			$stmt->close();
+			$mysqli->close();
+			
+			return $array;
+	}
 
 ?>

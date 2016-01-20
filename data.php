@@ -31,6 +31,7 @@
 <p>Nuud te voite lisada sinu kuulutus, ja vaatama mida lisati teised.
 	<br>Ka te voite saada sonum teisele kasutajale! </p>
 <br> Vaata kõik kasutajad <a href="table.php"> siin!</a>
+<br> Vaata sinu postitusi <a href="Single_post.php"> siin!</a>
 </body>
 </html>
 

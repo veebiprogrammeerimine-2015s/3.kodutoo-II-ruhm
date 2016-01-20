@@ -8,6 +8,17 @@
 	$text_list = getTextData();
 	//var_dump($car_list);
 	$emailtable = getEmailData();
+	
+	
+	
+	//kas kasutaja tahab kustutada
+	// kas aadressireal on ?delete=??!??!?!
+	if(isset($_GET["delete"])){
+		
+		// saadan kaasa id, mida kustutada
+		deletePost($_GET["delete"]);
+		
+	}
 ?>
 
 <table border=1 align="center" >
@@ -30,7 +41,6 @@
 				echo "<td>".$text_list[$i]->post_kd."</td>";
 				echo "<td>".$text_list[$i]->user_id."</td>";
 				echo "<td>".$text_list[$i]->text."</td>";
-			
 				echo "</tr>";
 			}
 			
