@@ -151,11 +151,11 @@
 		
 	}
 	
-	function deletePost($id_to_deleted){
+	function deletePost($delete_post_data){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
 		$stmt = $mysqli->prepare("UPDATE text_kd SET deleted=NOW() WHERE post_kd=?");
-		$stmt->bind_param("i", $id_to_deleted);
+		$stmt->bind_param("i", $delete_post_data);
 		
 		if($stmt->execute()){
 			// sai edukalt kustutatud
@@ -210,14 +210,14 @@
 	function updatePost($up_text, $up_id){
 		
 		$mysqli = new mysqli($GLOBALS["servername"], $GLOBALS["server_username"], $GLOBALS["server_password"], $GLOBALS["database"]);
-		
+		$mysqli->error;
 		$stmt = $mysqli->prepare("UPDATE text_kd SET text=? WHERE post_kd=?");
 		$stmt->bind_param("is", $up_text, $up_id);
 		
 		// kas õnnestus salvestada
 		if($stmt->execute()){
 			// õnnestus
-			echo "jeeee";
+			echo "edukalt salvestanud!!!!";
 		}
 		
 		
