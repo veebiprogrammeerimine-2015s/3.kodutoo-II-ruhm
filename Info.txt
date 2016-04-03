@@ -1,0 +1,13 @@
+Scenario.
+
+1.User can create an account, which will be saved in user_sample table in uus database.
+2.User can log in.
+3.Logged user can add, change and remove data (remove data doesn't work at current moment). 
+
+------
+
+Database UUS
+
+Tables:
+user_sample - for logins and passwords
+toidud - for products and prices
